@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.test.ts",
-    "import": "tsx scripts/import.ts"
+    "import": "tsx scripts/import.ts",
+    "token-cost": "tsx scripts/token-cost.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
