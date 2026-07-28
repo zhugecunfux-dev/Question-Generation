@@ -194,6 +194,53 @@ export interface QuestionTemplate {
 export type BankEntry = Question | QuestionTemplate;
 
 // ---------------------------------------------------------------------------
+// Private source knowledge
+// ---------------------------------------------------------------------------
+
+export type KnowledgeSourceKind = "notes" | "exercise" | "reference";
+export type KnowledgeFileKind = "markdown" | "json" | "image";
+
+/** One file recorded in a source bundle's immutable manifest. */
+export interface KnowledgeFileRecord {
+  /** Safe POSIX-style path relative to this source's private directory. */
+  path: string;
+  name: string;
+  kind: KnowledgeFileKind;
+  size: number;
+  sha256: string;
+}
+
+/** Source metadata stored in SQLite. The source bytes stay on the filesystem. */
+export interface KnowledgeSourceRecord {
+  id: string;
+  title: string;
+  kind: KnowledgeSourceKind;
+  topicId: string;
+  importedAt: string;
+  totalBytes: number;
+  counts: Record<KnowledgeFileKind, number>;
+  files: KnowledgeFileRecord[];
+}
+
+/** Browser-facing file metadata. URLs are derived, never stored in the manifest. */
+export interface KnowledgeFile extends KnowledgeFileRecord {
+  url: string;
+}
+
+export interface KnowledgeSource
+  extends Omit<KnowledgeSourceRecord, "files"> {
+  files: KnowledgeFile[];
+}
+
+export interface KnowledgeTopicSummary {
+  id: string;
+  number: number;
+  title: string;
+  sectionTitle: string;
+  sourceCount: number;
+}
+
+// ---------------------------------------------------------------------------
 // Paper generation
 // ---------------------------------------------------------------------------
 

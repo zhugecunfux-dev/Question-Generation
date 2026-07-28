@@ -99,6 +99,35 @@ npm run token-cost -- source/paper.pdf parsed/paper.md   # what a source doc cos
 npm run describe-assets -- --dry-run                     # fill in missing figure descriptions
 ```
 
+## Private knowledge base
+
+The **Knowledge base** page groups OCR source bundles by the existing 6091 syllabus
+topics. Original Markdown, MinerU JSON sidecars, and extracted images stay on the
+host under `data/knowledge/`; SQLite stores only their searchable metadata and file
+manifest. The private directory is Git-ignored because this repository is public.
+
+Import one completed MinerU `ocr/` directory with an explicit topic and material type:
+
+```bash
+npm run knowledge:import -- \
+  --in "../notes/mineru-output/Kinematics/ocr" \
+  --topic-id T2 \
+  --id kinematics-notes \
+  --title "Kinematics Notes" \
+  --kind notes
+```
+
+The importer accepts exactly one Markdown file, top-level JSON sidecars, and
+JPG/PNG/WebP/GIF files inside `images/`. Parser-generated PDFs are excluded. Files
+are hashed, JSON is validated, symbolic links and unsafe paths are rejected, and an
+identical re-import is a no-op. Knowledge files are served only through authenticated
+`private, no-store` routes; OCR Markdown is not rendered as HTML.
+
+Set `QG_KNOWLEDGE_DIR` to move the private file root. Neither the knowledge files nor
+their SQLite index travel with a Git clone or a new Codespace, so back them up
+separately. Knowledge sources are catalogued for browsing now; they are not
+automatically injected into the Claude-authored generation prompt.
+
 ## Getting papers in
 
 `npm run stage` takes a PDF parser's output (MinerU, Marker, Docling, PyMuPDF4LLM),

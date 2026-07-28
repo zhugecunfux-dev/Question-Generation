@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex flex-1 gap-5 text-sm text-[var(--color-ink-soft)] dark:text-neutral-400">
               <Link href="/" className="hover:text-[var(--color-accent)]">Generate</Link>
               <Link href="/bank" className="hover:text-[var(--color-accent)]">Question bank</Link>
+              <Link href="/knowledge" className="hover:text-[var(--color-accent)]">Knowledge base</Link>
               <Link href="/import" className="hover:text-[var(--color-accent)]">Import</Link>
               <Link href="/agent" className="hover:text-[var(--color-accent)]">Codex</Link>
             </div>

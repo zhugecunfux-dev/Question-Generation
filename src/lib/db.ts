@@ -1,18 +1,40 @@
 import path from "node:path";
 import fs from "node:fs";
 import Database from "better-sqlite3";
-import type { BankEntry, Difficulty, Question, QuestionFormat, QuestionTemplate } from "@/lib/types";
+import type {
+  BankEntry,
+  Difficulty,
+  KnowledgeSourceRecord,
+  Question,
+  QuestionFormat,
+  QuestionTemplate,
+} from "@/lib/types";
 
-const DB_PATH = process.env.QG_DB_PATH
-  ? path.resolve(process.env.QG_DB_PATH)
-  : path.join(process.cwd(), "data", "bank.sqlite");
+function resolveDbPath(): string {
+  return process.env.QG_DB_PATH
+    ? path.resolve(process.env.QG_DB_PATH)
+    : path.join(process.cwd(), "data", "bank.sqlite");
+}
 
 let db: Database.Database | undefined;
+let openDbPath: string | undefined;
+
+export function closeDb(): void {
+  if (db) db.close();
+  db = undefined;
+  openDbPath = undefined;
+}
 
 export function getDb(): Database.Database {
-  if (db) return db;
-  fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
-  db = new Database(DB_PATH);
+  const dbPath = resolveDbPath();
+  if (db && openDbPath === dbPath) return db;
+  if (db) {
+    db.close();
+    db = undefined;
+  }
+  fs.mkdirSync(path.dirname(dbPath), { recursive: true });
+  db = new Database(dbPath);
+  openDbPath = dbPath;
   db.pragma("journal_mode = WAL");
   db.exec(`
     CREATE TABLE IF NOT EXISTS entries (
@@ -32,6 +54,21 @@ export function getDb(): Database.Database {
     CREATE INDEX IF NOT EXISTS idx_entries_topic  ON entries (topic_id);
     CREATE INDEX IF NOT EXISTS idx_entries_kind   ON entries (kind);
     CREATE INDEX IF NOT EXISTS idx_entries_format ON entries (format);
+
+    CREATE TABLE IF NOT EXISTS knowledge_sources (
+      id           TEXT PRIMARY KEY,
+      topic_id     TEXT NOT NULL,
+      title        TEXT NOT NULL,
+      source_kind  TEXT NOT NULL CHECK (source_kind IN ('notes', 'exercise', 'reference')),
+      bundle_hash  TEXT NOT NULL,
+      relative_dir TEXT NOT NULL UNIQUE,
+      imported_at  TEXT NOT NULL,
+      total_bytes  INTEGER NOT NULL,
+      payload      TEXT NOT NULL,
+      UNIQUE (topic_id, bundle_hash)
+    );
+    CREATE INDEX IF NOT EXISTS idx_knowledge_topic_kind
+      ON knowledge_sources (topic_id, source_kind);
   `);
   return db;
 }
@@ -149,4 +186,90 @@ export function topicCounts(): Array<{ topicId: string; kind: string; n: number 
 
 export function deleteEntry(id: string): boolean {
   return getDb().prepare("DELETE FROM entries WHERE id = ?").run(id).changes > 0;
+}
+
+export interface StoredKnowledgeSource {
+  source: KnowledgeSourceRecord;
+  contentHash: string;
+  relativeDir: string;
+}
+
+interface KnowledgeRow {
+  payload: string;
+  contentHash: string;
+  relativeDir: string;
+}
+
+function fromKnowledgeRow(row: KnowledgeRow): StoredKnowledgeSource {
+  return {
+    source: JSON.parse(row.payload) as KnowledgeSourceRecord,
+    contentHash: row.contentHash,
+    relativeDir: row.relativeDir,
+  };
+}
+
+const KNOWLEDGE_SELECT =
+  "SELECT payload, bundle_hash AS contentHash, relative_dir AS relativeDir FROM knowledge_sources";
+
+export function getKnowledgeSource(id: string): StoredKnowledgeSource | undefined {
+  const row = getDb()
+    .prepare(`${KNOWLEDGE_SELECT} WHERE id = ?`)
+    .get(id) as KnowledgeRow | undefined;
+  return row ? fromKnowledgeRow(row) : undefined;
+}
+
+export function getKnowledgeSourceByHash(
+  topicId: string,
+  contentHash: string,
+): StoredKnowledgeSource | undefined {
+  const row = getDb()
+    .prepare(`${KNOWLEDGE_SELECT} WHERE topic_id = ? AND bundle_hash = ?`)
+    .get(topicId, contentHash) as KnowledgeRow | undefined;
+  return row ? fromKnowledgeRow(row) : undefined;
+}
+
+export function listKnowledgeSources(topicId?: string): StoredKnowledgeSource[] {
+  const rows = topicId
+    ? (getDb()
+        .prepare(
+          `${KNOWLEDGE_SELECT} WHERE topic_id = ? ORDER BY title COLLATE NOCASE, id`,
+        )
+        .all(topicId) as KnowledgeRow[])
+    : (getDb()
+        .prepare(
+          `${KNOWLEDGE_SELECT} ORDER BY topic_id, title COLLATE NOCASE, id`,
+        )
+        .all() as KnowledgeRow[]);
+  return rows.map(fromKnowledgeRow);
+}
+
+export function insertKnowledgeSource(record: StoredKnowledgeSource): void {
+  const { source, contentHash, relativeDir } = record;
+  const insert = getDb().prepare(`
+    INSERT INTO knowledge_sources
+      (id, topic_id, title, source_kind, bundle_hash, relative_dir, imported_at, total_bytes, payload)
+    VALUES
+      (@id, @topicId, @title, @kind, @contentHash, @relativeDir, @importedAt, @totalBytes, @payload)
+  `);
+  getDb().transaction(() => {
+    insert.run({
+      id: source.id,
+      topicId: source.topicId,
+      title: source.title,
+      kind: source.kind,
+      contentHash,
+      relativeDir,
+      importedAt: source.importedAt,
+      totalBytes: source.totalBytes,
+      payload: JSON.stringify(source),
+    });
+  })();
+}
+
+export function knowledgeTopicCounts(): Array<{ topicId: string; sourceCount: number }> {
+  return getDb()
+    .prepare(
+      "SELECT topic_id AS topicId, COUNT(*) AS sourceCount FROM knowledge_sources GROUP BY topic_id",
+    )
+    .all() as Array<{ topicId: string; sourceCount: number }>;
 }

@@ -9,4 +9,5 @@ data/bank.sqlite
 data/bank.sqlite-journal
 data/bank.sqlite-wal
 data/bank.sqlite-shm
+data/knowledge/
 .codex/

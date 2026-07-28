@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.test.ts",
     "import": "tsx scripts/import.ts",
+    "knowledge:import": "tsx scripts/import-knowledge.ts",
     "token-cost": "tsx scripts/token-cost.ts",
     "describe-assets": "tsx scripts/describe-assets.ts",
     "stage": "tsx scripts/stage-assets.ts",
