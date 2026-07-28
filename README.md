@@ -29,7 +29,7 @@ cp .env.example .env.local   # then set ANTHROPIC_API_KEY
 Retrieve and template modes work without a key.
 
 ```bash
-npm test        # 28 tests: expression evaluator, variant engine, importer, assets
+npm test        # 39 tests: expression evaluator, variant engine, importer, assets, staging
 npm run build   # production build
 ```
 
@@ -39,6 +39,20 @@ Two helper scripts need an API key:
 npm run token-cost -- source/paper.pdf parsed/paper.md   # what a source doc costs, three ways
 npm run describe-assets -- --dry-run                     # fill in missing figure descriptions
 ```
+
+## Getting papers in
+
+`npm run stage` takes a PDF parser's output (MinerU, Marker, Docling, PyMuPDF4LLM),
+copies the extracted figures into `data/assets/<paper-id>/`, and rewrites the Markdown
+image references to the form `assets[].path` expects:
+
+```bash
+npm run stage -- --in out/6091_2019_p2 --paper-id tys2019-p2
+```
+
+Parser commands, how to tell a digital PDF from a scan in one line, and measured
+timings are in [`tools/parse/README.md`](tools/parse/README.md). The full pipeline,
+cost analysis, and figure strategy are in [`docs/ingestion.md`](docs/ingestion.md).
 
 ## Syllabus model
 
@@ -216,6 +230,8 @@ src/lib/db.ts                     SQLite storage (better-sqlite3)
 src/lib/import.ts                 validation + JSON/JSONL/CSV parsing
 src/lib/assets.ts                 asset path safety (client-safe)
 src/lib/assets.server.ts          asset resolution against data/assets
+src/lib/stage.ts                  normalise parser output into assets[] shape
+tools/parse/                      PDF parser commands and measurements
 src/lib/template/expr.ts          safe expression evaluator
 src/lib/template/engine.ts        seeded variant expansion
 src/lib/llm/generate.ts           Claude-authored questions
