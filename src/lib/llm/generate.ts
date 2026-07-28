@@ -83,7 +83,8 @@ function buildSystemPrompt(): string {
     "- Use SI units and the symbols in the syllabus. Take g = 9.81 N/kg unless the question states otherwise.",
     "- Quote numerical answers to 2 or 3 significant figures, and always give the unit.",
     "- AO1 questions test recall and understanding; AO2 questions test applying physics to an unfamiliar situation. Do not write AO3 (practical) questions — those are Paper 3 and need real apparatus.",
-    "- Every question must be answerable from the stem alone. Do not reference a figure, graph, diagram, or table unless you fully describe its contents in words inside the stem.",
+    "- Every question must be answerable from the stem alone. You cannot attach a figure, so do not reference one unless you fully describe its contents in words inside the stem — give the axes and the readings for a graph, the components and their arrangement for a circuit, the rows and values for a table.",
+    "- Some exemplars below carry a figure, shown to you as a bracketed description. That is a description of an image the student can see and you cannot produce. Learn the style from those questions; do not imitate their reliance on a figure.",
     "- Stay inside the listed sub-topics. The 2024 revision removed the standalone Temperature topic, the quantitative gas laws, and vernier/micrometer reading — never test those.",
     "- For MCQ, write exactly four options labelled A-D with exactly one correct. Distractors must come from plausible student errors (wrong formula rearrangement, unit slip, sign error), not from absurd magnitudes.",
     "- `solution` is the mark scheme: state the physics principle, the working, and the final answer.",
@@ -114,9 +115,21 @@ function buildUserPrompt(opts: {
           const options = q.options
             ? "\n" + q.options.map((o) => `  ${o.label}. ${o.text}${o.correct ? "   <- key" : ""}`).join("\n")
             : "";
+          // Surface figures as descriptions so the exemplar reads coherently,
+          // flagged so the model doesn't conclude it may reference one too.
+          const figures = q.assets?.length
+            ? "\n" +
+              q.assets
+                .map(
+                  (a) =>
+                    `  [figure the student can see, which you cannot produce: ` +
+                    `${a.alt ?? a.caption ?? "no description recorded"}]`,
+                )
+                .join("\n")
+            : "";
           return [
             `Exemplar ${i + 1} — ${q.topicId}, ${q.format}, ${q.difficulty}, ${q.ao}, ${q.marks} mark(s)`,
-            q.stem + options,
+            q.stem + figures + options,
             `Answer: ${q.answer}`,
             q.solution ? `Mark scheme: ${q.solution}` : "",
           ]
@@ -157,10 +170,20 @@ function validate(q: ModelQuestion, allowedTopics: string[]): string | undefined
   } else if (q.options?.length) {
     return "non-mcq question must not carry options";
   }
-  // A stem that promises a figure it cannot supply is unusable on paper.
-  if (/\b(fig(?:ure)?|diagram|graph shown|table below|shown below)\b/i.test(q.stem) &&
-      !/describ|as follows|the values are|consists of/i.test(q.stem)) {
-    return "stem references a figure/diagram that is not described in words";
+  // A stem that promises a figure it cannot supply is unusable on paper. The
+  // model has no way to attach an asset, so this stays a hard reject — but the
+  // stem may legitimately *describe* a setup in words, which is the escape.
+  const promisesFigure =
+    /\b(fig\.?|figure|diagram|graph|chart|table|circuit|apparatus|sketch)\b/i.test(q.stem) &&
+    /\b(shown|above|below|opposite|following|this|the)\s+(fig\.?|figure|diagram|graph|chart|table|circuit|apparatus|sketch)\b/i.test(
+      q.stem,
+    );
+  const describesItInWords =
+    /\b(describ|as follows|the values are|consists of|is made up of|comprises|the axes|readings are|connected in|arranged)\b/i.test(
+      q.stem,
+    );
+  if (promisesFigure && !describesItInWords) {
+    return "stem refers to a figure/diagram/table that it never describes, and no figure can be attached";
   }
   return undefined;
 }

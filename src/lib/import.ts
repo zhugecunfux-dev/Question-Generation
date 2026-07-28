@@ -13,11 +13,14 @@ import type {
   Difficulty,
   McqOption,
   Question,
+  QuestionAsset,
   QuestionFormat,
   QuestionTemplate,
 } from "@/lib/types";
 import { isValidTopicId } from "@/lib/syllabus";
 import { expandTemplate } from "@/lib/template/engine";
+import { hasSupportedAssetExtension, normaliseAssetPath } from "@/lib/assets";
+import { assetExists } from "@/lib/assets.server";
 
 export interface ImportIssue {
   index: number;
@@ -83,6 +86,67 @@ function normaliseOptions(v: unknown): McqOption[] | undefined {
   });
 }
 
+/**
+ * Parse and validate the `assets` field.
+ *
+ * A question whose figure path is wrong is unusable — you would only find out
+ * when a student is looking at a blank space — so a bad path is a rejection,
+ * not a warning. `checkFiles: false` skips the on-disk check for the case where
+ * the JSON lands before the images are copied across.
+ */
+function normaliseAssets(
+  raw: Raw,
+  index: number,
+  id: string | undefined,
+  issues: ImportIssue[],
+  checkFiles: boolean,
+): QuestionAsset[] | undefined {
+  const value = pick(raw, "assets", "figures", "images", "image", "figure");
+  if (value === undefined) return undefined;
+
+  const list = Array.isArray(value) ? value : [value];
+  const out: QuestionAsset[] = [];
+
+  for (const item of list) {
+    const record: Raw = typeof item === "string" ? { path: item } : (item as Raw);
+    const rawPath = asString(pick(record, "path", "src", "file", "url", "image"));
+    if (!rawPath) {
+      issues.push({ index, id, message: "asset entry has no `path`" });
+      continue;
+    }
+
+    const safe = normaliseAssetPath(rawPath);
+    if (!safe) {
+      issues.push({
+        index,
+        id,
+        message: `asset path "${rawPath}" is not a safe relative path inside data/assets`,
+      });
+      continue;
+    }
+    if (!hasSupportedAssetExtension(safe)) {
+      issues.push({ index, id, message: `asset "${safe}" is not a png/jpg/webp/gif/svg` });
+      continue;
+    }
+    if (checkFiles && !assetExists(safe)) {
+      issues.push({ index, id, message: `asset "${safe}" was not found under data/assets` });
+      continue;
+    }
+
+    const width = Number(pick(record, "width", "w"));
+    const height = Number(pick(record, "height", "h"));
+    out.push({
+      path: safe,
+      caption: asString(pick(record, "caption", "label", "title")),
+      alt: asString(pick(record, "alt", "description", "altText", "alt_text")),
+      width: Number.isFinite(width) && width > 0 ? Math.round(width) : undefined,
+      height: Number.isFinite(height) && height > 0 ? Math.round(height) : undefined,
+    });
+  }
+
+  return out.length ? out : undefined;
+}
+
 function validateCommon(raw: Raw, index: number, issues: ImportIssue[]) {
   const id = asString(pick(raw, "id", "questionId", "question_id"));
   const topicId = normaliseTopicId(pick(raw, "topicId", "topic_id", "topic"));
@@ -124,12 +188,18 @@ function validateCommon(raw: Raw, index: number, issues: ImportIssue[]) {
   };
 }
 
-function parseStatic(raw: Raw, index: number, issues: ImportIssue[]): Question | undefined {
+function parseStatic(
+  raw: Raw,
+  index: number,
+  issues: ImportIssue[],
+  opts: ParseOptions,
+): Question | undefined {
   const before = issues.length;
   const common = validateCommon(raw, index, issues);
   const stem = asString(pick(raw, "stem", "question", "text", "body"));
   const answer = asString(pick(raw, "answer", "key", "correctAnswer"));
   const options = normaliseOptions(pick(raw, "options", "choices"));
+  const assets = normaliseAssets(raw, index, common.id, issues, opts.checkAssetFiles);
 
   if (!stem) issues.push({ index, id: common.id, message: "missing `stem`" });
 
@@ -165,6 +235,7 @@ function parseStatic(raw: Raw, index: number, issues: ImportIssue[]): Question |
     marks: common.marks,
     stem: stem!,
     options,
+    assets,
     answer: answer ?? (key ? `${key.label} (${key.text})` : ""),
     solution: asString(pick(raw, "solution", "workedSolution", "markScheme", "explanation")),
     tags: common.tags,
@@ -172,10 +243,16 @@ function parseStatic(raw: Raw, index: number, issues: ImportIssue[]): Question |
   };
 }
 
-function parseTemplate(raw: Raw, index: number, issues: ImportIssue[]): QuestionTemplate | undefined {
+function parseTemplate(
+  raw: Raw,
+  index: number,
+  issues: ImportIssue[],
+  opts: ParseOptions,
+): QuestionTemplate | undefined {
   const before = issues.length;
   const common = validateCommon(raw, index, issues);
   const stem = asString(pick(raw, "stem", "question", "text"));
+  const assets = normaliseAssets(raw, index, common.id, issues, opts.checkAssetFiles);
   if (!stem) issues.push({ index, id: common.id, message: "missing `stem`" });
 
   const variables = raw.variables;
@@ -201,6 +278,7 @@ function parseTemplate(raw: Raw, index: number, issues: ImportIssue[]): Question
     ao: common.ao,
     marks: common.marks,
     stem: stem!,
+    assets,
     variables: variables as QuestionTemplate["variables"],
     constraints: (raw.constraints as string[] | undefined) ?? undefined,
     derived: (raw.derived as QuestionTemplate["derived"]) ?? undefined,
@@ -235,8 +313,22 @@ function parseTemplate(raw: Raw, index: number, issues: ImportIssue[]): Question
   return template;
 }
 
+export interface ParseOptions {
+  /**
+   * Verify each referenced figure exists under `data/assets`. Turn off when the
+   * question JSON arrives before the images have been copied across.
+   */
+  checkAssetFiles: boolean;
+}
+
+const DEFAULT_PARSE_OPTIONS: ParseOptions = { checkAssetFiles: true };
+
 /** Parse an array of raw records into bank entries. */
-export function parseEntries(records: unknown[]): ImportResult {
+export function parseEntries(
+  records: unknown[],
+  options: Partial<ParseOptions> = {},
+): ImportResult {
+  const opts: ParseOptions = { ...DEFAULT_PARSE_OPTIONS, ...options };
   const entries: BankEntry[] = [];
   const issues: ImportIssue[] = [];
   const seenIds = new Set<string>();
@@ -249,8 +341,8 @@ export function parseEntries(records: unknown[]): ImportResult {
     const raw = record as Raw;
     const kind = asString(pick(raw, "kind")) === "template" || raw.variables ? "template" : "static";
     const entry = kind === "template"
-      ? parseTemplate(raw, index, issues)
-      : parseStatic(raw, index, issues);
+      ? parseTemplate(raw, index, issues, opts)
+      : parseStatic(raw, index, issues, opts);
 
     if (!entry) return;
     if (seenIds.has(entry.id)) {
@@ -305,22 +397,26 @@ export function parseCsv(text: string): Array<Record<string, string>> {
 }
 
 /** Accepts a JSON array, a `{questions: [...]}` wrapper, JSONL, or CSV. */
-export function parseImportPayload(text: string, filename = ""): ImportResult {
+export function parseImportPayload(
+  text: string,
+  filename = "",
+  options: Partial<ParseOptions> = {},
+): ImportResult {
   const trimmed = text.trim();
 
   if (filename.toLowerCase().endsWith(".csv") || (!trimmed.startsWith("[") && !trimmed.startsWith("{"))) {
     if (filename.toLowerCase().endsWith(".csv") || trimmed.includes(",")) {
-      return parseEntries(parseCsv(text));
+      return parseEntries(parseCsv(text), options);
     }
   }
 
-  if (trimmed.startsWith("[")) return parseEntries(JSON.parse(trimmed) as unknown[]);
+  if (trimmed.startsWith("[")) return parseEntries(JSON.parse(trimmed) as unknown[], options);
 
   if (trimmed.startsWith("{")) {
     // Either a wrapper object or JSONL (one object per line).
     if (trimmed.includes("}\n{") || trimmed.includes("}\r\n{")) {
       const records = trimmed.split(/\r?\n/).filter(Boolean).map((l) => JSON.parse(l) as unknown);
-      return parseEntries(records);
+      return parseEntries(records, options);
     }
     const obj = JSON.parse(trimmed) as Record<string, unknown>;
     // A wrapper may split static questions and templates across keys; take all
@@ -329,8 +425,8 @@ export function parseImportPayload(text: string, filename = ""): ImportResult {
       .map((key) => obj[key])
       .filter(Array.isArray)
       .flat();
-    if (collected.length) return parseEntries(collected);
-    return parseEntries([obj]);
+    if (collected.length) return parseEntries(collected, options);
+    return parseEntries([obj], options);
   }
 
   throw new Error("Unrecognised import format — expected JSON array, JSONL, {questions: [...]}, or CSV");

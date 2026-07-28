@@ -13,6 +13,7 @@ export const dynamic = "force-dynamic";
  */
 export async function POST(request: NextRequest) {
   const dryRun = request.nextUrl.searchParams.get("dryRun") === "1";
+  const skipAssetCheck = request.nextUrl.searchParams.get("skipAssetCheck") === "1";
 
   let text: string;
   let filename = "";
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
 
   let result;
   try {
-    result = parseImportPayload(text, filename);
+    result = parseImportPayload(text, filename, { checkAssetFiles: !skipAssetCheck });
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : String(err) },

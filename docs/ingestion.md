@@ -133,15 +133,60 @@ Three honest ways out, in increasing effort:
    per figure family — worth it for the handful of shapes that recur across every
    paper (series/parallel circuits, v–t graphs, ray diagrams, inclined planes).
 
-## 5. What still needs building
+## 5. What's implemented
 
-The schema in `src/lib/types.ts` currently has **no figure field** — questions are
-text-and-options only. Supporting real papers needs, at minimum:
+Tiers 1 and 2 are built.
 
-- an `assets` field on questions (image path, caption, alt text, dimensions)
-- import validation that resolves and checks asset paths
-- figure rendering in `QuestionCard` and in the Markdown export
-- relaxing the LLM validator's figure rule to "describe it *or* attach one"
-- for tier 3, a figure-generator hook on templates
+**Storage.** Figures live in `data/assets/` (override with `QG_ASSETS_DIR`),
+alongside the bank rather than in `public/`. They are served by
+`/api/assets/[...path]`, which is the single place path containment is enforced —
+`..`, absolute paths, drive letters, `file://` and `data:` URLs, NUL bytes and
+symlinks pointing outside the root are all rejected. SVGs are served under a
+`sandbox` CSP, since a bank file is untrusted input and an SVG can carry script.
 
-None of that is written yet.
+**Schema.** `assets?: QuestionAsset[]` on both questions and templates:
+
+```json
+"assets": [
+  {
+    "path": "seed/velocity-time-trolley.svg",
+    "caption": "Fig. 2.1",
+    "alt": "Velocity-time graph. Velocity rises linearly from 0 to 20 m/s over the first 5 s, then stays constant at 20 m/s until 10 s.",
+    "width": 440,
+    "height": 300
+  }
+]
+```
+
+Import accepts `assets` / `figures` / `images` / `image` / `figure`, a bare
+string instead of an object, and `src` / `file` / `title` / `description` as
+field aliases. A path that is unsafe, isn't an image, or isn't on disk is
+**rejected and reported** like any other invalid row. Use
+`--skip-asset-check` (CLI) or `?skipAssetCheck=1` (API) when the question JSON
+arrives before the images have been copied across — the safety checks still
+apply, only the existence check is skipped.
+
+**Descriptions (tier 2).** `npm run describe-assets` fills in missing `alt` text
+with Claude vision, prompted to record what is *drawn* — axis ranges, component
+values, coordinates — and explicitly not to solve the question. Supports
+`--dry-run` and `--force`. Note SVG is not a vision input type, so vector
+figures need their `alt` written by hand (the shipped seed figure has one).
+
+**Rendering.** `QuestionCard` renders figures with caption and alt text; the
+Markdown export emits `![alt](assets/<path>)` so an exported paper still renders
+when the assets directory sits beside it.
+
+**LLM generation.** The model cannot attach a figure, so a stem that refers to
+an undescribed one is still rejected — but the check now recognises far more
+phrasings, and exemplars carrying figures are shown to the model as a labelled
+description so it learns the style without learning to lean on an image.
+
+## 6. What's still open
+
+- **Tier 3** — no figure-generator hook on templates yet. A template with a
+  fixed `assets` entry is safe only while the varying quantities stay out of the
+  image.
+- **Raster figures for `describe-assets`** — SVGs are skipped; rasterising them
+  would need a renderer this repo doesn't ship.
+- **Deduplication** — the same figure reused across papers is stored per path,
+  with no content hashing.

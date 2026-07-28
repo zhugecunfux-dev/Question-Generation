@@ -12,10 +12,12 @@ import { upsertEntries } from "@/lib/db";
 
 const args = process.argv.slice(2);
 const dryRun = args.includes("--dry-run");
+// Lets the question JSON land before the images are copied across.
+const skipAssetCheck = args.includes("--skip-asset-check");
 const files = args.filter((a) => !a.startsWith("--"));
 
 if (files.length === 0) {
-  console.error("usage: npm run import -- [--dry-run] <file...>");
+  console.error("usage: npm run import -- [--dry-run] [--skip-asset-check] <file...>");
   process.exit(1);
 }
 
@@ -34,7 +36,7 @@ for (const file of files) {
   const text = fs.readFileSync(full, "utf8");
   let result;
   try {
-    result = parseImportPayload(text, full);
+    result = parseImportPayload(text, full, { checkAssetFiles: !skipAssetCheck });
   } catch (err) {
     console.error(`✗ ${file}: ${err instanceof Error ? err.message : String(err)}`);
     process.exitCode = 1;

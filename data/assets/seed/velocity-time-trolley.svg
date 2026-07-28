@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 300" width="440" height="300"
+     role="img" aria-label="Velocity-time graph: velocity rises linearly from 0 to 20 metres per second over the first 5 seconds, then stays constant at 20 metres per second until 10 seconds.">
+  <rect width="440" height="300" fill="#ffffff"/>
+
+  <!-- grid: x every 2 s (30 px per second), y every 5 m/s (8 px per m/s) -->
+  <g stroke="#dde4e9" stroke-width="1">
+    <line x1="120" y1="70" x2="120" y2="230"/>
+    <line x1="180" y1="70" x2="180" y2="230"/>
+    <line x1="240" y1="70" x2="240" y2="230"/>
+    <line x1="300" y1="70" x2="300" y2="230"/>
+    <line x1="360" y1="70" x2="360" y2="230"/>
+    <line x1="60" y1="190" x2="360" y2="190"/>
+    <line x1="60" y1="150" x2="360" y2="150"/>
+    <line x1="60" y1="110" x2="360" y2="110"/>
+    <line x1="60" y1="70"  x2="360" y2="70"/>
+  </g>
+
+  <!-- axes -->
+  <g stroke="#101418" stroke-width="1.6" fill="none">
+    <line x1="60" y1="230" x2="400" y2="230"/>
+    <line x1="60" y1="230" x2="60" y2="50"/>
+    <path d="M400 230 l-7 -4 v8 z" fill="#101418"/>
+    <path d="M60 50 l-4 7 h8 z" fill="#101418"/>
+  </g>
+
+  <!-- tick marks -->
+  <g stroke="#101418" stroke-width="1.2">
+    <line x1="120" y1="230" x2="120" y2="235"/>
+    <line x1="180" y1="230" x2="180" y2="235"/>
+    <line x1="240" y1="230" x2="240" y2="235"/>
+    <line x1="300" y1="230" x2="300" y2="235"/>
+    <line x1="360" y1="230" x2="360" y2="235"/>
+    <line x1="55" y1="190" x2="60" y2="190"/>
+    <line x1="55" y1="150" x2="60" y2="150"/>
+    <line x1="55" y1="110" x2="60" y2="110"/>
+    <line x1="55" y1="70"  x2="60" y2="70"/>
+  </g>
+
+  <!-- the trace: 0 to 20 m/s over 5 s, then constant to 10 s -->
+  <polyline points="60,230 210,70 360,70" fill="none" stroke="#1c5d99" stroke-width="2.6"
+            stroke-linejoin="round" stroke-linecap="round"/>
+
+  <g font-family="Georgia, serif" font-size="13" fill="#101418" text-anchor="middle">
+    <text x="60"  y="250">0</text>
+    <text x="120" y="250">2</text>
+    <text x="180" y="250">4</text>
+    <text x="240" y="250">6</text>
+    <text x="300" y="250">8</text>
+    <text x="360" y="250">10</text>
+    <text x="230" y="275">time / s</text>
+  </g>
+
+  <g font-family="Georgia, serif" font-size="13" fill="#101418" text-anchor="end">
+    <text x="50" y="235">0</text>
+    <text x="50" y="195">5</text>
+    <text x="50" y="155">10</text>
+    <text x="50" y="115">15</text>
+    <text x="50" y="75">20</text>
+  </g>
+
+  <text x="22" y="145" font-family="Georgia, serif" font-size="13" fill="#101418"
+        text-anchor="middle" transform="rotate(-90 22 145)">velocity / m s⁻¹</text>
+</svg>

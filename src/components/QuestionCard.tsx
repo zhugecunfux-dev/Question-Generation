@@ -1,4 +1,31 @@
-import type { BankEntry, Question, QuestionTemplate } from "@/lib/types";
+import type { BankEntry, Question, QuestionAsset, QuestionTemplate } from "@/lib/types";
+import { assetUrl } from "@/lib/assets";
+
+function Figures({ assets }: { assets: QuestionAsset[] }) {
+  return (
+    <div className="mt-3 flex flex-wrap gap-4">
+      {assets.map((asset) => (
+        <figure key={asset.path} className="m-0 max-w-full">
+          {/* Bank figures are arbitrary sizes from whatever parsed the paper, so
+              next/image's required dimensions don't fit; a plain img is right. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={assetUrl(asset.path)}
+            alt={asset.alt ?? asset.caption ?? "Figure for this question"}
+            width={asset.width}
+            height={asset.height}
+            className="max-w-full rounded border border-[var(--color-line)] bg-white dark:border-neutral-700"
+          />
+          {asset.caption && (
+            <figcaption className="mt-1 text-xs text-[var(--color-ink-soft)] dark:text-neutral-400">
+              {asset.caption}
+            </figcaption>
+          )}
+        </figure>
+      ))}
+    </div>
+  );
+}
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
@@ -43,6 +70,8 @@ export function QuestionCard({
       </div>
 
       <p className="whitespace-pre-wrap text-[15px] leading-relaxed">{entry.stem}</p>
+
+      {entry.assets?.length ? <Figures assets={entry.assets} /> : null}
 
       {q?.options && (
         <ol className="mt-3 space-y-1 text-[15px]">

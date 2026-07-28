@@ -102,6 +102,13 @@ export default function GeneratePage() {
       lines.push(`## ${i + 1}. [${q.topicId} · ${q.difficulty} · ${q.ao} · ${q.marks} mark${q.marks > 1 ? "s" : ""}]`);
       lines.push("");
       lines.push(q.stem);
+      // Figures export as Markdown image references so the paper still renders
+      // once the assets directory sits next to the exported file.
+      q.assets?.forEach((a) => {
+        lines.push("");
+        lines.push(`![${a.alt ?? a.caption ?? "Figure"}](assets/${a.path})`);
+        if (a.caption) lines.push(`*${a.caption}*`);
+      });
       if (q.options) {
         lines.push("");
         q.options.forEach((o) => lines.push(`- **${o.label}.** ${o.text}`));

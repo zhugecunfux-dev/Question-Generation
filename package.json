@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test test/*.test.ts",
     "import": "tsx scripts/import.ts",
-    "token-cost": "tsx scripts/token-cost.ts"
+    "token-cost": "tsx scripts/token-cost.ts",
+    "describe-assets": "tsx scripts/describe-assets.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

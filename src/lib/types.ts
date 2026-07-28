@@ -78,6 +78,26 @@ export interface McqOption {
 }
 
 /**
+ * A figure attached to a question — a circuit, ray diagram, graph, apparatus
+ * sketch. 6091 is figure-heavy, so this is the common case, not an edge case.
+ *
+ * `alt` is searchable metadata and accessibility text, and gives a model
+ * context when few-shotting. It is deliberately NOT a substitute for the image:
+ * "a circuit with two resistors" cannot be read off to answer a question about
+ * which resistor carries more current.
+ */
+export interface QuestionAsset {
+  /** Path relative to the assets root (`data/assets`), e.g. "tys2019/p1-q7.png". */
+  path: string;
+  /** The caption as printed on the paper, e.g. "Fig. 7.1". */
+  caption?: string;
+  /** Description of what the figure shows. Metadata, never a replacement. */
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+/**
  * A concrete question. `kind: "static"` is a fixed question as authored /
  * imported; `kind: "template"` carries a parameterised recipe that the variant
  * engine expands into many concrete questions.
@@ -96,6 +116,8 @@ export interface QuestionBase {
   stem: string;
   /** Present for `format: "mcq"`. */
   options?: McqOption[];
+  /** Figures the question depends on. */
+  assets?: QuestionAsset[];
   /** Expected answer (final value / key points). */
   answer: string;
   /** Worked solution or mark scheme. */
@@ -146,6 +168,15 @@ export interface QuestionTemplate {
   marks: number;
   /** Mustache-ish stem, e.g. "A car accelerates from {{u}} m/s ...". */
   stem: string;
+  /**
+   * Figures carried by every variant of this template.
+   *
+   * A fixed image and a varying number are in tension: if a sampled value is
+   * printed on the figure, the figure is wrong the moment it changes. Keep
+   * varying quantities in the stem and label the figure symbolically (R1, V),
+   * or leave the question static.
+   */
+  assets?: QuestionAsset[];
   variables: VariableSpec[];
   /** Boolean expressions that a sampled variable set must satisfy. */
   constraints?: string[];

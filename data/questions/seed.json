@@ -34,6 +34,28 @@
       "tags": "seed,common-misconception"
     },
     {
+      "id": "seed-T2-002",
+      "topicId": "T2",
+      "subtopicId": "T2.2",
+      "format": "data_based",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 4,
+      "stem": "The graph shows how the velocity of a trolley on a horizontal track varies with time.\n\n(a) Calculate the acceleration of the trolley during the first 5.0 s.\n(b) Calculate the total distance travelled by the trolley during the 10 s shown.",
+      "assets": [
+        {
+          "path": "seed/velocity-time-trolley.svg",
+          "caption": "Fig. 2.1",
+          "alt": "Velocity-time graph. Velocity rises linearly from 0 to 20 m/s over the first 5 s, then stays constant at 20 m/s until 10 s. Time axis 0 to 10 s, velocity axis 0 to 20 m/s.",
+          "width": 440,
+          "height": 300
+        }
+      ],
+      "answer": "(a) 4.0 m/s^2  (b) 150 m",
+      "solution": "(a) Acceleration is the gradient of the velocity-time graph: a = (20 - 0) / (5.0 - 0) = 4.0 m/s^2. (b) Distance is the area under the graph: triangle (1/2)(5.0)(20) = 50 m, plus rectangle (5.0)(20) = 100 m, giving 150 m in total.",
+      "tags": "seed,graph,figure"
+    },
+    {
       "id": "seed-T6-001",
       "topicId": "T6",
       "subtopicId": "T6.1",

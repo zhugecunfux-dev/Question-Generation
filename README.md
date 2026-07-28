@@ -16,7 +16,7 @@ produces the same paper.
 
 ```bash
 npm install
-npm run import -- data/questions/seed.json   # load the starter bank (11 entries)
+npm run import -- data/questions/seed.json   # load the starter bank (12 entries)
 npm run dev                                   # http://localhost:3000
 ```
 
@@ -29,8 +29,15 @@ cp .env.example .env.local   # then set ANTHROPIC_API_KEY
 Retrieve and template modes work without a key.
 
 ```bash
-npm test        # 19 tests: expression evaluator, variant engine, importer
+npm test        # 28 tests: expression evaluator, variant engine, importer, assets
 npm run build   # production build
+```
+
+Two helper scripts need an API key:
+
+```bash
+npm run token-cost -- source/paper.pdf parsed/paper.md   # what a source doc costs, three ways
+npm run describe-assets -- --dry-run                     # fill in missing figure descriptions
 ```
 
 ## Syllabus model
@@ -137,6 +144,36 @@ per template). They are parsed by a hand-written tokenizer + Pratt parser in
 [`src/lib/template/expr.ts`](src/lib/template/expr.ts) — **not** `eval` — because templates are
 user-supplied data.
 
+### Figures
+
+6091 is figure-heavy, so questions and templates take an optional `assets` array.
+Images live in `data/assets/` (override with `QG_ASSETS_DIR`) and are served by
+`/api/assets/[...path]`, which enforces path containment in one place.
+
+```json
+"assets": [
+  {
+    "path": "seed/velocity-time-trolley.svg",
+    "caption": "Fig. 2.1",
+    "alt": "Velocity-time graph. Velocity rises linearly from 0 to 20 m/s over the first 5 s, then stays constant at 20 m/s until 10 s.",
+    "width": 440,
+    "height": 300
+  }
+]
+```
+
+`alt` is searchable metadata, accessibility text, and context when few-shotting
+the model — deliberately **not** a substitute for the image. Generate missing
+ones with `npm run describe-assets`.
+
+An unsafe, non-image, or missing path is rejected like any other invalid row.
+Pass `--skip-asset-check` when the question JSON arrives before the images do.
+
+> **Templates and figures are in tension.** If a template varies a number that
+> is printed on its figure, the figure is wrong the moment it changes. Keep
+> varying quantities in the stem and label the figure symbolically, or leave the
+> question static. See [`docs/ingestion.md`](docs/ingestion.md).
+
 ## Claude-authored questions
 
 `generateWithLlm` sends the model the exact topic and sub-topic list it may draw on, real
@@ -158,7 +195,8 @@ Model defaults to `claude-opus-5`; override with `ANTHROPIC_MODEL`.
 | `GET /api/syllabus` | Syllabus JSON + per-topic bank counts. |
 | `GET /api/questions` | Query the bank (`topicId`, `format`, `difficulty`, `kind`, `search`, `limit`, `offset`). |
 | `DELETE /api/questions?id=…` | Remove one entry. |
-| `POST /api/import` | Import a bank file. `?dryRun=1` validates without writing. |
+| `GET /api/assets/[...path]` | Serve a question figure from `data/assets`. |
+| `POST /api/import` | Import a bank file. `?dryRun=1` validates without writing, `?skipAssetCheck=1` skips the figure-exists check. |
 | `POST /api/generate` | Generate a paper. Body: `{mode, topicIds, formats?, difficulties?, count, seed?, notes?, save?}`. |
 
 ```bash
@@ -170,11 +208,14 @@ curl -X POST localhost:3000/api/generate -H 'content-type: application/json' \
 
 ```
 data/syllabus/6091-physics.json   machine-readable syllabus (single source of truth)
-data/questions/seed.json          starter bank: 5 static questions + 6 templates
+data/questions/seed.json          starter bank: 6 static questions + 6 templates
+data/assets/                      question figures, served via /api/assets
 src/lib/types.ts                  domain model
 src/lib/syllabus.ts               syllabus loading + topic lookup
 src/lib/db.ts                     SQLite storage (better-sqlite3)
 src/lib/import.ts                 validation + JSON/JSONL/CSV parsing
+src/lib/assets.ts                 asset path safety (client-safe)
+src/lib/assets.server.ts          asset resolution against data/assets
 src/lib/template/expr.ts          safe expression evaluator
 src/lib/template/engine.ts        seeded variant expansion
 src/lib/llm/generate.ts           Claude-authored questions
@@ -189,7 +230,9 @@ bank is your data, not repo content.
 ## Known limits
 
 - Paper 3 (practical) is modelled in the syllabus but not generated: AO3 needs real apparatus.
-- No figure or diagram support. Questions needing one must describe it in words; the LLM
-  validator actively rejects stems that reference an undescribed figure.
+- Figures are stored and rendered, but not *generated*: a template cannot yet emit a figure
+  from its own variables, so parameterised questions must keep varying values out of the image.
+- Claude-authored questions still cannot attach a figure, so the validator rejects stems that
+  refer to one without describing it.
 - Sub-topic-level syllabus data is unverified (see above).
 - No multi-user auth — this is a single-tenant local/self-hosted tool as it stands.
