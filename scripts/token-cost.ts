@@ -29,7 +29,10 @@ const INPUT_PRICE: Record<string, number> = {
 const args = process.argv.slice(2);
 const modelFlag = args.indexOf("--model");
 const model = modelFlag >= 0 ? args[modelFlag + 1] : "claude-opus-5";
-const files = args.filter((a, i) => !a.startsWith("--") && i !== modelFlag + 1);
+// Guard the -1 case: without --model, `modelFlag + 1` is 0 and would silently
+// swallow the first filename.
+const modelValueIndex = modelFlag >= 0 ? modelFlag + 1 : -1;
+const files = args.filter((a, i) => !a.startsWith("--") && i !== modelValueIndex);
 
 if (files.length === 0) {
   console.error("usage: npm run token-cost -- [--model <id>] <file.pdf|file.md> ...");
