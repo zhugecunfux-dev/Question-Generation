@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LogoutButton } from "@/components/LogoutButton";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,11 +17,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="font-semibold tracking-tight">
               6091 <span className="text-[var(--color-accent)]">Question Generator</span>
             </Link>
-            <div className="flex gap-5 text-sm text-[var(--color-ink-soft)] dark:text-neutral-400">
+            <div className="flex flex-1 gap-5 text-sm text-[var(--color-ink-soft)] dark:text-neutral-400">
               <Link href="/" className="hover:text-[var(--color-accent)]">Generate</Link>
               <Link href="/bank" className="hover:text-[var(--color-accent)]">Question bank</Link>
               <Link href="/import" className="hover:text-[var(--color-accent)]">Import</Link>
+              <Link href="/agent" className="hover:text-[var(--color-accent)]">Codex</Link>
             </div>
+            <LogoutButton />
           </nav>
         </header>
         <main className="mx-auto max-w-6xl px-5 py-8">{children}</main>

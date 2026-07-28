@@ -1,0 +1,16 @@
+{
+  "name": "6091 Physics Studio",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "6091 Physics Studio",
+      "onAutoForward": "notify",
+      "visibility": "private"
+    }
+  },
+  "postCreateCommand": "npm ci && npm run import -- data/questions/seed.json",
+  "remoteEnv": {
+    "CODEX_WORKSPACE": "${containerWorkspaceFolder}"
+  }
+}

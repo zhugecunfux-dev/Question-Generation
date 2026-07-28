@@ -17,8 +17,11 @@ produces the same paper.
 ```bash
 npm install
 npm run import -- data/questions/seed.json   # load the starter bank (12 entries)
-npm run dev                                   # http://localhost:3000
+QG_INSECURE_LOCAL_ONLY=1 npm run dev          # http://localhost:3000
 ```
+The local bypass is explicit and `npm run dev` binds to `127.0.0.1`.
+Never use `QG_INSECURE_LOCAL_ONLY` with a remotely reachable server.
+
 
 For Claude-authored mode, add an API key:
 
@@ -29,9 +32,65 @@ cp .env.example .env.local   # then set ANTHROPIC_API_KEY
 Retrieve and template modes work without a key.
 
 ```bash
-npm test        # 39 tests: expression evaluator, variant engine, importer, assets, staging
+npm test        # 51 tests: core engine, importer, assets, staging, access, and Codex bridge
 npm run build   # production build
 ```
+
+## Private Codex workspace
+
+The **Codex** page is a private, server-side bridge to your local Codex login. It can
+start or resume Codex conversations, stream replies and activity, stop an active turn,
+and ask before commands or file changes. The browser never receives your ChatGPT
+credentials, and no OpenAI Platform API key is required.
+
+Codex file writes are locked to this repository with the `workspace-write` sandbox.
+The whole site fails closed unless `QG_ACCESS_TOKEN` is configured for remote use,
+because the import, delete, and agent routes all change local data. The sandbox is not
+a secrecy boundary for files the host OS account can already read: prefer an isolated
+Codespace/container or a dedicated OS account, and treat the access key as sensitive
+as access to that host.
+
+### Run on a trusted computer
+
+First sign Codex in with the ChatGPT account whose subscription you want to use:
+
+```bash
+npm run codex:login
+```
+
+Then run the site. Use a long private value and open `/agent` from your browser:
+
+```bash
+npm run build
+QG_ACCESS_TOKEN=choose-a-long-random-value \
+CODEX_WORKSPACE="$PWD" \
+npm run start:remote
+```
+
+Do not publish port 3000 directly to the public internet. Put it behind Tailscale,
+another private VPN, or an HTTPS reverse proxy with authentication. The host computer
+must remain awake and online.
+
+### Open it from another computer with GitHub Codespaces
+
+This repository includes a dev-container configuration. Create a Codespace from this
+branch, then run:
+
+```bash
+export QG_ACCESS_TOKEN=choose-a-long-random-value
+npm run codex:login
+npm run dev:remote
+```
+
+Open the private forwarded port **3000** from the Codespaces **Ports** panel. Sign in to
+GitHub from the other computer and open the same private port URL. Codespaces stop when
+idle and may incur GitHub compute/storage charges; the Codex model usage still follows
+the ChatGPT account used by `codex login`.
+
+Conversation history is stored by Codex on the host that runs the app. SQLite question
+data also lives on that host. GitHub stores the source code, not the live database or
+Codex login. GitHub Pages and ordinary serverless hosting cannot run this application
+because it needs a persistent Node process, SQLite, and a local Codex child process.
 
 Two helper scripts need an API key:
 
@@ -212,6 +271,8 @@ Model defaults to `claude-opus-5`; override with `ANTHROPIC_MODEL`.
 | `GET /api/assets/[...path]` | Serve a question figure from `data/assets`. |
 | `POST /api/import` | Import a bank file. `?dryRun=1` validates without writing, `?skipAssetCheck=1` skips the figure-exists check. |
 | `POST /api/generate` | Generate a paper. Body: `{mode, topicIds, formats?, difficulties?, count, seed?, notes?, save?}`. |
+| `GET/POST /api/codex` | List/resume Codex threads, stream turns, interrupt work, and resolve approvals. |
+| `GET/POST/DELETE /api/auth` | Check, create, or clear the private site session. |
 
 ```bash
 curl -X POST localhost:3000/api/generate -H 'content-type: application/json' \
@@ -251,4 +312,4 @@ bank is your data, not repo content.
 - Claude-authored questions still cannot attach a figure, so the validator rejects stems that
   refer to one without describing it.
 - Sub-topic-level syllabus data is unverified (see above).
-- No multi-user auth — this is a single-tenant local/self-hosted tool as it stands.
+- Authentication is a single shared access key, not multi-user accounts or per-user roles.
