@@ -1,0 +1,359 @@
+{
+  "$schema": "./syllabus.schema.json",
+  "id": "sg-olevel-physics-6091",
+  "subject": "Physics",
+  "subjectCode": "6091",
+  "qualification": "Singapore-Cambridge General Certificate of Education (Ordinary Level)",
+  "board": "SEAB / Cambridge",
+  "syllabusYear": 2026,
+  "language": "en",
+  "sourceDocument": {
+    "title": "Physics (Syllabus 6091)",
+    "url": "https://www.seab.gov.sg/files/O%20Lvl%20Syllabus%20Sch%20Cddts/2026/6091_y26_sy.pdf",
+    "mirror": "https://isomer-user-content.by.gov.sg/334/42ee79d0-bb13-43f5-94ab-629729f88aa0/6091_y26_sy.pdf",
+    "verified": false,
+    "note": "Section/topic structure and the scheme of assessment were cross-checked against public summaries of the official PDF. Sub-topic breakdowns are a reconstruction and MUST be diffed against the official PDF (pages 10-22) before being treated as authoritative."
+  },
+  "assessmentObjectives": [
+    {
+      "id": "AO1",
+      "title": "Knowledge with understanding",
+      "description": "Recall and use scientific phenomena, facts, concepts, definitions, laws, theories, models, vocabulary, units, symbols, quantities, instruments and apparatus, and scientific and technological applications with their social, economic and environmental implications.",
+      "theoryWeighting": 0.45,
+      "notes": "Approximately 15% of the theory marks are for simple recall."
+    },
+    {
+      "id": "AO2",
+      "title": "Handling information and solving problems",
+      "description": "Locate, select, organise and present information; translate information between forms; manipulate numerical and other data; use information to identify patterns, report trends and draw inferences; present reasoned explanations; make predictions and hypotheses; solve problems.",
+      "theoryWeighting": 0.55
+    },
+    {
+      "id": "AO3",
+      "title": "Experimental skills and investigations",
+      "description": "Follow instructions; use techniques, apparatus and materials safely; make and record observations, measurements and estimates; interpret and evaluate observations and experimental results; plan investigations, select techniques, apparatus and materials, and evaluate methods.",
+      "assessedIn": ["paper3"],
+      "skillAreas": [
+        { "id": "P", "title": "Planning", "weightingWithinPaper3": 0.15 },
+        { "id": "MMO", "title": "Manipulation, measurement and observation" },
+        { "id": "PDO", "title": "Presentation of data and observations" },
+        { "id": "ACE", "title": "Analysis, conclusions and evaluation" }
+      ],
+      "notes": "MMO, PDO and ACE together carry approximately 85% of Paper 3."
+    }
+  ],
+  "papers": [
+    {
+      "id": "paper1",
+      "code": "6091/01",
+      "name": "Multiple Choice",
+      "durationMinutes": 60,
+      "marks": 40,
+      "weighting": 0.30,
+      "questionFormats": ["mcq"],
+      "structure": [
+        {
+          "section": null,
+          "marks": 40,
+          "questionCount": 40,
+          "compulsory": true,
+          "description": "40 compulsory multiple-choice items, each with four options (A-D)."
+        }
+      ]
+    },
+    {
+      "id": "paper2",
+      "code": "6091/02",
+      "name": "Structured and Free Response",
+      "durationMinutes": 105,
+      "marks": 80,
+      "weighting": 0.50,
+      "questionFormats": ["structured", "data_based", "free_response"],
+      "structure": [
+        {
+          "section": "A",
+          "marks": 70,
+          "compulsory": true,
+          "description": "A variable number of compulsory structured questions. The last two questions carry 20 marks in total, one of which is a data-based question worth 8-12 marks that requires candidates to interpret, evaluate or solve problems using a stem of information."
+        },
+        {
+          "section": "B",
+          "marks": 10,
+          "compulsory": false,
+          "choice": "1 of 2",
+          "description": "Two free-response questions; candidates answer one."
+        }
+      ]
+    },
+    {
+      "id": "paper3",
+      "code": "6091/03",
+      "name": "Practical Test",
+      "durationMinutes": 110,
+      "marks": 40,
+      "weighting": 0.20,
+      "questionFormats": ["practical"],
+      "structure": [
+        {
+          "section": null,
+          "marks": 40,
+          "description": "Two sections; candidates have 55 minutes with the apparatus for each section. Assesses P, MMO, PDO and ACE."
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "I",
+      "title": "Measurement",
+      "topics": [
+        {
+          "id": "T1",
+          "number": 1,
+          "title": "Physical Quantities, Units and Measurement",
+          "subtopics": [
+            { "id": "T1.1", "title": "Physical quantities, SI base units and prefixes" },
+            { "id": "T1.2", "title": "Scalars and vectors" },
+            { "id": "T1.3", "title": "Measurement of length and time" }
+          ],
+          "keyQuantities": ["length", "time", "mass", "current", "temperature", "amount of substance"]
+        }
+      ]
+    },
+    {
+      "id": "II",
+      "title": "Newtonian Mechanics",
+      "topics": [
+        {
+          "id": "T2",
+          "number": 2,
+          "title": "Kinematics",
+          "subtopics": [
+            { "id": "T2.1", "title": "Speed, velocity and acceleration" },
+            { "id": "T2.2", "title": "Graphical analysis of motion" },
+            { "id": "T2.3", "title": "Free-fall and the effect of air resistance" }
+          ]
+        },
+        {
+          "id": "T3",
+          "number": 3,
+          "title": "Dynamics",
+          "subtopics": [
+            { "id": "T3.1", "title": "Balanced and unbalanced forces (Newton's first and second laws)" },
+            { "id": "T3.2", "title": "Free-body diagrams and resultant force" },
+            { "id": "T3.3", "title": "Friction" },
+            { "id": "T3.4", "title": "Interaction forces (Newton's third law)" }
+          ]
+        },
+        {
+          "id": "T4",
+          "number": 4,
+          "title": "Turning Effect of Forces",
+          "subtopics": [
+            { "id": "T4.1", "title": "Moments and the principle of moments" },
+            { "id": "T4.2", "title": "Centre of gravity" },
+            { "id": "T4.3", "title": "Stability" }
+          ]
+        },
+        {
+          "id": "T5",
+          "number": 5,
+          "title": "Pressure",
+          "subtopics": [
+            { "id": "T5.1", "title": "Pressure exerted by solids" },
+            { "id": "T5.2", "title": "Pressure in liquids" },
+            { "id": "T5.3", "title": "Atmospheric pressure, barometers and manometers" }
+          ]
+        },
+        {
+          "id": "T6",
+          "number": 6,
+          "title": "Energy",
+          "subtopics": [
+            { "id": "T6.1", "title": "Energy stores and transfers" },
+            { "id": "T6.2", "title": "Conservation of energy (kinetic and gravitational potential energy)" },
+            { "id": "T6.3", "title": "Work" },
+            { "id": "T6.4", "title": "Power" },
+            { "id": "T6.5", "title": "Efficiency" },
+            { "id": "T6.6", "title": "Energy resources" }
+          ],
+          "syllabusNote": "Energy resources moved into this topic in the 2024 revision. The revision reframes energy around stores (kinetic, internal, potential) and transfers."
+        }
+      ]
+    },
+    {
+      "id": "III",
+      "title": "Thermal Physics",
+      "topics": [
+        {
+          "id": "T7",
+          "number": 7,
+          "title": "Kinetic Particle Model of Matter",
+          "subtopics": [
+            { "id": "T7.1", "title": "States of matter" },
+            { "id": "T7.2", "title": "Brownian motion" },
+            { "id": "T7.3", "title": "Kinetic model and gas pressure" }
+          ],
+          "syllabusNote": "The quantitative gas laws were removed in the 2024 revision."
+        },
+        {
+          "id": "T8",
+          "number": 8,
+          "title": "Thermal Processes",
+          "subtopics": [
+            { "id": "T8.1", "title": "Conduction" },
+            { "id": "T8.2", "title": "Convection" },
+            { "id": "T8.3", "title": "Radiation" },
+            { "id": "T8.4", "title": "Applications of thermal energy transfer" }
+          ]
+        },
+        {
+          "id": "T9",
+          "number": 9,
+          "title": "Thermal Properties of Matter",
+          "subtopics": [
+            { "id": "T9.1", "title": "Internal energy" },
+            { "id": "T9.2", "title": "Specific heat capacity" },
+            { "id": "T9.3", "title": "Melting, boiling and evaporation" },
+            { "id": "T9.4", "title": "Specific latent heat" }
+          ],
+          "syllabusNote": "The standalone 'Temperature' topic (thermometers, calibration) was removed in the 2024 revision."
+        }
+      ]
+    },
+    {
+      "id": "IV",
+      "title": "Waves",
+      "topics": [
+        {
+          "id": "T10",
+          "number": 10,
+          "title": "General Properties of Waves",
+          "subtopics": [
+            { "id": "T10.1", "title": "Describing wave motion (transverse and longitudinal)" },
+            { "id": "T10.2", "title": "Wave terms and the wave equation" },
+            { "id": "T10.3", "title": "Sound as a longitudinal wave" },
+            { "id": "T10.4", "title": "Speed of sound, echoes and ultrasound" },
+            { "id": "T10.5", "title": "Pitch, loudness and the human range of audibility" }
+          ],
+          "syllabusNote": "Sound is no longer a standalone topic; it is folded into general wave properties in the 2024 revision."
+        },
+        {
+          "id": "T11",
+          "number": 11,
+          "title": "Electromagnetic Spectrum",
+          "subtopics": [
+            { "id": "T11.1", "title": "Properties of electromagnetic waves" },
+            { "id": "T11.2", "title": "Components of the spectrum and their applications" },
+            { "id": "T11.3", "title": "Effects of excessive exposure" }
+          ]
+        },
+        {
+          "id": "T12",
+          "number": 12,
+          "title": "Light",
+          "subtopics": [
+            { "id": "T12.1", "title": "Reflection at a plane surface" },
+            { "id": "T12.2", "title": "Refraction and refractive index" },
+            { "id": "T12.3", "title": "Total internal reflection and critical angle" },
+            { "id": "T12.4", "title": "Thin converging lens and ray diagrams" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "V",
+      "title": "Electricity and Magnetism",
+      "topics": [
+        {
+          "id": "T13",
+          "number": 13,
+          "title": "Static Electricity",
+          "subtopics": [
+            { "id": "T13.1", "title": "Laws of electrostatics and charging by friction/induction" },
+            { "id": "T13.2", "title": "Electric fields and field lines" },
+            { "id": "T13.3", "title": "Applications and hazards of electrostatics" }
+          ]
+        },
+        {
+          "id": "T14",
+          "number": 14,
+          "title": "Current of Electricity",
+          "subtopics": [
+            { "id": "T14.1", "title": "Electric current and charge" },
+            { "id": "T14.2", "title": "Electromotive force and potential difference" },
+            { "id": "T14.3", "title": "Resistance, Ohm's law and resistivity" },
+            { "id": "T14.4", "title": "I-V characteristics of components" }
+          ]
+        },
+        {
+          "id": "T15",
+          "number": 15,
+          "title": "D.C. Circuits",
+          "subtopics": [
+            { "id": "T15.1", "title": "Series and parallel circuits" },
+            { "id": "T15.2", "title": "Potential divider" },
+            { "id": "T15.3", "title": "Input transducers (thermistor, light-dependent resistor)" }
+          ]
+        },
+        {
+          "id": "T16",
+          "number": 16,
+          "title": "Practical Electricity",
+          "subtopics": [
+            { "id": "T16.1", "title": "Electrical energy and power" },
+            { "id": "T16.2", "title": "Dangers of electricity" },
+            { "id": "T16.3", "title": "Safe use of electricity (fuses, circuit breakers, earthing, switches)" }
+          ]
+        },
+        {
+          "id": "T17",
+          "number": 17,
+          "title": "Magnetism",
+          "subtopics": [
+            { "id": "T17.1", "title": "Laws of magnetism and magnetic materials" },
+            { "id": "T17.2", "title": "Magnetic fields and field lines" },
+            { "id": "T17.3", "title": "Magnetisation, demagnetisation, temporary and permanent magnets" }
+          ]
+        },
+        {
+          "id": "T18",
+          "number": 18,
+          "title": "Electromagnetism",
+          "subtopics": [
+            { "id": "T18.1", "title": "Magnetic effect of a current" },
+            { "id": "T18.2", "title": "Force on a current-carrying conductor in a magnetic field" },
+            { "id": "T18.3", "title": "The d.c. motor" }
+          ]
+        },
+        {
+          "id": "T19",
+          "number": 19,
+          "title": "Electromagnetic Induction",
+          "subtopics": [
+            { "id": "T19.1", "title": "Principles of electromagnetic induction (Faraday's and Lenz's laws)" },
+            { "id": "T19.2", "title": "The a.c. generator" },
+            { "id": "T19.3", "title": "The transformer and transmission of electrical energy" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "VI",
+      "title": "Radioactivity",
+      "topics": [
+        {
+          "id": "T20",
+          "number": 20,
+          "title": "Radioactivity",
+          "subtopics": [
+            { "id": "T20.1", "title": "Composition of the atom and nuclide notation" },
+            { "id": "T20.2", "title": "Nuclear emissions (alpha, beta, gamma)" },
+            { "id": "T20.3", "title": "Radioactive decay and half-life" },
+            { "id": "T20.4", "title": "Uses and hazards of radioactive materials" }
+          ]
+        }
+      ]
+    }
+  ]
+}
