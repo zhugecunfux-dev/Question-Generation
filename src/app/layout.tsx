@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LogoutButton } from "@/components/LogoutButton";
+import "katex/dist/katex.min.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="font-semibold tracking-tight">
               6091 <span className="text-[var(--color-accent)]">Question Generator</span>
             </Link>
-            <div className="flex flex-1 gap-5 text-sm text-[var(--color-ink-soft)] dark:text-neutral-400">
+            <div className="order-3 flex basis-full flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--color-ink-soft)] sm:order-none sm:min-w-0 sm:basis-auto sm:flex-1 dark:text-neutral-400">
               <Link href="/" className="hover:text-[var(--color-accent)]">Generate</Link>
               <Link href="/bank" className="hover:text-[var(--color-accent)]">Question bank</Link>
               <Link href="/knowledge" className="hover:text-[var(--color-accent)]">Knowledge base</Link>

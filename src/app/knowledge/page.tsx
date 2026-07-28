@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { KnowledgeMarkdownPreview } from "@/components/KnowledgeMarkdownPreview";
 
 type KnowledgeFileKind = "markdown" | "json" | "image";
 type KnowledgeSourceKind = "notes" | "exercise" | "reference";
@@ -217,6 +218,7 @@ export default function KnowledgePage() {
 
   const selectedSource = data?.sources.find((source) => source.id === selectedSourceId);
   const activeTopic = activeTopicId ? topicById.get(activeTopicId) : undefined;
+  const selectedMarkdown = selectedSource?.files.find((file) => file.kind === "markdown");
   const selectedFiles = selectedSource?.files.filter((file) => file.kind !== "image") ?? [];
   const selectedImages = selectedSource?.files.filter((file) => file.kind === "image") ?? [];
   const visibleImages = showAllImages ? selectedImages : selectedImages.slice(0, 12);
@@ -388,6 +390,13 @@ export default function KnowledgePage() {
                   <StatBadge count={selectedSource.counts.json} label="JSON" />
                   <StatBadge count={selectedSource.counts.image} label="images" />
                 </div>
+
+                <KnowledgeMarkdownPreview
+                  key={selectedSource.id}
+                  sourceId={selectedSource.id}
+                  markdownFile={selectedMarkdown}
+                  files={selectedSource.files}
+                />
 
                 <div className="mt-6 grid gap-7 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
                   <section>

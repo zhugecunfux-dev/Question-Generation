@@ -121,7 +121,9 @@ The importer accepts exactly one Markdown file, top-level JSON sidecars, and
 JPG/PNG/WebP/GIF files inside `images/`. Parser-generated PDFs are excluded. Files
 are hashed, JSON is validated, symbolic links and unsafe paths are rejected, and an
 identical re-import is a no-op. Knowledge files are served only through authenticated
-`private, no-store` routes; OCR Markdown is not rendered as HTML.
+`private, no-store` routes. The browser preview supports GFM tables and KaTeX equations;
+raw HTML and trusted KaTeX commands stay disabled, while relative figures resolve only
+to image files recorded in that source's manifest.
 
 Set `QG_KNOWLEDGE_DIR` to move the private file root. Neither the knowledge files nor
 their SQLite index travel with a Git clone or a new Codespace, so back them up
