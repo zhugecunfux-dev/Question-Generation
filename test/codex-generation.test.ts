@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
   parseCodexJson,
+  planGenerationSlots,
   validateModelQuestion,
   type ModelQuestion,
 } from "@/lib/llm/generate";
@@ -31,6 +32,39 @@ function question(overrides: Partial<ModelQuestion> = {}): ModelQuestion {
     ...overrides,
   };
 }
+
+test("sequential generation slots balance filters and reserve only the aggregate figure quota", () => {
+  const slots = planGenerationSlots({
+    topicIds: ["T2", "T3"],
+    formats: ["mcq", "structured", "data_based", "free_response"],
+    difficulties: ["easy", "medium", "hard"],
+    count: 15,
+  });
+
+  assert.equal(slots.length, 15);
+  assert.equal(slots.filter((slot) => slot.figureRequired).length, 5);
+  assert.deepEqual(
+    slots.filter((slot) => slot.figureRequired).map((slot) => slot.number),
+    [2, 5, 8, 11, 14],
+  );
+  for (const key of ["topicId", "format", "difficulty"] as const) {
+    const counts = new Map<string, number>();
+    for (const slot of slots) {
+      counts.set(slot[key], (counts.get(slot[key]) ?? 0) + 1);
+    }
+    const frequencies = [...counts.values()];
+    assert.ok(Math.max(...frequencies) - Math.min(...frequencies) <= 1);
+  }
+
+  const teacherDirected = planGenerationSlots({
+    topicIds: ["T2"],
+    formats: ["mcq", "structured", "data_based", "free_response"],
+    difficulties: ["hard"],
+    count: 15,
+    notes: "5 mcq",
+  });
+  assert.equal(teacherDirected.filter((slot) => slot.format === "mcq").length, 5);
+});
 
 test("Codex JSON parser accepts a fenced object but requires a questions array", () => {
   const parsed = parseCodexJson('```json\n{"questions":[]}\n```');

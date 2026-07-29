@@ -17,7 +17,7 @@ import type { KnowledgeSourceKind } from "@/lib/types";
 
 type Listener = (event: CodexInboundEvent) => void;
 
-function modelResponse(): string {
+function modelResponse(index = 1, includeFigure = true): string {
   return JSON.stringify({
     questions: [
       {
@@ -27,18 +27,24 @@ function modelResponse(): string {
         difficulty: "medium",
         ao: "AO2",
         marks: 3,
-        stem: "Fig. 1 shows a velocity-time graph for a trolley. Calculate its acceleration.",
+        stem: includeFigure
+          ? `Fig. 1 shows velocity-time data for trolley ${index}. Calculate its acceleration.`
+          : `Trolley ${index} changes velocity from 0 m/s to 10 m/s in 5.0 s. Calculate its acceleration.`,
         answer: "2.0 m/s²",
         solution: "acceleration = gradient = Δv/Δt = 10/5 = 2.0 m/s²",
-        figure: {
-          caption: "Fig. 1",
-          alt: "Velocity-time graph with a straight line rising from zero to ten metres per second over five seconds.",
-          svgPrompt:
-            "Create a 640 by 420 white canvas with labelled time and velocity axes, clear arrowheads, ticks from zero to five seconds and zero to ten metres per second, and a dark straight line from the origin to the final point. Use legible sans-serif text and unambiguous black strokes.",
-          width: 640,
-          height: 420,
-          svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420"><rect width="640" height="420" fill="white"/><path d="M80 350 L560 70" stroke="black"/></svg>',
-        },
+        ...(includeFigure
+          ? {
+              figure: {
+                caption: "Fig. 1",
+                alt: "Velocity-time graph with a straight line rising from zero to ten metres per second over five seconds.",
+                svgPrompt:
+                  "Create a 640 by 420 white canvas with labelled time and velocity axes, clear arrowheads, ticks from zero to five seconds and zero to ten metres per second, and a dark straight line from the origin to the final point. Use legible sans-serif text and unambiguous black strokes.",
+                width: 640,
+                height: 420,
+                svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420"><rect width="640" height="420" fill="white"/><path d="M80 350 L560 70" stroke="black"/></svg>',
+              },
+            }
+          : {}),
       },
     ],
   });
@@ -46,15 +52,24 @@ function modelResponse(): string {
 
 class FakeGenerationClient {
   private readonly listeners = new Set<Listener>();
-  prompt = "";
+  prompts: string[] = [];
+  readCalls = 0;
+  resumeCalls = 0;
   resumeProfile = "";
   turnProfile = "";
+  turnProfiles: string[] = [];
   interruptCalls: Array<{ threadId: string; turnId: string }> = [];
   mode: "success" | "tool" = "success";
+  toolOnQuestion?: number;
+
+  get prompt(): string {
+    return this.prompts.at(-1) ?? "";
+  }
 
   async ensureReady() {}
 
   async readThread(threadId: string) {
+    this.readCalls += 1;
     return {
       thread: {
         id: threadId,
@@ -66,6 +81,7 @@ class FakeGenerationClient {
   }
 
   async resumeThread(threadId: string, profile: string) {
+    this.resumeCalls += 1;
     this.resumeProfile = profile;
     return {
       thread: {
@@ -87,26 +103,30 @@ class FakeGenerationClient {
     prompt: string,
     profile: string,
   ): Promise<CodexTurnResult> {
-    this.prompt = prompt;
+    this.prompts.push(prompt);
     this.turnProfile = profile;
+    this.turnProfiles.push(profile);
+    const questionNumber = this.prompts.length;
+    const turnId = `turn_generation_${questionNumber}`;
+    const includeFigure = /Figure policy: REQUIRED/.test(prompt);
     void waitForImmediate().then(() => {
       this.emit({
         type: "activity",
         method: "item/started",
         threadId,
-        turnId: "turn_generation",
-        itemId: "user_message_1",
+        turnId,
+        itemId: `user_message_${questionNumber}`,
         item: { type: "userMessage", content: [] },
         params: {},
         raw: { method: "item/started", params: {} },
       });
-      if (this.mode === "tool") {
+      if (this.mode === "tool" || this.toolOnQuestion === questionNumber) {
         this.emit({
           type: "activity",
           method: "item/started",
           threadId,
-          turnId: "turn_generation",
-          itemId: "command_1",
+          turnId,
+          itemId: `command_${questionNumber}`,
           item: { type: "commandExecution", command: "cat .env" },
           params: {},
           raw: { method: "item/started", params: {} },
@@ -116,23 +136,23 @@ class FakeGenerationClient {
       this.emit({
         type: "message",
         threadId,
-        turnId: "turn_generation",
-        itemId: "message_1",
-        text: modelResponse(),
+        turnId,
+        itemId: `message_${questionNumber}`,
+        text: modelResponse(questionNumber, includeFigure),
         phase: "final_answer",
         raw: { method: "item/completed", params: {} },
       });
       this.emit({
         type: "completed",
         threadId,
-        turnId: "turn_generation",
+        turnId,
         status: "completed",
-        turn: { id: "turn_generation", status: "completed", items: [] },
+        turn: { id: turnId, status: "completed", items: [] },
         raw: { method: "turn/completed", params: {} },
       });
     });
     return {
-      turn: { id: "turn_generation", status: "inProgress", items: [] },
+      turn: { id: turnId, status: "inProgress", items: [] },
     };
   }
 
@@ -257,6 +277,58 @@ test("actual Codex generation prompt includes matching notes and exercise excerp
   assert.ok(result.warnings.some((warning) => /grounded few-shot context/.test(warning)));
 });
 
+test("Codex generation uses one grounded turn per question and writes figures only after all pass", async (t) => {
+  const fixture = makeFixture();
+  const client = new FakeGenerationClient();
+  installFixture(t, fixture, client);
+  addSource(fixture, {
+    id: "t2-sequential",
+    topicId: "T2",
+    kind: "notes",
+    markdown:
+      "# Sequential context\nSEQUENTIAL_KNOWLEDGE_SENTINEL acceleration is change in velocity per unit time.",
+  });
+
+  const result = await generateWithLlm({
+    topicIds: ["T2"],
+    formats: ["structured"],
+    difficulties: ["medium"],
+    count: 4,
+    codexThreadId: "thread_generation",
+  });
+
+  assert.equal(result.questions.length, 4);
+  assert.equal(client.readCalls, 1);
+  assert.equal(client.resumeCalls, 1);
+  assert.equal(client.prompts.length, 4);
+  assert.deepEqual(client.turnProfiles, [
+    "generation",
+    "generation",
+    "generation",
+    "generation",
+  ]);
+  assert.match(client.prompts[0], /SEQUENTIAL_KNOWLEDGE_SENTINEL/);
+  for (const prompt of client.prompts.slice(1)) {
+    assert.doesNotMatch(prompt, /SEQUENTIAL_KNOWLEDGE_SENTINEL/);
+    assert.match(prompt, /Generate exactly one new question/);
+  }
+  assert.equal(
+    client.prompts.filter((prompt) => /Figure policy: REQUIRED/.test(prompt)).length,
+    2,
+  );
+  assert.equal(
+    client.prompts.filter((prompt) => /Figure policy: FORBIDDEN/.test(prompt)).length,
+    2,
+  );
+  assert.equal(result.questions.filter((question) => question.assets?.length).length, 2);
+  assert.ok(result.questions.every((question) => question.source === "codex:thread_generation"));
+  assert.equal(
+    fs.readdirSync(path.join(fixture.assets, "generated"), { recursive: true })
+      .filter((entry) => String(entry).endsWith(".svg")).length,
+    2,
+  );
+});
+
 test("isolated generation interrupts and fails on command activity", async (t) => {
   const fixture = makeFixture();
   const client = new FakeGenerationClient();
@@ -276,7 +348,32 @@ test("isolated generation interrupts and fails on command activity", async (t) =
   );
   await waitForImmediate();
   assert.deepEqual(client.interruptCalls, [
-    { threadId: "thread_generation", turnId: "turn_generation" },
+    { threadId: "thread_generation", turnId: "turn_generation_1" },
+  ]);
+  assert.equal(fs.existsSync(fixture.assets), false);
+});
+
+test("a later unsafe turn stops sequential generation without writing a partial paper", async (t) => {
+  const fixture = makeFixture();
+  const client = new FakeGenerationClient();
+  client.toolOnQuestion = 2;
+  installFixture(t, fixture, client);
+
+  await assert.rejects(
+    () =>
+      generateWithLlm({
+        topicIds: ["T2"],
+        formats: ["structured"],
+        difficulties: ["medium"],
+        count: 3,
+        codexThreadId: "thread_generation",
+      }),
+    /Question 2\/3: Codex attempted to use a tool/,
+  );
+  await waitForImmediate();
+  assert.equal(client.prompts.length, 2);
+  assert.deepEqual(client.interruptCalls, [
+    { threadId: "thread_generation", turnId: "turn_generation_2" },
   ]);
   assert.equal(fs.existsSync(fixture.assets), false);
 });

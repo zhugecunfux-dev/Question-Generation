@@ -131,11 +131,12 @@ the canonical Markdown in these sources. Exercise excerpts act as few-shot style
 references; notes and reference excerpts provide factual grounding. Every file is
 rechecked against its manifest size and SHA-256 before retrieval, and OCR text is
 framed as untrusted data. MinerU JSON sidecars and source image bytes are not sent
-to the current text-only Codex turn.
+to the text-only Codex turns.
 
 Selected excerpts are sent to the Codex service and remain visible in the dedicated
-generation thread. Generation uses a fresh read-only, no-approval turn; do not reuse
-an everyday `/agent` conversation for private Knowledge Base generation.
+generation thread. Generation uses a fresh read-only, no-approval thread and creates
+one turn per question; do not reuse an everyday `/agent` conversation for private
+Knowledge Base generation.
 
 ## Getting papers in
 
@@ -290,7 +291,8 @@ Pass `--skip-asset-check` when the question JSON arrives before the images do.
 `generateWithLlm` now sends the request to the same local Codex app-server used
 by `/agent`. The generator creates a visible Codex thread, passes up to 30
 matching examples from the local bank, the allowed syllabus topics, and the
-required JSON contract. No provider API key is used.
+required JSON contract on the first turn, then generates and validates one
+question per turn in that same grounded thread. No provider API key is used.
 
 Generate also opens `/progress` in a separate window. It reports real backend
 stages for bank reading, Codex drafting, question validation, SVG safety checks,
@@ -298,12 +300,14 @@ asset storage, paper assembly, and optional bank saving. The same progress card
 remains visible on the Generate page, while the raw Codex thread is available
 from a link in the progress window.
 
-Exactly the requested number of questions must pass validation. At least 30%
-(rounded up) must include a self-contained SVG. Each figure carries a detailed
+Exactly the requested number of questions must pass validation. Figure slots are
+planned across the paper so exactly 30% (rounded up) require a self-contained SVG;
+the other turns stay text-only. Each figure carries a detailed
 `generationPrompt` production brief, precise alt text, dimensions, and the
 finished SVG. SVGs containing script, event handlers, embedded images, external
 references, animation, `foreignObject`, or CSS URLs are rejected before being
-written to `data/assets/generated/`.
+written to `data/assets/generated/`. Questions and SVGs are kept in memory until
+every turn passes, so a later failure does not leave a partial paper on disk.
 
 Anything kept is tagged `generated:codex` and **`needs-review`**. Treat the
 questions, answers, and diagrams as drafts. They are written to the bank only
