@@ -28,7 +28,7 @@ export default function GeneratePage() {
   const [count, setCount] = useState(10);
   const [seed, setSeed] = useState("");
   const [notes, setNotes] = useState("");
-  const [save, setSave] = useState(false);
+  const [save, setSave] = useState(true);
 
   const [paper, setPaper] = useState<GeneratedPaper | null>(null);
   const [showAnswers, setShowAnswers] = useState(false);
@@ -36,6 +36,8 @@ export default function GeneratePage() {
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState<"paper" | "answers" | null>(null);
   const [exportNotice, setExportNotice] = useState<string | null>(null);
+  const [bankSaveState, setBankSaveState] =
+    useState<"idle" | "saving" | "saved">("idle");
   const [generationProgress, setGenerationProgress] =
     useState<GenerationProgress | null>(null);
 
@@ -68,6 +70,7 @@ export default function GeneratePage() {
     setError(null);
     setPaper(null);
     setExportNotice(null);
+    setBankSaveState("idle");
     setGenerationProgress(null);
     const progressWindow =
       mode === "llm" ? window.open("about:blank", "qg-codex-generation") : null;
@@ -130,6 +133,7 @@ export default function GeneratePage() {
         setPaper(null);
       } else {
         setPaper(data as GeneratedPaper);
+        if (mode === "llm" && save) setBankSaveState("saved");
       }
     } catch (err) {
       if (!codexThreadStarted) progressWindow?.close();
@@ -138,6 +142,37 @@ export default function GeneratePage() {
       if (progressTimer !== undefined) window.clearInterval(progressTimer);
       await refreshProgress().catch(() => undefined);
       setBusy(false);
+    }
+  }
+
+  async function savePaperToBank() {
+    if (!paper?.questions.length) return;
+    setBankSaveState("saving");
+    setError(null);
+    try {
+      const response = await fetch("/api/import", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ questions: paper.questions }),
+      });
+      const data = (await response.json()) as {
+        written?: number;
+        rejected?: number;
+        issues?: Array<{ message: string }>;
+        error?: string;
+      };
+      if (!response.ok || data.rejected || data.written !== paper.questions.length) {
+        const detail = data.issues?.map((issue) => issue.message).join("; ");
+        throw new Error(
+          data.error ??
+            detail ??
+            `Only ${data.written ?? 0} of ${paper.questions.length} questions were saved.`,
+        );
+      }
+      setBankSaveState("saved");
+    } catch (saveError) {
+      setBankSaveState("idle");
+      setError(saveError instanceof Error ? saveError.message : String(saveError));
     }
   }
 
@@ -416,6 +451,18 @@ export default function GeneratePage() {
                 className="rounded border border-[var(--color-line)] px-2 py-1 text-xs disabled:opacity-50 dark:border-neutral-700"
               >
                 {exporting === "answers" ? "Building PDF…" : "PDF + answers"}
+              </button>
+              <button
+                type="button"
+                onClick={() => void savePaperToBank()}
+                disabled={bankSaveState !== "idle"}
+                className="rounded border border-[var(--color-line)] px-2 py-1 text-xs disabled:opacity-50 dark:border-neutral-700"
+              >
+                {bankSaveState === "saving"
+                  ? "Saving…"
+                  : bankSaveState === "saved"
+                    ? "Saved to Question Bank"
+                    : "Save to Question Bank"}
               </button>
             </div>
 

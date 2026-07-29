@@ -1,0 +1,4 @@
+interface:
+  display_name: "O Level Newtonian Mechanics"
+  short_description: "O Level mechanics solutions without calculus"
+  default_prompt: "Use $olevel-newtonian-mechanics to solve this O Level mechanics problem with syllabus-appropriate methods."
