@@ -6,6 +6,49 @@ import {
   resolveAccessPolicy,
 } from "@/lib/access";
 
+function firstHeaderValue(value: string | null): string | undefined {
+  return value
+    ?.split(",", 1)[0]
+    ?.trim();
+}
+
+function safeRequestHost(value: string | null): string | undefined {
+  const candidate = firstHeaderValue(value);
+  if (
+    !candidate ||
+    candidate.includes("@") ||
+    candidate.includes("/") ||
+    candidate.includes("\\") ||
+    candidate.includes("?") ||
+    candidate.includes("#") ||
+    /\s/.test(candidate)
+  ) {
+    return undefined;
+  }
+
+  try {
+    const parsed = new URL(`http://${candidate}`);
+    return parsed.pathname === "/" && !parsed.search && !parsed.hash
+      ? parsed.host
+      : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function publicRequestUrl(request: NextRequest, pathname: string): URL {
+  const forwardedProtocol = firstHeaderValue(request.headers.get("x-forwarded-proto"));
+  const protocol =
+    forwardedProtocol === "https" || forwardedProtocol === "http"
+      ? forwardedProtocol
+      : request.nextUrl.protocol.replace(":", "");
+  const host =
+    safeRequestHost(request.headers.get("host")) ??
+    safeRequestHost(request.headers.get("x-forwarded-host")) ??
+    request.nextUrl.host;
+  return new URL(pathname, `${protocol}://${host}`);
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAuthRoute = pathname === "/login" || pathname === "/api/auth";
@@ -20,7 +63,7 @@ export async function middleware(request: NextRequest) {
 
   if (isAuthRoute) {
     if (authenticated && pathname === "/login") {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(publicRequestUrl(request, "/"));
     }
     return NextResponse.next();
   }
@@ -36,7 +79,7 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  const loginUrl = new URL("/login", request.url);
+  const loginUrl = publicRequestUrl(request, "/login");
   loginUrl.searchParams.set("next", pathname + request.nextUrl.search);
   return NextResponse.redirect(loginUrl);
 }

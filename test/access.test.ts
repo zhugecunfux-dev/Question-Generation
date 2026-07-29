@@ -145,6 +145,35 @@ test("missing token redirects pages and returns clear 503 API responses on remot
   }
 });
 
+test("proxy HTTPS redirects keep the public host instead of leaking localhost", async () => {
+  const previousToken = process.env.QG_ACCESS_TOKEN;
+  const previousBypass = process.env.QG_INSECURE_LOCAL_ONLY;
+  process.env.QG_ACCESS_TOKEN = "test-access-token";
+  delete process.env.QG_INSECURE_LOCAL_ONLY;
+
+  try {
+    const response = await middleware(
+      new NextRequest("http://localhost:3000/bank?topicId=T2", {
+        headers: {
+          host: "physics-generator.trycloudflare.com",
+          "x-forwarded-proto": "https",
+        },
+      }),
+    );
+
+    assert.equal(response.status, 307);
+    assert.equal(
+      response.headers.get("location"),
+      "https://physics-generator.trycloudflare.com/login?next=%2Fbank%3FtopicId%3DT2",
+    );
+  } finally {
+    if (previousToken === undefined) delete process.env.QG_ACCESS_TOKEN;
+    else process.env.QG_ACCESS_TOKEN = previousToken;
+    if (previousBypass === undefined) delete process.env.QG_INSECURE_LOCAL_ONLY;
+    else process.env.QG_INSECURE_LOCAL_ONLY = previousBypass;
+  }
+});
+
 test("explicit local-only bypass works only for a loopback request", async () => {
   const previousToken = process.env.QG_ACCESS_TOKEN;
   const previousBypass = process.env.QG_INSECURE_LOCAL_ONLY;
