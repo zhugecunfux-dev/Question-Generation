@@ -123,6 +123,15 @@ function rpcIdKey(id: JsonRpcId): string {
   return `${typeof id}:${String(id)}`;
 }
 
+function isUnmaterializedThreadError(error: unknown): boolean {
+  return (
+    error instanceof Error &&
+    /not materialized yet|includeTurns is unavailable before first user message/i.test(
+      error.message,
+    )
+  );
+}
+
 function resolveWorkspace(value?: string): string {
   return path.resolve(value?.trim() || process.env.CODEX_WORKSPACE?.trim() || process.cwd());
 }
@@ -383,6 +392,8 @@ export class CodexAppServerClient {
   private readonly pendingApprovals = new Map<string, PendingApproval>();
   private readonly approvalIdsByRpcId = new Map<string, string>();
   private readonly activeTurns = new Map<string, ActiveTurn>();
+  /** Threads started by this process are workspace-safe even before turn one. */
+  private readonly workspaceThreads = new Set<string>();
   private readonly listeners = new Set<EventListener>();
 
   constructor(options: CodexClientOptions = {}) {
@@ -439,24 +450,41 @@ export class CodexAppServerClient {
   }
 
   async startThread(): Promise<CodexThreadResult> {
-    return this.request<CodexThreadResult>("thread/start", {
+    const result = await this.request<CodexThreadResult>("thread/start", {
       cwd: this.workspace,
       approvalPolicy: "on-request",
       approvalsReviewer: "user",
       sandbox: "workspace-write",
       serviceName: "question_generation_web",
     });
+    this.workspaceThreads.add(result.thread.id);
+    return result;
   }
 
   async resumeThread(threadId: string): Promise<CodexThreadResult> {
+    // A thread/start result is valid for turn/start immediately, but Codex does
+    // not persist ("materialize") it until the first user message. Calling
+    // thread/read or thread/resume in that gap fails with includeTurns errors.
+    if (this.workspaceThreads.has(threadId)) {
+      return {
+        thread: {
+          id: threadId,
+          cwd: this.workspace,
+          turns: [],
+          status: { type: "idle" },
+        },
+      };
+    }
     await this.readThread(threadId);
-    return this.request<CodexThreadResult>("thread/resume", {
+    const result = await this.request<CodexThreadResult>("thread/resume", {
       threadId,
       cwd: this.workspace,
       approvalPolicy: "on-request",
       approvalsReviewer: "user",
       sandbox: "workspace-write",
     });
+    this.workspaceThreads.add(threadId);
+    return result;
   }
 
   async listThreads(options: {
@@ -474,10 +502,25 @@ export class CodexAppServerClient {
   }
 
   async readThread(threadId: string): Promise<CodexThreadResult> {
-    const result = await this.request<CodexThreadResult>("thread/read", {
-      threadId,
-      includeTurns: true,
-    });
+    let result: CodexThreadResult;
+    try {
+      result = await this.request<CodexThreadResult>("thread/read", {
+        threadId,
+        includeTurns: true,
+      });
+    } catch (error) {
+      if (this.workspaceThreads.has(threadId) && isUnmaterializedThreadError(error)) {
+        return {
+          thread: {
+            id: threadId,
+            cwd: this.workspace,
+            turns: [],
+            status: { type: "idle" },
+          },
+        };
+      }
+      throw error;
+    }
     const cwd = optionalString(result.thread?.cwd);
     if (!cwd || path.resolve(cwd) !== this.workspace) {
       throw new Error("Thread is outside the configured Codex workspace");
@@ -583,6 +626,7 @@ export class CodexAppServerClient {
     this.pendingApprovals.clear();
     this.approvalIdsByRpcId.clear();
     this.activeTurns.clear();
+    this.workspaceThreads.clear();
     if (proc) await this.terminateProcess(proc);
     this.closing = false;
   }
@@ -670,6 +714,7 @@ export class CodexAppServerClient {
     this.pendingApprovals.clear();
     this.approvalIdsByRpcId.clear();
     this.activeTurns.clear();
+    this.workspaceThreads.clear();
   }
 
   private async cleanupFailedStart(
@@ -890,6 +935,7 @@ export class CodexAppServerClient {
     this.pendingApprovals.clear();
     this.approvalIdsByRpcId.clear();
     this.activeTurns.clear();
+    this.workspaceThreads.clear();
   }
 
   private rejectPending(error: Error): void {

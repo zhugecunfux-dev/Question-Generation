@@ -176,16 +176,17 @@ figures need their `alt` written by hand (the shipped seed figure has one).
 Markdown export emits `![alt](assets/<path>)` so an exported paper still renders
 when the assets directory sits beside it.
 
-**LLM generation.** The model cannot attach a figure, so a stem that refers to
-an undescribed one is still rejected — but the check now recognises far more
-phrasings, and exemplars carrying figures are shown to the model as a labelled
-description so it learns the style without learning to lean on an image.
+**Codex generation.** The local Codex-authored mode can attach a self-contained
+SVG figure. At least 30% of every generated set must include one. Each SVG is
+returned with a detailed production prompt, precise alt text, and dimensions;
+unsafe or externally referenced SVG content is rejected before storage.
 
 ## 6. What's still open
 
-- **Tier 3** — no figure-generator hook on templates yet. A template with a
-  fixed `assets` entry is safe only while the varying quantities stay out of the
-  image.
+- **Template tier 3** — Codex-authored questions can generate standalone SVGs,
+  but there is still no figure-generator hook tied to template variables. A
+  template with a fixed `assets` entry is safe only while varying quantities
+  stay out of the image.
 - **Raster figures for `describe-assets`** — SVGs are skipped; rasterising them
   would need a renderer this repo doesn't ship.
 - **Deduplication** — the same figure reused across papers is stored per path,

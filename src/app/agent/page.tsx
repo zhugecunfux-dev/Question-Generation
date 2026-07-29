@@ -10,7 +10,7 @@ interface ThreadSummary {
   preview?: string;
   createdAt?: number;
   updatedAt?: number;
-  turns?: Array<{ id?: string; items?: unknown[] }>;
+  turns?: Array<{ id?: string; status?: string; items?: unknown[] }>;
 }
 
 interface ChatMessage {
@@ -195,13 +195,40 @@ export default function AgentPage() {
     () => (typeof window === "undefined" ? null : window.localStorage.getItem("qg-codex-thread")),
     [],
   );
+  const requestedThreadId = useMemo(
+    () =>
+      typeof window === "undefined"
+        ? null
+        : new URLSearchParams(window.location.search).get("threadId"),
+    [],
+  );
 
   useEffect(() => {
     void (async () => {
       await refreshThreads();
       await refreshStatus();
+      if (requestedThreadId) await selectThread(requestedThreadId);
     })();
   }, []);
+
+  useEffect(() => {
+    if (!requestedThreadId || !threadId || busy) return;
+    const timer = window.setInterval(() => {
+      void jsonRequest<{ thread: ThreadSummary }>(
+        "/api/codex?action=thread&threadId=" + encodeURIComponent(threadId),
+      )
+        .then((data) => {
+          setMessages(messagesFromThread(data.thread));
+          const turns = data.thread.turns ?? [];
+          const stillRunning = turns.some(
+            (turn) => turn.status === "inProgress" || turn.status === "in_progress",
+          );
+          if (turns.length && !stillRunning) window.clearInterval(timer);
+        })
+        .catch(() => undefined);
+    }, 2_000);
+    return () => window.clearInterval(timer);
+  }, [requestedThreadId, threadId, busy]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });

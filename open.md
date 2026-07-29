@@ -134,7 +134,8 @@ npm run dev:remote
 - 打开网站本身不需要 OpenAI API key。
 - `/agent` 使用 `npm run codex:login` 登录的 ChatGPT 账号，遵循该账号的 Codex 权限和用量限制，不从 OpenAI Platform API key 余额扣费。
 - Retrieve 和 Template variants 两种出题模式不需要模型 API。
-- Claude-authored 模式需要另行配置 `ANTHROPIC_API_KEY`，会按 Anthropic API 用量计费；暂时不用可以不配置。
+- Codex-authored 出题模式使用 `/agent` 的本地 Codex 登录，不需要 OpenAI Platform 或 Anthropic API key。生成请求会出现在 Codex 对话列表中；至少 30% 的题目会带经过安全检查的 SVG 图。
+- `ANTHROPIC_API_KEY` 只对独立的 `token-cost` 和 `describe-assets` 工具有需要，普通出题不使用。
 - 如果以后让网站在没有 Codex 对话参与的情况下自动调用图片生成 API，则需要再单独配置相应 API 和预算；这不是目前打开网站的必要条件。
 - GitHub Codespaces 的计算和存储属于 GitHub 的费用，与模型 API 费用分开。
 

@@ -80,6 +80,17 @@ rl.on("line", (line) => {
   }
 
   if (message.method === "thread/read") {
+    if (mode === "unmaterialized") {
+      send({
+        id: message.id,
+        error: {
+          code: -32602,
+          message:
+            "thread thread_test is not materialized yet; includeTurns is unavailable before first user message",
+        },
+      });
+      return;
+    }
     send({
       id: message.id,
       result: {

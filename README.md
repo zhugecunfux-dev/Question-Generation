@@ -7,7 +7,7 @@ existing question bank. Three generation modes, one syllabus model, one bank.
 |---|---|---|
 | **Retrieve** | Picks existing questions from the bank, filtered by topic / format / difficulty. | Graded papers — nothing is invented. |
 | **Template variants** | Expands parameterised templates into fresh number variants. Answers are *computed* from the template's own expressions. | Drill and homework sets; every student gets different numbers, same physics. |
-| **Claude-authored** | Writes new questions few-shot on your bank, constrained to the syllabus and validated before display. | Concept and explanation questions that a template can't parameterise. |
+| **Codex-authored** | Uses your local Codex login to read matching bank examples and write new questions; at least 30% include generated SVG figures. | New local practice sets that remain visible in the Codex workspace. |
 
 Papers are reproducible: retrieve and template modes take a **seed**, so the same seed always
 produces the same paper.
@@ -23,11 +23,10 @@ The local bypass is explicit and `npm run dev` binds to `127.0.0.1`.
 Never use `QG_INSECURE_LOCAL_ONLY` with a remotely reachable server.
 
 
-For Claude-authored mode, add an API key:
-
-```bash
-cp .env.example .env.local   # then set ANTHROPIC_API_KEY
-```
+For Codex-authored mode, sign in once with `npm run codex:login`. It uses the
+local Codex app-server and does not require an OpenAI Platform or Anthropic API
+key. (`ANTHROPIC_API_KEY` remains optional for the separate `token-cost` and
+`describe-assets` utilities.)
 
 Retrieve and template modes work without a key.
 
@@ -128,7 +127,7 @@ to image files recorded in that source's manifest.
 Set `QG_KNOWLEDGE_DIR` to move the private file root. Neither the knowledge files nor
 their SQLite index travel with a Git clone or a new Codespace, so back them up
 separately. Knowledge sources are catalogued for browsing now; they are not
-automatically injected into the Claude-authored generation prompt.
+automatically injected into the Codex-authored generation prompt.
 
 ## Getting papers in
 
@@ -278,19 +277,29 @@ Pass `--skip-asset-check` when the question JSON arrives before the images do.
 > varying quantities in the stem and label the figure symbolically, or leave the
 > question static. See [`docs/ingestion.md`](docs/ingestion.md).
 
-## Claude-authored questions
+## Codex-authored questions
 
-`generateWithLlm` sends the model the exact topic and sub-topic list it may draw on, real
-exemplars from your bank in the same format, and a JSON schema for the output. Returned
-questions are then validated and **discarded** if they use an unrequested topic, produce an MCQ
-without exactly four options and one key, allocate implausible marks, or reference a figure the
-stem never describes.
+`generateWithLlm` now sends the request to the same local Codex app-server used
+by `/agent`. The generator creates a visible Codex thread, passes up to 30
+matching examples from the local bank, the allowed syllabus topics, and the
+required JSON contract. No provider API key is used.
 
-Anything kept is tagged `generated:llm` **and `needs-review`** — surfaced with an amber badge in
-the UI. Treat it as a first draft, not as bank-quality content. It is only written to the bank
-if you tick "Save generated questions".
+Generate also opens `/progress` in a separate window. It reports real backend
+stages for bank reading, Codex drafting, question validation, SVG safety checks,
+asset storage, paper assembly, and optional bank saving. The same progress card
+remains visible on the Generate page, while the raw Codex thread is available
+from a link in the progress window.
 
-Model defaults to `claude-opus-5`; override with `ANTHROPIC_MODEL`.
+Exactly the requested number of questions must pass validation. At least 30%
+(rounded up) must include a self-contained SVG. Each figure carries a detailed
+`generationPrompt` production brief, precise alt text, dimensions, and the
+finished SVG. SVGs containing script, event handlers, embedded images, external
+references, animation, `foreignObject`, or CSS URLs are rejected before being
+written to `data/assets/generated/`.
+
+Anything kept is tagged `generated:codex` and **`needs-review`**. Treat the
+questions, answers, and diagrams as drafts. They are written to the bank only
+when "Save generated questions" is selected.
 
 ## API
 
@@ -302,6 +311,7 @@ Model defaults to `claude-opus-5`; override with `ANTHROPIC_MODEL`.
 | `GET /api/assets/[...path]` | Serve a question figure from `data/assets`. |
 | `POST /api/import` | Import a bank file. `?dryRun=1` validates without writing, `?skipAssetCheck=1` skips the figure-exists check. |
 | `POST /api/generate` | Generate a paper. Body: `{mode, topicIds, formats?, difficulties?, count, seed?, notes?, save?}`. |
+| `GET /api/generation-progress?threadId=…` | Read live question-writing and layout progress for a Codex generation. |
 | `GET/POST /api/codex` | List/resume Codex threads, stream turns, interrupt work, and resolve approvals. |
 | `GET/POST/DELETE /api/auth` | Check, create, or clear the private site session. |
 
@@ -326,7 +336,7 @@ src/lib/stage.ts                  normalise parser output into assets[] shape
 tools/parse/                      PDF parser commands and measurements
 src/lib/template/expr.ts          safe expression evaluator
 src/lib/template/engine.ts        seeded variant expansion
-src/lib/llm/generate.ts           Claude-authored questions
+src/lib/llm/generate.ts           local Codex-authored questions + SVG validation
 src/lib/paper.ts                  paper assembly across the three modes
 src/app/                          Next.js App Router pages + API routes
 test/                             expression, engine, and import tests
@@ -338,9 +348,8 @@ bank is your data, not repo content.
 ## Known limits
 
 - Paper 3 (practical) is modelled in the syllabus but not generated: AO3 needs real apparatus.
-- Figures are stored and rendered, but not *generated*: a template cannot yet emit a figure
-  from its own variables, so parameterised questions must keep varying values out of the image.
-- Claude-authored questions still cannot attach a figure, so the validator rejects stems that
-  refer to one without describing it.
+- Templates still cannot generate figures from variables, so their varying
+  values must stay out of fixed images. Codex-authored questions can generate
+  standalone SVG figures and must do so for at least 30% of each request.
 - Sub-topic-level syllabus data is unverified (see above).
 - Authentication is a single shared access key, not multi-user accounts or per-user roles.

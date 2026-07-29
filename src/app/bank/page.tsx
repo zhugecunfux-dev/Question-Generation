@@ -16,6 +16,9 @@ export default function BankPage() {
   const [search, setSearch] = useState("");
   const [showAnswers, setShowAnswers] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [exporting, setExporting] = useState<"paper" | "answers" | null>(null);
+  const [exportNotice, setExportNotice] = useState<string | null>(null);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/syllabus")
@@ -45,6 +48,45 @@ export default function BankPage() {
     if (!confirm(`Delete ${id} from the bank? This cannot be undone.`)) return;
     await fetch(`/api/questions?id=${encodeURIComponent(id)}`, { method: "DELETE" });
     load();
+  }
+
+  async function exportBankPdf(withAnswers: boolean) {
+    setExporting(withAnswers ? "answers" : "paper");
+    setExportNotice(null);
+    setExportError(null);
+    try {
+      const response = await fetch("/api/export/bank-pdf", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ topicId, kind, search, withAnswers }),
+      });
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? `PDF export failed (${response.status}).`);
+      }
+
+      const disposition = response.headers.get("content-disposition") ?? "";
+      const filename =
+        disposition.match(/filename="([^"]+)"/)?.[1] ??
+        (withAnswers ? "6091-bank-with-answers.pdf" : "6091-bank.pdf");
+      const questionCount = response.headers.get("x-qg-question-count") ?? "matching";
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1_000);
+      setExportNotice(
+        `${questionCount} question${questionCount === "1" ? "" : "s"} downloaded and saved at output/pdf/${filename}`,
+      );
+    } catch (error) {
+      setExportError(error instanceof Error ? error.message : String(error));
+    } finally {
+      setExporting(null);
+    }
   }
 
   return (
@@ -101,6 +143,39 @@ export default function BankPage() {
           Show answers
         </label>
       </div>
+
+      <div className="flex flex-wrap items-center gap-2 rounded-md border border-[var(--color-line)] bg-white p-3 dark:border-neutral-800 dark:bg-neutral-900">
+        <button
+          type="button"
+          onClick={() => void exportBankPdf(false)}
+          disabled={loading || total === 0 || kind === "template" || exporting !== null}
+          className="rounded-md bg-[var(--color-accent)] px-3 py-1.5 text-sm font-medium text-white disabled:opacity-40"
+        >
+          {exporting === "paper" ? "Building PDF…" : "Download filtered PDF"}
+        </button>
+        <button
+          type="button"
+          onClick={() => void exportBankPdf(true)}
+          disabled={loading || total === 0 || kind === "template" || exporting !== null}
+          className="rounded border border-[var(--color-line)] px-3 py-1.5 text-sm disabled:opacity-40 dark:border-neutral-700"
+        >
+          {exporting === "answers" ? "Building PDF…" : "PDF + answers"}
+        </button>
+        <span className="text-xs text-[var(--color-ink-soft)] dark:text-neutral-400">
+          Exports all matching questions across every page; templates are excluded.
+        </span>
+      </div>
+
+      {exportNotice && (
+        <div className="rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200">
+          {exportNotice}
+        </div>
+      )}
+      {exportError && (
+        <div className="rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-900 dark:border-red-900 dark:bg-red-950/40 dark:text-red-200">
+          {exportError}
+        </div>
+      )}
 
       <p className="text-sm text-[var(--color-ink-soft)] dark:text-neutral-400">
         {loading ? "Loading…" : `${total} entr${total === 1 ? "y" : "ies"}`}

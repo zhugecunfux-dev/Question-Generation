@@ -123,6 +123,27 @@ test("failed turn notifications normalize to terminal errors", () => {
     assert.equal(normalized.message, "model unavailable");
   }
 });
+
+test("a newly started thread can be read and used before its first message materializes", async (t) => {
+  const client = new CodexAppServerClient({
+    command: process.execPath,
+    args: [fixture, "unmaterialized"],
+    workspace: process.cwd(),
+    rpcTimeoutMs: 2_000,
+  });
+  t.after(() => client.dispose());
+
+  await client.ensureReady();
+  const started = await client.startThread();
+  const placeholder = await client.readThread(started.thread.id);
+  assert.equal(placeholder.thread.id, "thread_test");
+  assert.deepEqual(placeholder.thread.turns, []);
+
+  const resumed = await client.resumeThread(started.thread.id);
+  assert.equal(resumed.thread.id, "thread_test");
+  await assert.doesNotReject(() => client.startTurn(started.thread.id, "first message"));
+});
+
 test("concurrent turns are rejected and interrupt clears the guard", async (t) => {
   const client = new CodexAppServerClient({
     command: process.execPath,

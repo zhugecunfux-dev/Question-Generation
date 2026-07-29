@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // better-sqlite3 is a native addon — keep it out of the bundler.
-  serverExternalPackages: ["better-sqlite3"],
+  // Native addons and PDFKit's runtime AFM/font data must stay next to their
+  // installed packages instead of being flattened into Next's server chunks.
+  serverExternalPackages: ["better-sqlite3", "pdfkit", "svg-to-pdfkit"],
 };
 
 export default nextConfig;

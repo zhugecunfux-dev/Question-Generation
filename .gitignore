@@ -1,6 +1,7 @@
 node_modules/
 .next/
 out/
+.DS_Store
 .env
 .env.local
 *.tsbuildinfo
@@ -10,4 +11,7 @@ data/bank.sqlite-journal
 data/bank.sqlite-wal
 data/bank.sqlite-shm
 data/knowledge/
+data/assets/generated/
+output/pdf/*.pdf
+!output/pdf/.gitkeep
 .codex/

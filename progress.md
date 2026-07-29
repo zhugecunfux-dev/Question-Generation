@@ -33,7 +33,12 @@ system prompt.
 |---|---|---|
 | Retrieve | Working | Filtered sampling from the bank; calls no model. |
 | Template variants | Working | Seeded expansion; answers computed from the template's own expressions, not stored. |
-| Claude-authored | **Written, never executed** | No API key was available in the build environment, so this path has not run once. |
+| Codex-authored | Implemented locally | Reads matching bank examples, runs through the `/agent` Codex bridge without a provider API key, and requires at least 30% SVG figure questions. |
+
+Codex-authored requests now open a dedicated live progress window. It separates
+question writing from figure/layout work and reports bank context, Codex
+drafting, validation, SVG storage, paper assembly, and completion from real
+server-side events rather than an estimated timer.
 
 Retrieve and template modes are seeded — the same seed always produces the same
 paper. Verified by a 480-case sweep (see Verification).
@@ -120,9 +125,11 @@ What has actually been run, as opposed to written:
 | Physics spot-checks | Every seed answer and a sample of generated variants recomputed by hand |
 | PDF parsing | PyMuPDF4LLM on a synthetic paper: 0.45 s, figure uncropped, table recovered |
 
-**Not verified:** the Claude-authored generation path, `token-cost`'s counting
-branch, and `describe-assets` — all three need an API key that was not available.
-Their argument parsing and error paths were exercised; their API calls were not.
+**Not verified end to end:** a live Codex-authored paper still requires an
+interactive local Codex login. Its JSON parsing, question rules, detailed SVG
+prompt requirement, and SVG safety rejection are covered by tests. The
+`token-cost` counting branch and `describe-assets` still need an Anthropic API
+key and were not exercised.
 
 ### Bugs found by these checks
 
@@ -158,14 +165,14 @@ endpoint had the truth.
   extracted JPEGs. The assistant intentionally did not inspect the note content,
   as requested. Hugging Face downloads worked; ModelScope was slow, and a local
   GPU-driver mismatch forced the CPU path.
-- **The LLM path has never executed.** Needs `ANTHROPIC_API_KEY`.
+- **The Codex-authored path needs a signed-in local Codex session.** Run
+  `npm run codex:login`; no provider API key is required for question generation.
 
 ### Known gaps
 
-- **Figures, tier 3** — a template cannot generate a figure from its own
-  variables, so a parameterised question must keep its varying values out of the
-  image. Worth building for the shapes that recur across every paper: series and
-  parallel circuits, v–t graphs, ray diagrams, inclined planes.
+- **Template figures, tier 3** — Codex-authored questions can now emit standalone
+  SVG figures with detailed production prompts, but a parameterised template
+  still cannot regenerate its figure from sampled variables.
 - **Paper 3 (practical)** is modelled in the syllabus but not generated; AO3
   needs real apparatus.
 - **`describe-assets` skips SVG** — not a vision input type, and rasterising

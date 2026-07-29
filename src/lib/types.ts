@@ -95,6 +95,8 @@ export interface QuestionAsset {
   alt?: string;
   width?: number;
   height?: number;
+  /** Detailed production brief retained for generated SVG review/regeneration. */
+  generationPrompt?: string;
 }
 
 /**
@@ -264,12 +266,16 @@ export interface GenerateRequest {
   seed?: number;
   /** Extra instruction passed to the model in llm mode. */
   notes?: string;
+  /** Existing local Codex thread used to make generation visible in `/agent`. */
+  codexThreadId?: string;
 }
 
 export interface GeneratedPaper {
   mode: GenerateRequest["mode"];
   generatedAt: string;
   seed?: number;
+  /** Codex thread that produced this paper, for opening it in the local agent UI. */
+  codexThreadId?: string;
   totalMarks: number;
   questions: Question[];
   /** Warnings, e.g. "asked for 12 MCQ on T3, bank only had 5". */

@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { QuestionCard } from "@/components/QuestionCard";
+import { GenerationProgressPanel } from "@/components/GenerationProgressPanel";
+import type { GenerationProgress } from "@/lib/generation-progress";
 import type { Difficulty, GeneratedPaper, QuestionFormat, Syllabus } from "@/lib/types";
 
 type Mode = "retrieve" | "template" | "llm";
@@ -9,7 +11,7 @@ type Mode = "retrieve" | "template" | "llm";
 const MODE_HELP: Record<Mode, string> = {
   retrieve: "Pick existing questions straight from the bank. Nothing is invented — safest for a graded paper.",
   template: "Expand parameterised templates into fresh number variants. Answers are computed, not guessed.",
-  llm: "Have Claude write new questions, few-shot on your bank. Saved tagged `needs-review`.",
+  llm: "Have your local Codex read matching bank questions and write new ones. At least 30% include generated SVG figures.",
 };
 
 const FORMATS: QuestionFormat[] = ["mcq", "structured", "data_based", "free_response"];
@@ -32,6 +34,10 @@ export default function GeneratePage() {
   const [showAnswers, setShowAnswers] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [exporting, setExporting] = useState<"paper" | "answers" | null>(null);
+  const [exportNotice, setExportNotice] = useState<string | null>(null);
+  const [generationProgress, setGenerationProgress] =
+    useState<GenerationProgress | null>(null);
 
   useEffect(() => {
     fetch("/api/syllabus")
@@ -60,7 +66,49 @@ export default function GeneratePage() {
     }
     setBusy(true);
     setError(null);
+    setPaper(null);
+    setExportNotice(null);
+    setGenerationProgress(null);
+    const progressWindow =
+      mode === "llm" ? window.open("about:blank", "qg-codex-generation") : null;
+    let codexThreadStarted = false;
+    let progressTimer: number | undefined;
+    let progressThreadId: string | undefined;
+
+    const refreshProgress = async () => {
+      if (!progressThreadId) return;
+      const response = await fetch(
+        `/api/generation-progress?threadId=${encodeURIComponent(progressThreadId)}`,
+        { cache: "no-store" },
+      );
+      if (!response.ok) return;
+      const data = (await response.json()) as { progress: GenerationProgress };
+      setGenerationProgress(data.progress);
+    };
+
     try {
+      let codexThreadId: string | undefined;
+      if (mode === "llm") {
+        const threadResponse = await fetch("/api/codex", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ action: "start" }),
+        });
+        const threadData = (await threadResponse.json()) as {
+          thread?: { id?: string };
+          error?: string;
+        };
+        if (!threadResponse.ok || !threadData.thread?.id) {
+          throw new Error(threadData.error ?? "Could not start the local Codex generation thread.");
+        }
+        codexThreadId = threadData.thread.id;
+        progressThreadId = codexThreadId;
+        codexThreadStarted = true;
+        if (progressWindow) {
+          progressWindow.location.href = `/progress?threadId=${encodeURIComponent(codexThreadId)}`;
+        }
+        progressTimer = window.setInterval(() => void refreshProgress(), 900);
+      }
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -72,6 +120,7 @@ export default function GeneratePage() {
           count,
           seed: seed.trim() === "" ? undefined : Number(seed),
           notes: notes.trim() || undefined,
+          codexThreadId,
           save: mode === "llm" ? save : false,
         }),
       });
@@ -83,51 +132,50 @@ export default function GeneratePage() {
         setPaper(data as GeneratedPaper);
       }
     } catch (err) {
+      if (!codexThreadStarted) progressWindow?.close();
       setError(err instanceof Error ? err.message : String(err));
     } finally {
+      if (progressTimer !== undefined) window.clearInterval(progressTimer);
+      await refreshProgress().catch(() => undefined);
       setBusy(false);
     }
   }
 
-  function exportPaper(withAnswers: boolean) {
+  async function exportPaper(withAnswers: boolean) {
     if (!paper) return;
-    const lines: string[] = [
-      `# O-Level Physics 6091 — generated paper`,
-      ``,
-      `Mode: ${paper.mode}${paper.seed !== undefined ? ` · seed: ${paper.seed}` : ""}`,
-      `Questions: ${paper.questions.length} · Total marks: ${paper.totalMarks}`,
-      ``,
-    ];
-    paper.questions.forEach((q, i) => {
-      lines.push(`## ${i + 1}. [${q.topicId} · ${q.difficulty} · ${q.ao} · ${q.marks} mark${q.marks > 1 ? "s" : ""}]`);
-      lines.push("");
-      lines.push(q.stem);
-      // Figures export as Markdown image references so the paper still renders
-      // once the assets directory sits next to the exported file.
-      q.assets?.forEach((a) => {
-        lines.push("");
-        lines.push(`![${a.alt ?? a.caption ?? "Figure"}](assets/${a.path})`);
-        if (a.caption) lines.push(`*${a.caption}*`);
+    setExporting(withAnswers ? "answers" : "paper");
+    setError(null);
+    setExportNotice(null);
+    try {
+      const response = await fetch("/api/export/pdf", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ paper, withAnswers }),
       });
-      if (q.options) {
-        lines.push("");
-        q.options.forEach((o) => lines.push(`- **${o.label}.** ${o.text}`));
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? `PDF export failed (${response.status}).`);
       }
-      if (withAnswers) {
-        lines.push("");
-        lines.push(`**Answer:** ${q.answer}`);
-        if (q.solution) lines.push(`**Mark scheme:** ${q.solution}`);
-      }
-      lines.push("");
-    });
 
-    const blob = new Blob([lines.join("\n")], { type: "text/markdown" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = withAnswers ? "6091-paper-with-answers.md" : "6091-paper.md";
-    a.click();
-    URL.revokeObjectURL(url);
+      const blob = await response.blob();
+      const disposition = response.headers.get("content-disposition") ?? "";
+      const filename =
+        disposition.match(/filename="([^"]+)"/)?.[1] ??
+        (withAnswers ? "6091-paper-with-answers.pdf" : "6091-paper.pdf");
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1_000);
+      setExportNotice(`PDF downloaded and saved locally at output/pdf/${filename}`);
+    } catch (exportError) {
+      setError(exportError instanceof Error ? exportError.message : String(exportError));
+    } finally {
+      setExporting(null);
+    }
   }
 
   return (
@@ -152,7 +200,7 @@ export default function GeneratePage() {
                     onChange={() => setMode(m)}
                     className="accent-[var(--color-accent)]"
                   />
-                  {m === "retrieve" ? "Retrieve from bank" : m === "template" ? "Template variants" : "Claude-authored"}
+                  {m === "retrieve" ? "Retrieve from bank" : m === "template" ? "Template variants" : "Codex-authored"}
                 </span>
                 <span className="mt-1 block pl-6 text-xs text-[var(--color-ink-soft)] dark:text-neutral-400">
                   {MODE_HELP[m]}
@@ -300,19 +348,23 @@ export default function GeneratePage() {
             disabled={busy}
             className="w-full rounded-md bg-[var(--color-accent)] px-4 py-2 font-medium text-white disabled:opacity-50"
           >
-            {busy ? "Generating…" : "Generate paper"}
+            {busy ? (mode === "llm" ? "Generating in Codex…" : "Generating…") : "Generate paper"}
           </button>
         </section>
       </aside>
 
       <section>
+        {generationProgress && (
+          <GenerationProgressPanel progress={generationProgress} compact />
+        )}
+
         {error && (
           <div className="mb-4 rounded-md border border-red-300 bg-red-50 p-3 text-sm text-red-900 dark:border-red-900 dark:bg-red-950/40 dark:text-red-200">
             {error}
           </div>
         )}
 
-        {!paper && !error && (
+        {!paper && !error && !generationProgress && (
           <div className="rounded-lg border border-dashed border-[var(--color-line)] p-10 text-center text-sm text-[var(--color-ink-soft)] dark:border-neutral-800 dark:text-neutral-400">
             Pick topics on the left and generate a paper.
           </div>
@@ -330,6 +382,16 @@ export default function GeneratePage() {
                   seed {paper.seed}
                 </span>
               )}
+              {paper.codexThreadId && (
+                <a
+                  href={`/agent?threadId=${encodeURIComponent(paper.codexThreadId)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-[var(--color-accent)] underline"
+                >
+                  Open Codex generation
+                </a>
+              )}
               <label className="ml-auto flex items-center gap-2">
                 <input
                   type="checkbox"
@@ -341,19 +403,27 @@ export default function GeneratePage() {
               </label>
               <button
                 type="button"
-                onClick={() => exportPaper(false)}
-                className="rounded border border-[var(--color-line)] px-2 py-1 text-xs dark:border-neutral-700"
+                onClick={() => void exportPaper(false)}
+                disabled={exporting !== null}
+                className="rounded border border-[var(--color-line)] px-2 py-1 text-xs disabled:opacity-50 dark:border-neutral-700"
               >
-                Export paper
+                {exporting === "paper" ? "Building PDF…" : "Download PDF"}
               </button>
               <button
                 type="button"
-                onClick={() => exportPaper(true)}
-                className="rounded border border-[var(--color-line)] px-2 py-1 text-xs dark:border-neutral-700"
+                onClick={() => void exportPaper(true)}
+                disabled={exporting !== null}
+                className="rounded border border-[var(--color-line)] px-2 py-1 text-xs disabled:opacity-50 dark:border-neutral-700"
               >
-                Export with answers
+                {exporting === "answers" ? "Building PDF…" : "PDF + answers"}
               </button>
             </div>
+
+            {exportNotice && (
+              <div className="mb-4 rounded-md border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-200">
+                {exportNotice}
+              </div>
+            )}
 
             {paper.warnings.length > 0 && (
               <ul className="mb-4 space-y-1 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
