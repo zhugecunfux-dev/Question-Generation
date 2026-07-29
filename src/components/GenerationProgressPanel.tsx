@@ -8,7 +8,7 @@ const PHASES: Array<{ id: GenerationPhase; title: string; subtitle: string }> = 
   {
     id: "questions",
     title: "Question writing",
-    subtitle: "Bank context → Codex draft → physics checks",
+    subtitle: "Knowledge Base → bank examples → Codex draft → physics checks",
   },
   {
     id: "layout",
@@ -124,7 +124,15 @@ export function GenerationProgressPanel({
       {!compact && (
         <div className="border-t border-[var(--color-line)] px-4 py-3 text-xs text-[var(--color-ink-soft)] dark:border-neutral-800 dark:text-neutral-500">
           Requested {progress.requestedCount} question(s)
-          {progress.exemplarCount !== undefined ? ` · ${progress.exemplarCount} bank exemplar(s)` : ""}
+          {progress.knowledgeSourceCount !== undefined
+            ? " · " + progress.knowledgeSourceCount + " KB source(s)"
+            : ""}
+          {progress.knowledgeExcerptCount !== undefined
+            ? " · " + progress.knowledgeExcerptCount + " KB excerpt(s)"
+            : ""}
+          {progress.exemplarCount !== undefined
+            ? " · " + progress.exemplarCount + " bank exemplar(s)"
+            : ""}
           {progress.questionCount !== undefined ? ` · ${progress.questionCount} validated` : ""}
           {progress.figureCount !== undefined ? ` · ${progress.figureCount} SVG figure(s)` : ""}
         </div>

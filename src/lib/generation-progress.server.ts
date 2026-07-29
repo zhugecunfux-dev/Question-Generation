@@ -45,7 +45,7 @@ export function beginGenerationProgress(input: {
     status: "queued",
     stage: "queued",
     headline: "Generation request queued",
-    detail: "Preparing the question-bank context for Codex.",
+    detail: "Preparing the Knowledge Base and question-bank context for Codex.",
     percent: 3,
     requestedCount: input.requestedCount,
     topicIds: input.topicIds,
@@ -78,6 +78,8 @@ export function reportGenerationProgress(
       | "headline"
       | "detail"
       | "percent"
+      | "knowledgeSourceCount"
+      | "knowledgeExcerptCount"
       | "exemplarCount"
       | "questionCount"
       | "figureCount"

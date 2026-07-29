@@ -126,8 +126,16 @@ to image files recorded in that source's manifest.
 
 Set `QG_KNOWLEDGE_DIR` to move the private file root. Neither the knowledge files nor
 their SQLite index travel with a Git clone or a new Codespace, so back them up
-separately. Knowledge sources are catalogued for browsing now; they are not
-automatically injected into the Codex-authored generation prompt.
+separately. Codex-authored generation now retrieves bounded, topic-matched excerpts from
+the canonical Markdown in these sources. Exercise excerpts act as few-shot style
+references; notes and reference excerpts provide factual grounding. Every file is
+rechecked against its manifest size and SHA-256 before retrieval, and OCR text is
+framed as untrusted data. MinerU JSON sidecars and source image bytes are not sent
+to the current text-only Codex turn.
+
+Selected excerpts are sent to the Codex service and remain visible in the dedicated
+generation thread. Generation uses a fresh read-only, no-approval turn; do not reuse
+an everyday `/agent` conversation for private Knowledge Base generation.
 
 ## Getting papers in
 

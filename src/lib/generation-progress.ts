@@ -21,6 +21,8 @@ export interface GenerationProgress {
   topicIds: string[];
   formatLabels: string[];
   difficultyLabels: string[];
+  knowledgeSourceCount?: number;
+  knowledgeExcerptCount?: number;
   exemplarCount?: number;
   questionCount?: number;
   figureCount?: number;

@@ -129,9 +129,11 @@ export async function POST(request: NextRequest) {
   const action = requiredString(body, "action");
   const client = getCodexClient();
 
-  if (action === "start") {
+  if (action === "start" || action === "start-generation") {
     try {
-      const result = await client.startThread();
+      const result = await client.startThread(
+        action === "start-generation" ? "generation" : "interactive",
+      );
       return NextResponse.json({ ok: true, ...result });
     } catch (error) {
       return errorResponse(error, 503);
@@ -332,7 +334,7 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(
     {
       ok: false,
-      error: "`action` must be start | send | interrupt | approve",
+      error: "`action` must be start | start-generation | send | interrupt | approve",
     },
     { status: 400 },
   );

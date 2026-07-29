@@ -48,6 +48,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "`count` must be between 1 and 60" }, { status: 400 });
   }
 
+  if (body.notes !== undefined && typeof body.notes !== "string") {
+    return NextResponse.json({ error: "`notes` must be a string" }, { status: 400 });
+  }
+  const notes = body.notes?.trim();
+  if (notes && notes.length > 4_000) {
+    return NextResponse.json(
+      { error: "`notes` must be at most 4,000 characters" },
+      { status: 413 },
+    );
+  }
+
   const req: GenerateRequest = {
     mode,
     topicIds,
@@ -55,7 +66,7 @@ export async function POST(request: NextRequest) {
     difficulties: body.difficulties as Difficulty[] | undefined,
     count: Math.round(count),
     seed: body.seed === undefined ? undefined : Number(body.seed),
-    notes: body.notes,
+    notes: notes || undefined,
     codexThreadId:
       typeof body.codexThreadId === "string" && body.codexThreadId.trim()
         ? body.codexThreadId.trim()

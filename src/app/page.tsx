@@ -11,7 +11,7 @@ type Mode = "retrieve" | "template" | "llm";
 const MODE_HELP: Record<Mode, string> = {
   retrieve: "Pick existing questions straight from the bank. Nothing is invented — safest for a graded paper.",
   template: "Expand parameterised templates into fresh number variants. Answers are computed, not guessed.",
-  llm: "Have your local Codex read matching bank questions and write new ones. At least 30% include generated SVG figures.",
+  llm: "Have your local Codex retrieve topic-matched Knowledge Base excerpts plus bank questions, then write new ones. At least 30% include generated SVG figures.",
 };
 
 const FORMATS: QuestionFormat[] = ["mcq", "structured", "data_based", "free_response"];
@@ -92,7 +92,7 @@ export default function GeneratePage() {
         const threadResponse = await fetch("/api/codex", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ action: "start" }),
+          body: JSON.stringify({ action: "start-generation" }),
         });
         const threadData = (await threadResponse.json()) as {
           thread?: { id?: string };

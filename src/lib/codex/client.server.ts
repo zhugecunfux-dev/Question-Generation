@@ -89,6 +89,8 @@ export interface CodexClientOptions {
   rpcTimeoutMs?: number;
 }
 
+export type CodexExecutionProfile = "interactive" | "generation";
+
 export class CodexRpcError extends Error {
   readonly code: number;
   readonly data?: unknown;
@@ -449,19 +451,24 @@ export class CodexAppServerClient {
     }
   }
 
-  async startThread(): Promise<CodexThreadResult> {
+  async startThread(
+    profile: CodexExecutionProfile = "interactive",
+  ): Promise<CodexThreadResult> {
     const result = await this.request<CodexThreadResult>("thread/start", {
       cwd: this.workspace,
-      approvalPolicy: "on-request",
+      approvalPolicy: profile === "generation" ? "never" : "on-request",
       approvalsReviewer: "user",
-      sandbox: "workspace-write",
+      sandbox: profile === "generation" ? "read-only" : "workspace-write",
       serviceName: "question_generation_web",
     });
     this.workspaceThreads.add(result.thread.id);
     return result;
   }
 
-  async resumeThread(threadId: string): Promise<CodexThreadResult> {
+  async resumeThread(
+    threadId: string,
+    profile: CodexExecutionProfile = "interactive",
+  ): Promise<CodexThreadResult> {
     // A thread/start result is valid for turn/start immediately, but Codex does
     // not persist ("materialize") it until the first user message. Calling
     // thread/read or thread/resume in that gap fails with includeTurns errors.
@@ -479,9 +486,9 @@ export class CodexAppServerClient {
     const result = await this.request<CodexThreadResult>("thread/resume", {
       threadId,
       cwd: this.workspace,
-      approvalPolicy: "on-request",
+      approvalPolicy: profile === "generation" ? "never" : "on-request",
       approvalsReviewer: "user",
-      sandbox: "workspace-write",
+      sandbox: profile === "generation" ? "read-only" : "workspace-write",
     });
     this.workspaceThreads.add(threadId);
     return result;
@@ -528,7 +535,11 @@ export class CodexAppServerClient {
     return result;
   }
 
-  async startTurn(threadId: string, text: string): Promise<CodexTurnResult> {
+  async startTurn(
+    threadId: string,
+    text: string,
+    profile: CodexExecutionProfile = "interactive",
+  ): Promise<CodexTurnResult> {
     if (this.activeTurns.has(threadId)) {
       throw new CodexTurnBusyError(threadId);
     }
@@ -536,20 +547,32 @@ export class CodexAppServerClient {
     const activeTurn: ActiveTurn = {};
     this.activeTurns.set(threadId, activeTurn);
     try {
-      const result = await this.request<CodexTurnResult>("turn/start", {
-        threadId,
-        input: [{ type: "text", text }],
-        cwd: this.workspace,
-        approvalPolicy: "on-request",
-        approvalsReviewer: "user",
-        sandboxPolicy: {
-          type: "workspaceWrite",
-          writableRoots: [this.workspace],
-          networkAccess: false,
-          excludeTmpdirEnvVar: false,
-          excludeSlashTmp: false,
-        },
-      });
+      const result = await this.request<CodexTurnResult>(
+        "turn/start",
+        profile === "generation"
+          ? {
+              threadId,
+              input: [{ type: "text", text }],
+              cwd: this.workspace,
+              approvalPolicy: "never",
+              approvalsReviewer: "user",
+              sandboxPolicy: { type: "readOnly", networkAccess: false },
+            }
+          : {
+              threadId,
+              input: [{ type: "text", text }],
+              cwd: this.workspace,
+              approvalPolicy: "on-request",
+              approvalsReviewer: "user",
+              sandboxPolicy: {
+                type: "workspaceWrite",
+                writableRoots: [this.workspace],
+                networkAccess: false,
+                excludeTmpdirEnvVar: false,
+                excludeSlashTmp: false,
+              },
+            },
+      );
       if (this.activeTurns.get(threadId) === activeTurn) {
         activeTurn.turnId = result.turn.id;
       }
