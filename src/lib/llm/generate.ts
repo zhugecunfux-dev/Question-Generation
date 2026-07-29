@@ -303,10 +303,13 @@ function buildKnowledgeQuery(opts: {
 }
 
 const SAFE_GENERATION_ITEM_TYPES = new Set([
+  "userMessage",
+  "hookPrompt",
   "agentMessage",
   "reasoning",
   "plan",
   "todoList",
+  "contextCompaction",
 ]);
 
 function generationActivityViolation(
@@ -335,7 +338,11 @@ function generationActivityViolation(
       return "Codex attempted to use a tool during isolated question generation.";
     }
     if (typeof itemType !== "string" || !SAFE_GENERATION_ITEM_TYPES.has(itemType)) {
-      return "Codex emitted a non-generation activity during the isolated turn.";
+      return (
+        "Codex emitted an unsupported generation activity (" +
+        (typeof itemType === "string" ? itemType : event.method) +
+        ")."
+      );
     }
   }
   return undefined;

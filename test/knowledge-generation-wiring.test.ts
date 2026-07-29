@@ -90,6 +90,16 @@ class FakeGenerationClient {
     this.prompt = prompt;
     this.turnProfile = profile;
     void waitForImmediate().then(() => {
+      this.emit({
+        type: "activity",
+        method: "item/started",
+        threadId,
+        turnId: "turn_generation",
+        itemId: "user_message_1",
+        item: { type: "userMessage", content: [] },
+        params: {},
+        raw: { method: "item/started", params: {} },
+      });
       if (this.mode === "tool") {
         this.emit({
           type: "activity",
