@@ -1,0 +1,4 @@
+interface:
+  display_name: "O Level Dynamics"
+  short_description: "O Level force and dynamics problem solving"
+  default_prompt: "Use $olevel-dynamics to solve, explain, mark, or generate this O Level Dynamics problem using g = 10 N/kg."

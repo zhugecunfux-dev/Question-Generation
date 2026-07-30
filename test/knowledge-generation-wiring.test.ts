@@ -61,6 +61,7 @@ class FakeGenerationClient {
   interruptCalls: Array<{ threadId: string; turnId: string }> = [];
   mode: "success" | "tool" = "success";
   toolOnQuestion?: number;
+  queuedResponses: string[] = [];
 
   get prompt(): string {
     return this.prompts.at(-1) ?? "";
@@ -138,7 +139,9 @@ class FakeGenerationClient {
         threadId,
         turnId,
         itemId: `message_${questionNumber}`,
-        text: modelResponse(questionNumber, includeFigure),
+        text:
+          this.queuedResponses.shift() ??
+          modelResponse(questionNumber, includeFigure),
         phase: "final_answer",
         raw: { method: "item/completed", params: {} },
       });
@@ -376,4 +379,35 @@ test("a later unsafe turn stops sequential generation without writing a partial 
     { threadId: "thread_generation", turnId: "turn_generation_2" },
   ]);
   assert.equal(fs.existsSync(fixture.assets), false);
+});
+
+test("an invalid SVG gets one automatic correction before the paper fails", async (t) => {
+  const fixture = makeFixture();
+  const client = new FakeGenerationClient();
+  const unsafeResponse = modelResponse(1, true).replace(
+    "</svg>",
+    '<image href=\\"https://example.com/figure.png\\"/></svg>',
+  );
+  client.queuedResponses.push(unsafeResponse, modelResponse(1, true));
+  installFixture(t, fixture, client);
+
+  const result = await generateWithLlm({
+    topicIds: ["T2"],
+    formats: ["structured"],
+    difficulties: ["medium"],
+    count: 1,
+    codexThreadId: "thread_generation",
+  });
+
+  assert.equal(result.questions.length, 1);
+  assert.equal(client.prompts.length, 2);
+  assert.match(client.prompts[1], /failed local validation/);
+  assert.match(client.prompts[1], /unsafe or external content/);
+  assert.match(client.prompts[1], /corrected replacement/);
+  assert.match(client.prompts[1], /url\(#arrow\)/);
+  assert.equal(
+    fs.readdirSync(path.join(fixture.assets, "generated"), { recursive: true })
+      .filter((entry) => String(entry).endsWith(".svg")).length,
+    1,
+  );
 });

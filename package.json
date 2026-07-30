@@ -15,6 +15,7 @@
     "token-cost": "tsx scripts/token-cost.ts",
     "describe-assets": "tsx scripts/describe-assets.ts",
     "stage": "tsx scripts/stage-assets.ts",
+    "imagegen:complete": "tsx scripts/complete-imagegen-job.ts",
     "dev:remote": "next dev --hostname 0.0.0.0",
     "start:remote": "next start --hostname 0.0.0.0",
     "codex:login": "codex login --device-auth",

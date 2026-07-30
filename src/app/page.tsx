@@ -11,7 +11,7 @@ type Mode = "retrieve" | "template" | "llm";
 const MODE_HELP: Record<Mode, string> = {
   retrieve: "Pick existing questions straight from the bank. Nothing is invented — safest for a graded paper.",
   template: "Expand parameterised templates into fresh number variants. Answers are computed, not guessed.",
-  llm: "Have your local Codex retrieve topic-matched Knowledge Base excerpts plus bank questions, then write new ones. At least 30% include generated SVG figures.",
+  llm: "Have your local Codex retrieve topic-matched Knowledge Base excerpts plus bank questions, then write new ones. At least 30% include figures; complex Turning Effect apparatus uses ImageGen with exact SVG labels.",
 };
 
 const FORMATS: QuestionFormat[] = ["mcq", "structured", "data_based", "free_response"];
@@ -425,6 +425,16 @@ export default function GeneratePage() {
                   className="text-xs text-[var(--color-accent)] underline"
                 >
                   Open Codex generation
+                </a>
+              )}
+              {paper.illustrationThreadId && (
+                <a
+                  href={`/agent?threadId=${encodeURIComponent(paper.illustrationThreadId)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs text-[var(--color-accent)] underline"
+                >
+                  Open ImageGen illustration
                 </a>
               )}
               <label className="ml-auto flex items-center gap-2">

@@ -1,0 +1,5214 @@
+[
+    {
+        "type": "text",
+        "text": "Unit 4 Turning effects of forces",
+        "text_level": 1,
+        "bbox": [
+            393,
+            41,
+            655,
+            87
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Moment",
+        "text_level": 2,
+        "bbox": [
+            102,
+            117,
+            187,
+            135
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "In dynamics, what is meant by a moment (or a torque)?",
+        "bbox": [
+            100,
+            145,
+            306,
+            178
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Name fixed point around which an object turns when a force is applied.",
+        "bbox": [
+            100,
+            222,
+            319,
+            268
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "It is the turning effect of a force.",
+        "bbox": [
+            341,
+            145,
+            618,
+            164
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            341,
+            170,
+            410,
+            186
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Define the moment of a force about a pivot.",
+        "bbox": [
+            102,
+            329,
+            315,
+            360
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Recall that it is one of the effects of forces.",
+        "bbox": [
+            341,
+            187,
+            649,
+            205
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Pivot (or fulcrum)",
+        "bbox": [
+            343,
+            222,
+            501,
+            241
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/dc7bddcf0ab07e879563c2ef2bdf62e85b2f7511c6200bf93274cc72e20ebc12.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            341,
+            244,
+            668,
+            310
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "It is the product of the force F and the perpendicular distance d from the pivot to the line of action of the force.",
+        "bbox": [
+            339,
+            329,
+            918,
+            364
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/73950afaa7b3b786ae482f93a488ee268b22c5d2608cce9f455523b1d924c617.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            439,
+            367,
+            846,
+            433
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Eg.",
+        "bbox": [
+            343,
+            441,
+            374,
+            460
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "A force F is exerted on the rod as shown. a, b and c represent various distances.",
+        "bbox": [
+            341,
+            466,
+            912,
+            500
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "image",
+        "img_path": "images/ebbda777b8d5da27ed6dfad750955e7adf5a738266baae222148cd247e64004b.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            521,
+            504,
+            765,
+            576
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "The moment of force F about the pivot $= F \\times c$ (not $F \\times a$ or $F \\times b )$",
+        "bbox": [
+            343,
+            584,
+            891,
+            602
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            343,
+            609,
+            410,
+            625
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "In this example, the line of action of force F is a vertical line. When extends downward, it will meet the perpendicular distance from the pivot to this line, c.",
+        "bbox": [
+            341,
+            626,
+            905,
+            659
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Give the formula for the moment of a force.",
+        "bbox": [
+            102,
+            676,
+            282,
+            707
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "equation",
+        "img_path": "images/99e59940ef2149a6493e0f702ed5e31ae30eb5ec71aa954ebb60d56108874291.jpg",
+        "text": "$$\nM = F d\n$$",
+        "text_format": "latex",
+        "bbox": [
+            343,
+            681,
+            406,
+            699
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "where",
+        "bbox": [
+            451,
+            681,
+            511,
+            699
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "M = moment (Nm)",
+        "bbox": [
+            523,
+            681,
+            701,
+            699
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "F = force applied (N)",
+        "bbox": [
+            521,
+            702,
+            720,
+            721
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "d = perpendicular distance from the pivot to the line of action of the force (m)",
+        "bbox": [
+            521,
+            724,
+            943,
+            759
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "State the SI unit for moment of forces.",
+        "bbox": [
+            102,
+            781,
+            310,
+            813
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Newton metre (Nm)",
+        "bbox": [
+            343,
+            781,
+            523,
+            799
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "What is the relationship between the moment (M), force (F) and perpendicular distance (d) from the pivot?",
+        "bbox": [
+            100,
+            829,
+            310,
+            893
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "The moment (M) is directly proportional to both the force (F) and the perpendicular distance (d).",
+        "bbox": [
+            341,
+            829,
+            934,
+            865
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• If d remains unchanged, M increases as Fincreases.",
+        "bbox": [
+            341,
+            871,
+            804,
+            890
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• If F remains unchanged, M increases as d increases.",
+        "bbox": [
+            343,
+            895,
+            804,
+            913
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "page_number",
+        "text": "88",
+        "bbox": [
+            65,
+            947,
+            91,
+            962
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            771,
+            945,
+            932,
+            958
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "State the two types of moment.",
+        "bbox": [
+            63,
+            48,
+            228,
+            78
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Clockwise moment",
+        "text_level": 2,
+        "bbox": [
+            331,
+            87,
+            422,
+            123
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "What is it?",
+        "text_level": 2,
+        "bbox": [
+            627,
+            58,
+            720,
+            78
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Moment causing rotation in the direction of the hands of a clock about the pivot",
+        "bbox": [
+            490,
+            90,
+            639,
+            176
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/9025aa872c7cf773be22fe9b9768a3883b21176af15196c7caffda33a7732ace.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            678,
+            112,
+            914,
+            157
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Anticlockwise moment",
+        "text_level": 2,
+        "bbox": [
+            312,
+            185,
+            437,
+            219
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Moment causing rotation opposite to the direction of the hands of a clock about the pivot",
+        "bbox": [
+            457,
+            187,
+            662,
+            274
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/8f35851aaa2875fc934cd18636c0e4200a3e3b2ed0cf1ce0e42d5729483e38bb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            676,
+            204,
+            899,
+            262
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Applications",
+        "text_level": 2,
+        "bbox": [
+            306,
+            308,
+            414,
+            327
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "How?",
+        "text_level": 2,
+        "bbox": [
+            627,
+            311,
+            686,
+            330
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Opening a• Applying force on the door handle creates a door moment (or turning effect) about the hinges, causing the door to rotate open.",
+        "bbox": [
+            312,
+            340,
+            850,
+            396
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Opening a jar",
+        "bbox": [
+            312,
+            404,
+            403,
+            440
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Applying force on the lid creates a moment around the jar, making it easier to twist open.",
+        "bbox": [
+            428,
+            406,
+            846,
+            445
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Using a seesaw",
+        "bbox": [
+            319,
+            452,
+            391,
+            488
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Children sitting at different distances from the pivot create moments that balance or tip the seesaw.",
+        "bbox": [
+            428,
+            454,
+            852,
+            506
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Using a screwdriver",
+        "bbox": [
+            300,
+            517,
+            406,
+            552
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Question Calculate the moment of forces in the following diagrams.",
+        "bbox": [
+            290,
+            570,
+            864,
+            595
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/a81607e253703efefbc20762ca6f247ffd1703b7e3307a5c6731b4a8e916a75e.jpg",
+        "image_caption": [
+            "(a)"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            422,
+            602,
+            687,
+            673
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/413e246141765308fc31be79cfcb40a8d64dc5da78b954c3a14eff18e5821135.jpg",
+        "image_caption": [
+            "(b)"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            420,
+            679,
+            684,
+            748
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "text_level": 2,
+        "bbox": [
+            284,
+            769,
+            352,
+            786
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "(a) $M = 2 0 ~ \\mathsf { N } \\times 2 ~ \\mathsf { m } = 4 0 ~ \\mathsf { N m }$",
+        "bbox": [
+            377,
+            775,
+            631,
+            794
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "(b) $M = 2 0 0 \\mathsf { N } \\times 2 5 \\mathsf { c m } = 5 0 0 0 \\mathsf { N c m }$ Or",
+        "bbox": [
+            375,
+            799,
+            691,
+            843
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "equation",
+        "img_path": "images/2a3fb861b7f77abce8e3b69522c8fca9f0dfcf0b859e470354ee0883eea12ef3.jpg",
+        "text": "$$\nM = 2 0 0 ~ { \\mathsf { N } } \\times 0 . 2 5 ~ { \\mathsf { m } } = 5 0 ~ { \\mathsf { N } } { \\mathsf { m } }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            418,
+            850,
+            666,
+            869
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "aside_text",
+        "text": "Give examples of the application of the moment of forces in our daily lives.",
+        "bbox": [
+            54,
+            299,
+            273,
+            347
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "aside_text",
+        "text": "Worked example 1",
+        "bbox": [
+            52,
+            562,
+            187,
+            578
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            951,
+            445,
+            980,
+            641
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            52,
+            946,
+            215,
+            961
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "page_number",
+        "text": "89",
+        "bbox": [
+            901,
+            957,
+            926,
+            972
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Question",
+        "bbox": [
+            343,
+            54,
+            420,
+            74
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(a) If the moment of forces on the beam is 150 Nm. Find the force applied, F.",
+        "bbox": [
+            434,
+            58,
+            920,
+            94
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(b) If the moment of forces on the beam is 600 Nm. Find the distance, d.",
+        "bbox": [
+            434,
+            176,
+            922,
+            211
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "bbox": [
+            341,
+            307,
+            408,
+            323
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/0f17fd54384721ff6ba75fcdb4a141ce0066c44991ee8805e800540d0b7e46ec.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            581,
+            98,
+            841,
+            165
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(a)",
+        "bbox": [
+            436,
+            325,
+            467,
+            342
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/310015ce9dc3c64bedd27df19fda5397aaf006595f12bde574df14e98d9b8446.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            581,
+            215,
+            839,
+            283
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "img_path": "images/3e03905cd20bbb81b2da51f3379bf06932bcc06af049aebb039102be8ea222cc.jpg",
+        "text": "$$\nF = \\frac { 1 5 0 \\ N m } { 4 \\ m } = 3 7 . 5 N\n$$",
+        "text_format": "latex",
+        "bbox": [
+            480,
+            315,
+            662,
+            351
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(b) $d = \\frac { 6 0 0 \\mathsf { N } m } { 7 5 \\mathsf { N } } = 8$ m",
+        "bbox": [
+            707,
+            315,
+            912,
+            352
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Worked example 3",
+        "bbox": [
+            106,
+            396,
+            240,
+            411
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Question",
+        "bbox": [
+            343,
+            401,
+            422,
+            419
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(a)",
+        "bbox": [
+            436,
+            430,
+            467,
+            448
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Calculate the moment of forces in the following diagrams.",
+        "bbox": [
+            434,
+            401,
+            916,
+            421
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/e3d5baf43bfef3f55ce2e56786add6345450bf141eba4a62271c4cb3d17ed053.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            478,
+            430,
+            738,
+            525
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/591342322029010d2ecc709166d87422d3bd553ab845ddffeb6ffb41ae80f927.jpg",
+        "image_caption": [
+            "(b)"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            478,
+            533,
+            738,
+            609
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "bbox": [
+            343,
+            632,
+            410,
+            648
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(a) $\\begin{array} { c } { M = ( 4 0 \\ \\mathsf { N } \\times 0 . 6 \\ \\mathsf { m } ) + ( 1 0 \\ \\mathsf { N } \\times 1 . 2 \\ \\mathsf { m } ) } \\\\ { = 2 4 \\ \\mathsf { N } \\mathsf { m } + 1 2 \\ \\mathsf { N } \\mathsf { m } = 3 6 \\ \\mathsf { N } \\mathsf { m } } \\end{array}$",
+        "bbox": [
+            436,
+            635,
+            790,
+            673
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "img_path": "images/8fc62d5c2d63ca2f21d681a273e9c16f9d4650e0bc3d7559e959bc9b6e49fabf.jpg",
+        "text": "$$\n{ \\begin{array} { r l } { ( { \\mathsf { b } } ) } & { M = ( 2 0 { \\mathsf { N } } \\times 0 . 3 { \\mathsf { m } } ) + ( 5 0 { \\mathsf { N } } \\times 0 . 7 { \\mathsf { m } } ) } \\\\ & { \\quad = 6 { \\mathsf { N } } { \\mathsf { m } } + 3 5 { \\mathsf { N } } { \\mathsf { m } } = 4 1 { \\mathsf { N } } { \\mathsf { m } } } \\end{array} }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            434,
+            679,
+            790,
+            716
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Question 1",
+        "text_level": 2,
+        "bbox": [
+            110,
+            773,
+            257,
+            794
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows a force applied on a beam which is pivoted at one side in Experiment 1.",
+        "bbox": [
+            104,
+            802,
+            825,
+            820
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/c9fcb3a49c11a665c2d9615ae668baedece3596bd549db2299a9046e031dc1da.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            391,
+            824,
+            649,
+            894
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "(a) Calculate the moment of forces.",
+        "bbox": [
+            104,
+            897,
+            397,
+            914
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "Worked example 2",
+        "bbox": [
+            104,
+            49,
+            240,
+            64
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "page_number",
+        "text": "90",
+        "bbox": [
+            65,
+            947,
+            91,
+            964
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            771,
+            945,
+            930,
+            958
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The experiment is repeated with the following modifications as shown in Experiments 2 and 3 below.",
+        "bbox": [
+            54,
+            50,
+            843,
+            68
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/f9eb85f457dd62924d3703bf0e6fc6938532bd5625b5a163681f801fdf47cb63.jpg",
+        "image_caption": [
+            "(b) State the effect on the ease of turning the beam in Experiments 2 and 3 compared to Experiment 1. Show your answer clearly."
+        ],
+        "image_footnote": [],
+        "bbox": [
+            201,
+            74,
+            738,
+            149
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Principle of moments",
+        "text_level": 2,
+        "bbox": [
+            54,
+            300,
+            261,
+            318
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "What does it mean when an object is said to be in equilibrium?",
+        "bbox": [
+            54,
+            329,
+            236,
+            377
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "State two conditions that must be met for any object to be in equilibrium.",
+        "bbox": [
+            52,
+            392,
+            267,
+            440
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "text_level": 2,
+        "bbox": [
+            52,
+            510,
+            122,
+            528
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "If there is a net force acting on an object, the object will accelerate in the direction of the net force, according to Newton's Second Law of Motion.",
+        "bbox": [
+            52,
+            529,
+            275,
+            635
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "» We learnt how to determine the net force acting on an object in the previous unit.",
+        "bbox": [
+            89,
+            637,
+            257,
+            714
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "If there is a net moment acting on an object, the object will turn or rotate about a pivot point.",
+        "bbox": [
+            52,
+            716,
+            271,
+            777
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Hence, when there is a net force and a net moment acting on an object, the object will not be in equilibrium.",
+        "bbox": [
+            52,
+            779,
+            250,
+            857
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "It means that the object will neither rotate (no rotational motion) nor move along a path (meaning no linear motion or translational motion).",
+        "bbox": [
+            290,
+            329,
+            883,
+            366
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Conditions",
+        "text_level": 2,
+        "bbox": [
+            302,
+            397,
+            401,
+            417
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "No net force",
+        "text_level": 2,
+        "bbox": [
+            317,
+            429,
+            383,
+            463
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "What is it?",
+        "text_level": 2,
+        "bbox": [
+            500,
+            397,
+            596,
+            417
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "The sum of all forces acting on the object must be zero.",
+        "bbox": [
+            416,
+            429,
+            672,
+            481
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "This ensures that the object will not have any translational motion.",
+        "bbox": [
+            451,
+            486,
+            670,
+            555
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            414,
+            559,
+            484,
+            577
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Translational motion refers to movement where all parts of an object move in the same direction and at the same speed, resulting in a change in position along a path.",
+        "bbox": [
+            414,
+            578,
+            668,
+            658
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "No net moment",
+        "text_level": 2,
+        "bbox": [
+            312,
+            673,
+            389,
+            706
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "The sum of all clockwise moments about any pivot must equal the sum of all anticlockwise moments (which is known as the principle of moments).",
+        "bbox": [
+            414,
+            672,
+            670,
+            775
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "This ensures that the object will not have any rotational motion.",
+        "bbox": [
+            449,
+            779,
+            656,
+            847
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Example",
+        "bbox": [
+            773,
+            397,
+            850,
+            417
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "image",
+        "img_path": "images/e89582da2d6b0e020b6ae228145d6d5cd505693ff23e655a1b15bccb2597162b.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            697,
+            427,
+            912,
+            519
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Sum of upward force = 5 N",
+        "bbox": [
+            691,
+            525,
+            874,
+            559
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Sum of downward force   \n=3N + 2 N   \n=5 N",
+        "bbox": [
+            691,
+            565,
+            897,
+            618
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Net force = 5 N − 5 N = 0 N (no translational motion)",
+        "bbox": [
+            691,
+            622,
+            922,
+            659
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Sum of clockwise moment   \n= 5 N× 0.8 m   \n= 4 Nm",
+        "bbox": [
+            691,
+            670,
+            918,
+            724
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Sum of anticlockwise moments",
+        "bbox": [
+            691,
+            728,
+            875,
+            764
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "The object is in equilibrium.",
+        "bbox": [
+            691,
+            901,
+            926,
+            920
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            955,
+            438,
+            980,
+            636
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            62,
+            950,
+            224,
+            965
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "page_number",
+        "text": "91",
+        "bbox": [
+            910,
+            951,
+            936,
+            967
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "It states that for an object to be in equilibrium, the sum of the clockwise moments about a pivot must equal the sum of the anticlockwise moments.",
+        "bbox": [
+            337,
+            49,
+            860,
+            100
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "text_level": 2,
+        "bbox": [
+            341,
+            106,
+            406,
+            122
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "This is one of the two conditions that an object must satisfy to be in equilibrium.",
+        "bbox": [
+            339,
+            124,
+            910,
+            141
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "image",
+        "img_path": "images/e75b981065b8801c9f87ab88a5fa7fc1ebb28d9d3b16b5bfc0d2760b7c333018.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            341,
+            159,
+            693,
+            220
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Sum of anticlockwise moments = Sum of clockwise moments",
+        "bbox": [
+            343,
+            231,
+            860,
+            248
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "img_path": "images/e315e8cb1314bacf9d23477bdae939f51b82a1ea0a2004627ae9f34b50173a15.jpg",
+        "text": "$$\n\\bar { F } _ { 1 } d _ { 1 } = \\bar { F } _ { 2 } d _ { 2 }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            573,
+            251,
+            662,
+            271
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The objects will be in equilibrium. This means that they will not turn in either ways.",
+        "bbox": [
+            339,
+            293,
+            928,
+            327
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "text_level": 2,
+        "bbox": [
+            102,
+            502,
+            168,
+            518
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "text_level": 2,
+        "bbox": [
+            341,
+            334,
+            406,
+            349
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Explain why the balance of an object is not affected by its weight.",
+        "bbox": [
+            100,
+            414,
+            319,
+            460
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The principle of moments helps determine when an object is in equilibrium, meaning it will not rotate or tip over. This is crucial in designing stable structures like bridges, buildings, and furniture.",
+        "bbox": [
+            339,
+            352,
+            924,
+            399
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Worked example 1",
+        "bbox": [
+            104,
+            666,
+            238,
+            681
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The balance of an object depends on the moments acting on it, not the weight alone.",
+        "bbox": [
+            339,
+            414,
+            937,
+            448
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Balance depends on moments (force × perpendicular distance), not just the amount of force (weight).",
+        "bbox": [
+            100,
+            521,
+            319,
+            584
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "An object is balanced when the sum of clockwise moments equals the sum of anticlockwise moments about a pivot.",
+        "bbox": [
+            341,
+            455,
+            930,
+            489
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "This means there is no resultant moment, and the object stays in equilibrium.",
+        "bbox": [
+            375,
+            496,
+            936,
+            529
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "table",
+        "img_path": "images/ef62eb0031cfba486ed91eb004396de8f3245afdbefeb1879b3db0e8c2867a22.jpg",
+        "table_caption": [
+            "anticlockwise M clockwise M"
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=\"2\"></td><td colspan=\"2\"></td><td rowspan=\"2\">object</td></tr><tr><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td>force applied</td><td>pivot</td><td>weight of object</td><td></td></tr></table>",
+        "bbox": [
+            459,
+            547,
+            864,
+            596
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "If the positions of the weights and distances from the pivot stay the same, increasing or decreasing the total weight proportionally will still keep the moments balanced.",
+        "bbox": [
+            341,
+            606,
+            928,
+            657
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Question In the following experimental setup, the uniform plank stays in equilibrium. R is the force exerted by the pivot on the plank. By ignoring the weight of the plank, calculate the magnitude of forces F and R.",
+        "bbox": [
+            341,
+            672,
+            934,
+            740
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "image",
+        "img_path": "images/c9282ea09ed4cc49855dd4e101fbaaaadb1376f003175769e56a917c85c09f40.jpg",
+        "image_caption": [
+            "(a)"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            478,
+            751,
+            808,
+            839
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "image",
+        "img_path": "images/54e542275998d71aba33288f749fdc07a240dad64058e7c62b110cf6f45c6a8a.jpg",
+        "image_caption": [
+            "(b)"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            478,
+            847,
+            806,
+            923
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "aside_text",
+        "text": "Define the principle of moments.",
+        "bbox": [
+            100,
+            49,
+            271,
+            79
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "aside_text",
+        "text": "State the formula to determine the principle of moments.",
+        "bbox": [
+            100,
+            156,
+            296,
+            201
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "aside_text",
+        "text": "What happens to objects when they achieve the principle of moments?",
+        "bbox": [
+            100,
+            292,
+            282,
+            340
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "page_number",
+        "text": "92",
+        "bbox": [
+            63,
+            947,
+            89,
+            964
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            769,
+            945,
+            930,
+            960
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "(c)",
+        "bbox": [
+            387,
+            63,
+            418,
+            80
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "bbox": [
+            292,
+            155,
+            362,
+            172
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            52,
+            193,
+            122,
+            209
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Remember the two conditions for any object to be in equilibrium:",
+        "bbox": [
+            50,
+            211,
+            273,
+            259
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• No net force",
+        "bbox": [
+            54,
+            260,
+            187,
+            277
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• No net moment",
+        "bbox": [
+            54,
+            279,
+            207,
+            296
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/5b1c04205a04b1ed95d62481f46af8e1e4e82279bc8570a291359ef77ebfbbff.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            430,
+            63,
+            767,
+            138
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "(a) clockwise M = anticlockwise M Since net force = 0:",
+        "bbox": [
+            385,
+            160,
+            879,
+            179
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/76e71ab3956537aa0ee6ac6f05ccbdb788521d02109b4314ca67ffc9304bf305.jpg",
+        "text": "$$\nF \\times 5 ~ { \\mathsf { m } } = 4 0 ~ { \\mathsf { N } } \\times 2 ~ { \\mathsf { m } }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            476,
+            182,
+            653,
+            201
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/6328429fbdc4601ebbad944dff887d4ed1399f21a940b5e053fea66d932bfcd4.jpg",
+        "text": "$$\nR - \\left( 4 0 + 1 6 \\right) \\ N = 0\n$$",
+        "text_format": "latex",
+        "bbox": [
+            711,
+            182,
+            883,
+            203
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/11bcae97b8289124cef7981c093babe57894dee8218cdd264b938892a620da89.jpg",
+        "text": "$$\nF = 1 6 ~ \\mathsf { N }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            521,
+            204,
+            606,
+            222
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/434da3159ae986350312cd95ea228f786da191f391581d026808b19dad46a2d4.jpg",
+        "text": "$$\nR = 5 6 ~ \\mathsf { N }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            711,
+            207,
+            794,
+            226
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "(b) clockwise M = anticlockwise M Since net force = 0:",
+        "bbox": [
+            385,
+            234,
+            879,
+            253
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/82f521043d0327f331a24179e06ccd0ae5501a8fcfaf87aec6c13fd4c93660a7.jpg",
+        "text": "$$\n2 5 0 \\mathsf { N } { \\times } 2 0 \\mathsf { c m } = \\mathsf { \\boldsymbol { F } } { \\times } 4 0 \\mathsf { c m }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            432,
+            257,
+            656,
+            275
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/bcef00ba1fc4d4850dc1029b3a0da17a8162c9f76bd948fde85cdf4bd9f59ff4.jpg",
+        "text": "$$\nR - \\left( 2 5 0 + 1 2 5 \\right) \\Nu = 0\n$$",
+        "text_format": "latex",
+        "bbox": [
+            711,
+            256,
+            905,
+            277
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/5728a32c51d2aba9ccf895a1d118ede9fa0c173a0501b21f2514e5e6d27bd577.jpg",
+        "text": "$$\nF = 1 2 5 \\mathsf { N }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            532,
+            278,
+            627,
+            296
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/e1b7ab76dc8c28e1239acddd88b0443675e249bdd0162af36e53b59b76c8f8a8.jpg",
+        "text": "$$\nR = 3 7 5 \\ N\n$$",
+        "text_format": "latex",
+        "bbox": [
+            711,
+            281,
+            806,
+            300
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "(c) clockwise M = anticlockwise M Since net force = 0:",
+        "bbox": [
+            383,
+            308,
+            881,
+            329
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/34ab268d6e95c119807690a59c23feac2082896347cb69bbe139b84001270096.jpg",
+        "text": "$$\nF \\times 6 0 ~ \\mathsf { c m } = 3 0 \\mathsf { N } \\times 9 0 ~ \\mathsf { c m }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            455,
+            331,
+            668,
+            349
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/794f1c28df24e7be8d0a113f3ec73f6193cf551fa7a077a8e6d3f741f2bc8763.jpg",
+        "text": "$$\n\\left( R + 3 0 \\right) \\mathsf { N } - 4 5 \\mathsf { N } = 0\n$$",
+        "text_format": "latex",
+        "bbox": [
+            711,
+            331,
+            901,
+            352
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/65c63ab3b1bf96c441319c667d92753c086845129cf7acc00df57b0985177161.jpg",
+        "text": "$$\nF = 4 5 \\ N\n$$",
+        "text_format": "latex",
+        "bbox": [
+            521,
+            352,
+            606,
+            371
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Worked example 2",
+        "bbox": [
+            54,
+            414,
+            191,
+            430
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "img_path": "images/8c3d4208bcdc9b631dad29d436ab9a0bcbe60b0175d2bdb3dd967e8c26445d89.jpg",
+        "text": "$$\nR = 1 5 \\mathsf { N }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            711,
+            356,
+            794,
+            375
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Question",
+        "bbox": [
+            292,
+            419,
+            372,
+            437
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "(a)",
+        "bbox": [
+            385,
+            481,
+            418,
+            499
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "In the diagrams, calculate the sum of clockwise and anticlockwise moments on the beam and state the direction in which the beam will turn.",
+        "bbox": [
+            381,
+            419,
+            887,
+            470
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/3c239c4011d63fe716bc6b1dbc10f7acf12fff03ca15b6ad0ce7e2fba6794b52.jpg",
+        "image_caption": [
+            "(b)"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            428,
+            481,
+            680,
+            566
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/6f908560fc5e9019fe4c9daccd2ea2eca27007916915aa90ca175e15c3548bf3.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            428,
+            578,
+            680,
+            663
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "bbox": [
+            292,
+            687,
+            360,
+            703
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "(a) Sum of clockwise $M = 3 0 ~ { \\mathsf { N } } \\times 7 0 ~ { \\mathsf { c m } } = 2 1 0 0 ~ { \\mathsf { N } } { \\mathsf { c m } }$",
+        "bbox": [
+            383,
+            691,
+            837,
+            710
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Sum of anticlockwise $M = 6 0 ~ { \\mathsf { N } } \\times 5 0 ~ { \\mathsf { c m } } = 3 0 0 0$ Ncm",
+        "bbox": [
+            426,
+            716,
+            870,
+            733
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "The beam will turn in the anticlockwise direction. (The sum of anticlockwise moments is greater than that of clockwise moments.)",
+        "bbox": [
+            424,
+            740,
+            885,
+            791
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "(b) Sum of clockwise $M = 7 0 N \\times 0 . 6 m = 4 2 N m$",
+        "bbox": [
+            383,
+            798,
+            798,
+            817
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Sum of anticlockwise $M = 2 0 \\ \\mathsf { N } \\times 0 . 8 \\ \\mathsf { m } = 1 6 \\ \\mathsf { N m }$",
+        "bbox": [
+            426,
+            823,
+            833,
+            842
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "The beam will turn in the clockwise direction. (The sum of anticlockwise moments is less than that of clockwise moments.)",
+        "bbox": [
+            426,
+            847,
+            891,
+            899
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            955,
+            438,
+            982,
+            636
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            63,
+            950,
+            226,
+            965
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "page_number",
+        "text": "93",
+        "bbox": [
+            912,
+            951,
+            937,
+            967
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows the axle P fixed into the wheel Q so that they rotate together. They are mounted in bearings, which are not shown.",
+        "bbox": [
+            430,
+            54,
+            936,
+            105
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/adebd903a4f98e7d59aa0a38711efe17b899bf7fdbd7a05b40d6759ce2175760.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            575,
+            111,
+            804,
+            281
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "A load of 400 N hangs on a rope wound around the axle, which has a radius of 12 cm. String S is wound around a wheel of radius 80 cm. Calculate the force in string S that produces equal and opposite moments.",
+        "bbox": [
+            430,
+            290,
+            910,
+            360
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Let F be the force in string S.",
+        "bbox": [
+            432,
+            367,
+            678,
+            386
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "clockwise M = anticlockwise M",
+        "bbox": [
+            434,
+            392,
+            703,
+            410
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "F×80 cm = 400 N×12 cm",
+        "bbox": [
+            457,
+            412,
+            684,
+            430
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "img_path": "images/093e7d47eef8891c4b4e63ca1a3cf07fcaef24cc364d42a80e5fa14f3df73acc.jpg",
+        "text": "$$\nF = 6 0 ~ \\mathsf { N }\n$$",
+        "text_format": "latex",
+        "bbox": [
+            527,
+            433,
+            608,
+            451
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/f339170a7901ac7cf86a49eddfd305f95f48e22a4311858184bd0e62a5bb285e.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            775,
+            370,
+            939,
+            471
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            432,
+            462,
+            500,
+            478
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "The distance must be perpendicular to the line of action of the force.",
+        "bbox": [
+            432,
+            480,
+            711,
+            513
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Worked example 4",
+        "bbox": [
+            104,
+            540,
+            238,
+            558
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows a box of mass 50 kg placed at a distance, $x ,$ from the pivot P.",
+        "bbox": [
+            430,
+            545,
+            937,
+            581
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/0f00094d0c6b55a541f9db44e54ddeed5cb4906fb3aeb60b6114077c5cc1890e.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            532,
+            584,
+            846,
+            687
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "When the plank is balanced, the reading of the spring balance is 200 N. By ignoring the weight of the plank and taking the gravitational field strength as 10 N/kg, calculate the value of x.",
+        "bbox": [
+            432,
+            696,
+            928,
+            764
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Weight of the box $: = m g = 5 0 ~ k g \\times 1 0 ~ \\mathsf { N } / \\mathsf { k g } = 5 0 0 ~ \\mathsf { N }$",
+        "bbox": [
+            432,
+            773,
+            862,
+            792
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "clockwise M = anticlockwise M",
+        "bbox": [
+            436,
+            798,
+            703,
+            816
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "500 N×x = 200 N× 90 cm",
+        "bbox": [
+            461,
+            818,
+            684,
+            836
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "img_path": "images/2c5c0418a402af090cdb9eea8adbe4eaa721fa168d8749a3d17c036718b49299.jpg",
+        "text": "$$\nx = 3 6 c m\n$$",
+        "text_format": "latex",
+        "bbox": [
+            527,
+            839,
+            620,
+            857
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "header",
+        "text": "Worked example 3",
+        "bbox": [
+            102,
+            49,
+            238,
+            65
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "aside_text",
+        "text": "Question",
+        "bbox": [
+            341,
+            56,
+            418,
+            74
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "aside_text",
+        "text": "Answer",
+        "bbox": [
+            339,
+            370,
+            406,
+            385
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "aside_text",
+        "text": "Question",
+        "bbox": [
+            341,
+            547,
+            420,
+            565
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "aside_text",
+        "text": "Answer",
+        "bbox": [
+            341,
+            775,
+            406,
+            791
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            769,
+            946,
+            930,
+            960
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "page_number",
+        "text": "94",
+        "bbox": [
+            63,
+            949,
+            89,
+            964
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Worked example 5",
+        "bbox": [
+            56,
+            52,
+            193,
+            69
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            52,
+            305,
+            122,
+            320
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Whenever there are two possible pivot points, we can choose one as the pivot to calculate the force acting at the other pivot point.",
+        "bbox": [
+            52,
+            325,
+            265,
+            400
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Question",
+        "bbox": [
+            296,
+            58,
+            372,
+            76
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "bbox": [
+            292,
+            327,
+            360,
+            342
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Question 2",
+        "text_level": 2,
+        "bbox": [
+            54,
+            750,
+            205,
+            770
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows a load being moved using a wheelbarrow.",
+        "bbox": [
+            50,
+            779,
+            434,
+            812
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "The total mass of the load and wheelbarrow is 50 kg. By taking the gravitational field strength as 10 N/kg, calculate force F needed just to lift the loaded wheelbarrow.",
+        "bbox": [
+            50,
+            814,
+            422,
+            876
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "A uniform plank of length 4.0 m and weight 200 N is suspended by two strings. $\\tau _ { \\mathfrak { r } }$ and $\\tau _ { _ 2 }$ are the tensions in the strings. A load of weight 40 N is placed at 0.5 m from one end of the plank as shown. The plank is balanced horizontally.",
+        "bbox": [
+            383,
+            58,
+            862,
+            142
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "image",
+        "img_path": "images/2f1d0a741b84e139b4fa6fe667d5c5f8e686ecadcc99939039015866676dee2a.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            492,
+            146,
+            784,
+            224
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "(a) By taking moments about a suitable point, calculate $T _ { \\scriptscriptstyle { 1 } \\cdot }$",
+        "bbox": [
+            385,
+            237,
+            889,
+            256
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "(b) Hence or otherwise, calculate the tension $\\boldsymbol { \\tau } _ { { \\scriptscriptstyle 2 } } .$",
+        "bbox": [
+            385,
+            262,
+            804,
+            282
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "(c) How could you check the ruler is horizontal?",
+        "bbox": [
+            385,
+            288,
+            802,
+            307
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "(a) To calculate $\\tau _ { \\mathbf { { r } } }$ we take moments about $T _ { \\scriptscriptstyle 2 }$ (meaning taking $\\boldsymbol { T } _ { 2 }$ as the pivot)",
+        "bbox": [
+            385,
+            330,
+            874,
+            367
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "clockwise M = anticlockwise M",
+        "bbox": [
+            432,
+            370,
+            697,
+            389
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "img_path": "images/43e82a4a5f902e4a2808265fe91eb4754575e88c2be2d95505bafb83865fcb87.jpg",
+        "text": "$$\n\\begin{array} { c } { { T _ { 1 } \\times 3 . 5 ~ \\mathsf { m } = \\left( 2 0 0 \\mathsf { N } \\times 2 . 0 ~ \\mathsf { m } \\right) + \\left( 4 0 \\mathsf { N } \\times 0 . 5 ~ \\mathsf { m } \\right) } } \\\\ { { T _ { 1 } = 1 2 0 ~ \\mathsf { N } } } \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            455,
+            390,
+            819,
+            434
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "(b) Since the plank is balanced, the net force is also zero. Upward forces —Downward forces = Net force",
+        "bbox": [
+            385,
+            447,
+            868,
+            489
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "img_path": "images/4b0b83bad98e002e03063943c990e273b38cbea027397f576be86220e49f8f3b.jpg",
+        "text": "$$\n\\begin{array} { c } { { 1 2 0 ~ \\mathsf { N } + T _ { \\mathrm { { 2 } } } - \\left( 2 0 0 ~ \\mathsf { N } + 4 0 ~ \\mathsf { N } \\right) = 0 ~ } } \\\\ { { T _ { \\mathrm { { 2 } } } = 1 2 0 ~ \\mathsf { N } ~ } } \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            488,
+            491,
+            790,
+            534
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "or",
+        "bbox": [
+            430,
+            540,
+            455,
+            555
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Take moments about $\\tau _ { \\mathrm { r } }$",
+        "bbox": [
+            430,
+            563,
+            637,
+            582
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "clockwise M = anticlockwise M",
+        "bbox": [
+            583,
+            587,
+            850,
+            604
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "img_path": "images/ac75d1176ebaefe8122847707a85e140778df28f5ce55edae0b74a3b8edb9bc4.jpg",
+        "text": "$$\n\\begin{array} { c } { { \\left( 2 0 0 \\mathsf { N } \\times 1 . 5 ~ { \\mathsf { m } } \\right) + \\left( 4 0 \\mathsf { N } \\times 3 . 0 ~ { \\mathsf { m } } \\right) = { T } _ { 2 } \\times 3 . 5 ~ { \\mathsf { m } } } } \\\\ { { { T } _ { 2 } = 1 2 0 ~ \\mathsf { N } } } \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            430,
+            606,
+            794,
+            650
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "(c) Measure the vertical distance from the surface to both ends of the plank. If both ends are at the same height, the plank is horizontal.",
+        "bbox": [
+            385,
+            662,
+            881,
+            716
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "image",
+        "img_path": "images/7682f03411e3dfaa1501ee67cffb4b773d528f74c16a6ac140823e6d8cd7fb11.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            470,
+            781,
+            881,
+            898
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            953,
+            440,
+            980,
+            636
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            62,
+            951,
+            224,
+            965
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "page_number",
+        "text": "95",
+        "bbox": [
+            910,
+            951,
+            936,
+            968
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Question 3",
+        "text_level": 2,
+        "bbox": [
+            106,
+            48,
+            257,
+            68
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows the essential parts of a hand winch.",
+        "bbox": [
+            102,
+            76,
+            546,
+            93
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/8707ab2fbead1474cee23dd14781d6687b48c2626ee32942fc09a8a1f32ca1b0.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            358,
+            100,
+            682,
+            272
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "The winch is used to move a load of 5o00 N over a horizontal distance towards the drum through a cable.   \nCalculate the minimum amount of effort required to turn the drum.",
+        "bbox": [
+            102,
+            279,
+            932,
+            311
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Question4",
+        "text_level": 2,
+        "bbox": [
+            108,
+            432,
+            257,
+            451
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows a uniform metre rule AB suspended from two ropes X and Y.",
+        "bbox": [
+            104,
+            459,
+            736,
+            477
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/d6ae1f9b90ee78277b36d397cd4059abe1bbbcd385b22573b88fe907656eb039.jpg",
+        "image_caption": [
+            "10.5 N"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            290,
+            481,
+            748,
+            555
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "The weight W of the metre rule is 10.5 N and it acts in the middle part of the plank. The force in rope X is P. The force in rope Y is Q. The metre rule is in equilíbrium.",
+        "bbox": [
+            102,
+            574,
+            928,
+            606
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "(a) State, in terms of P, the moment of force P about B.",
+        "bbox": [
+            102,
+            610,
+            552,
+            626
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "(b) Calculate",
+        "bbox": [
+            104,
+            657,
+            222,
+            674
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "(i) the moment of W about B,",
+        "bbox": [
+            141,
+            677,
+            389,
+            695
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "(ii) the force P,",
+        "bbox": [
+            141,
+            757,
+            275,
+            773
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "(iii) the force Q.",
+        "bbox": [
+            141,
+            836,
+            277,
+            853
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "page_number",
+        "text": "96",
+        "bbox": [
+            65,
+            946,
+            91,
+            962
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            771,
+            945,
+            930,
+            958
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Centre of gravity",
+        "text_level": 2,
+        "bbox": [
+            54,
+            50,
+            218,
+            68
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Define the centre of gravity of It is an imaginary point where the entire weight of the object appears an object. to act.",
+        "bbox": [
+            50,
+            78,
+            875,
+            112
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Explain why an object will balance at the centre of gravity.",
+        "bbox": [
+            52,
+            130,
+            251,
+            178
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "An object will balance at its centre of gravity because, at this point, the line of action of the object's weight passes through the pivot.",
+        "bbox": [
+            290,
+            130,
+            883,
+            165
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "As a result, the weight does not create any moment (or torque) around the pivot since there is no perpendicular distance from the pivot to the line of action of the weight.",
+        "bbox": [
+            290,
+            171,
+            881,
+            223
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "This means there is no net moment acting on the object, allowing it to remain in equilibrium and balanced.",
+        "bbox": [
+            290,
+            229,
+            891,
+            263
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "image",
+        "img_path": "images/745a66c6260a49cce9f2f5ccd22326b60cfa89f5cb24cf09548126bd4fc0d363.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            410,
+            266,
+            808,
+            362
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Where is the location of the centre of gravity (CG) in regular-shaped and uniform density and irregular-shaped objects?",
+        "bbox": [
+            50,
+            382,
+            267,
+            460
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Types of object",
+        "bbox": [
+            298,
+            389,
+            436,
+            408
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Regularshaped and uniform density",
+        "bbox": [
+            315,
+            421,
+            420,
+            489
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "How to find its CG?",
+        "bbox": [
+            463,
+            389,
+            631,
+            407
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "'• The CG is at the geometric centre.",
+        "bbox": [
+            447,
+            419,
+            641,
+            456
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Examples",
+        "bbox": [
+            724,
+            389,
+            810,
+            407
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            449,
+            533,
+            517,
+            550
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "For some regular-shaped objects with uniform density, the centre of gravity is not located on the actual objects, eg, a cylinder with a hollow centre.",
+        "bbox": [
+            447,
+            552,
+            637,
+            659
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "image",
+        "img_path": "images/0b7cff7d7dbec483d8ae784e4e4dfb8c7d1f34fc52ff027c75a667f27a0fbdcd.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            662,
+            418,
+            891,
+            644
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "'•' = centre of gravity",
+        "bbox": [
+            656,
+            651,
+            837,
+            670
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Irregularshaped",
+        "bbox": [
+            321,
+            683,
+            408,
+            718
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "The CG can be found by plumb line method.",
+        "bbox": [
+            449,
+            683,
+            622,
+            735
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "image",
+        "img_path": "images/4a9ca19412696ea993056f095c1142bd30dd6ee95257ef375efcd1830d72ba83.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            658,
+            681,
+            868,
+            831
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "'•' = centre of gravity",
+        "bbox": [
+            656,
+            840,
+            837,
+            860
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "page_number",
+        "text": "97",
+        "bbox": [
+            908,
+            954,
+            936,
+            971
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            951,
+            441,
+            978,
+            639
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            62,
+            954,
+            224,
+            968
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Describe how the centre of gravity for an irregularshaped lamina can be determined using the plumb line method.",
+        "bbox": [
+            102,
+            48,
+            306,
+            123
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Step",
+        "text_level": 2,
+        "bbox": [
+            352,
+            53,
+            397,
+            72
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Procedure",
+        "text_level": 2,
+        "bbox": [
+            529,
+            53,
+            620,
+            71
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Make three holes near the edge of an irregular-shaped lamina.",
+        "bbox": [
+            418,
+            85,
+            720,
+            120
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Hang the lamina freely about one of its holes on a pin clamped firmly on a retort stand.",
+        "bbox": [
+            416,
+            133,
+            732,
+            185
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "A plumb line attached to a bob is then suspended from the same pin. After it rests, mark the position and trace the vertical line from the hole.",
+        "bbox": [
+            416,
+            197,
+            732,
+            282
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "image",
+        "img_path": "images/a4149a9fd82c0013fd67bac8371fad08dada9a56c1fe4e1e7c8f0d2b16a2f7bb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            748,
+            86,
+            957,
+            252
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "4 Repeat the experiment for the rest of the two holes.",
+        "bbox": [
+            366,
+            294,
+            713,
+            330
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Remarks:",
+        "bbox": [
+            746,
+            285,
+            821,
+            300
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Lamina means a thin plate.",
+        "bbox": [
+            746,
+            303,
+            906,
+            334
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "5 The point of intersection of the three lines is the centre of gravity (CG) of the irregularly shaped lamina.",
+        "bbox": [
+            366,
+            342,
+            709,
+            411
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "The lamina can be balanced at the point of intersection.",
+        "bbox": [
+            746,
+            337,
+            899,
+            397
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "The object will come to rest with its centre of gravity aligned on a vertical line directly below the pivot.",
+        "bbox": [
+            341,
+            443,
+            891,
+            478
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "image",
+        "img_path": "images/428d738f1155f4ed0f71ff6900a5b4b32d305a2350e4ee689a9f516afa6756c9.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            562,
+            482,
+            726,
+            593
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Worked example",
+        "bbox": [
+            108,
+            614,
+            228,
+            631
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Question",
+        "text_level": 2,
+        "bbox": [
+            344,
+            620,
+            422,
+            637
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "A uniform metre rule of mass 0.5 kg rests on supports P and Q as shown below. Take g as 10 N/kg.",
+        "bbox": [
+            434,
+            620,
+            936,
+            654
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "image",
+        "img_path": "images/3587b4e0c28918220d7b603f39e5ef46e9825d02117ace59f609f7108ed30faa.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            581,
+            657,
+            798,
+            709
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "What force is exerted by support Q on the beam?",
+        "bbox": [
+            436,
+            718,
+            848,
+            736
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "text_level": 2,
+        "bbox": [
+            106,
+            747,
+            172,
+            764
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Look out for the keywords 'uniform' and 'metre rule'.",
+        "bbox": [
+            106,
+            766,
+            296,
+            796
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Answer",
+        "text_level": 2,
+        "bbox": [
+            344,
+            748,
+            410,
+            762
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Uniform → the centre of gravity is at midpoint.",
+        "bbox": [
+            106,
+            799,
+            325,
+            831
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Metre rule → the total length is 1 m.",
+        "bbox": [
+            106,
+            834,
+            310,
+            865
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Weight W of beam = 0.5 kg × 10 N/kg = 5 N",
+        "bbox": [
+            436,
+            746,
+            808,
+            765
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Let F be the force exerted by support Q on the beam.",
+        "bbox": [
+            436,
+            775,
+            680,
+            810
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Take the moments about P:",
+        "bbox": [
+            436,
+            814,
+            674,
+            834
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "image",
+        "img_path": "images/95aacb494daa91fbfc0ac00d35b4e749ec4dadf236046b6992d874f2a18b41b1.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            728,
+            775,
+            941,
+            847
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "clockwise M = anticlockwise M",
+        "bbox": [
+            437,
+            838,
+            703,
+            857
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "5 N×0.5 m=F×0.8 m",
+        "bbox": [
+            451,
+            860,
+            645,
+            877
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "F=3.125 N",
+        "bbox": [
+            529,
+            879,
+            635,
+            897
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "aside_text",
+        "text": "What happens when an object is suspended freely in the air from a pivot?",
+        "bbox": [
+            106,
+            443,
+            310,
+            489
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "page_number",
+        "text": "98",
+        "bbox": [
+            69,
+            947,
+            93,
+            962
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            773,
+            945,
+            934,
+            958
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Question5",
+        "text_level": 2,
+        "bbox": [
+            58,
+            52,
+            209,
+            72
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Two loads are placed on a uniform bar. The uniform bar has a length of 1.0 m and weighs 5 N.",
+        "bbox": [
+            54,
+            80,
+            792,
+            97
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "image",
+        "img_path": "images/964cd09631f9ada67cee335a72348053ee46f0d1975d654b4f6b56d758418373.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            300,
+            101,
+            639,
+            174
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "(a) Calculate the force F needed in order to balance the bar.",
+        "bbox": [
+            54,
+            182,
+            540,
+            198
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "(b) Hence, find the force exerted by the pivot on the bar.",
+        "bbox": [
+            52,
+            281,
+            507,
+            299
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Question6",
+        "text_level": 2,
+        "bbox": [
+            56,
+            430,
+            207,
+            449
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows apparatus for investigating moments of forces.",
+        "bbox": [
+            52,
+            459,
+            579,
+            475
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "image",
+        "img_path": "images/ccd915894726c92ff53aeb49a37a0bcb0e77a9338a182838439b6b03416ae968.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            255,
+            481,
+            680,
+            625
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "The uniform metre rule shown in the diagram is in equilibrium. The horizontal pivot is at the centre of the metre rule.",
+        "bbox": [
+            50,
+            633,
+            868,
+            663
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "(a)Write down two conditions for the metre rule to be in equilibrium.",
+        "bbox": [
+            52,
+            668,
+            877,
+            709
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "(b) Show that the value of the reading on the spring balance is 8 N.",
+        "bbox": [
+            52,
+            716,
+            877,
+            755
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "(c) The weight of the uniform metre rule is 1.5 N. Calculate the force exerted by the horizontal pivot on the metre rule. State the direction of this force.",
+        "bbox": [
+            52,
+            765,
+            864,
+            795
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "(d) How could you check the ruler is horizontal?",
+        "bbox": [
+            52,
+            869,
+            441,
+            886
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            955,
+            440,
+            980,
+            633
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            62,
+            950,
+            224,
+            964
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "page_number",
+        "text": "99",
+        "bbox": [
+            912,
+            951,
+            936,
+            967
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Stability",
+        "text_level": 2,
+        "bbox": [
+            94,
+            45,
+            180,
+            63
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "It is the ability of objects to remain in their original position.",
+        "bbox": [
+            333,
+            68,
+            833,
+            89
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "table",
+        "img_path": "images/2a746b744e0a822e49750c10b148c0e19c91085cc789e786113c5cdfb36e7302.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=\"2\">Describe how the line of action of the centre of gravity affects the stability of an object.</td><td colspan=\"2\">Stability</td><td colspan=\"2\">How?</td></tr><tr><td>Stable</td><td>position after being displaced.</td><td>When the line of action of the centre of gravity stays within the base area of support of an object when tilted, the object can return to its original</td><td><img src=\"images/7537b76dfd8696d2a687e9f6b227b474d620e6d636f82bffba5b1f56673dd822.jpg\"/></td></tr><tr><td colspan=\"2\">Unstable State two factors affecting the</td><td colspan=\"2\">• . When the line of action of the centre of gravity falls outside the base area of support of an object when tilted, the object will topple to a new position and does not return to its original position.</td></tr><tr><td rowspan=\"6\">stability of an object.</td><td>Factors Position of the</td><td>How it affects and why Lower CG increases</td><td>Example</td></tr><tr><td>centre of gravity</td><td>stability. This is because the line of action of the centre of gravity is</td><td><img src=\"images/68ec69225419e6a08be0d57c9d67678ebf8985e24c2ac24b4648a355b0080f99.jpg\"/></td></tr><tr><td></td><td>less likely to fall outside of the base when tilted to a certain angle.</td><td>A is more stable than because it has a lower centre of gravity.</td></tr><tr><td>Base area of support of the object</td><td>Wider base of support increases stability. This is because the line of action</td><td><img src=\"images/e7df0d479a26549d769d9ec2e6d2c9b2766d3d01a45a810c210f86fcd82aa64b.jpg\"/></td></tr><tr><td></td><td>of the centre of gravity is more likely to stay within the base when the object is tilted at a certain angle.</td><td>C is more stable than because it has a wide base area of support.</td></tr></table>",
+        "bbox": [
+            94,
+            100,
+            943,
+            891
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "page_number",
+        "text": "100",
+        "bbox": [
+            63,
+            950,
+            98,
+            965
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            777,
+            941,
+            937,
+            954
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "Using a suitable diagram, explain, in terms of moments of force, why the line of action of the centre of gravity affects the stability of an object.",
+        "bbox": [
+            56,
+            50,
+            273,
+            142
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            54,
+            185,
+            124,
+            200
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/efd08bf2401608a981cf4d5f528ac0e6a6be14ec1035eae37e41a2a4b0fd2cc9.jpg",
+        "image_caption": [],
+        "image_footnote": [
+            "Restoring moment is the moment that returns the object to equilibrium when tilted, acting opposite to the tilting direction."
+        ],
+        "bbox": [
+            312,
+            87,
+            523,
+            215
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/c0f20d1fe02daccd53abfb197fe14ca4b94f7aadcff45760759ec71eee323b84.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            319,
+            293,
+            511,
+            415
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "When the object is tilted but the line of action of the centre of gravity stays within its base, the anticlockwise moment (restoring moment) acts to bring the object back to its original position.",
+        "bbox": [
+            550,
+            89,
+            868,
+            190
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "This occurs because the restoring moment generated by the weight is greater than the tilting moment, causing the object to return to the same side of the base area.",
+        "bbox": [
+            548,
+            196,
+            875,
+            281
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "When the object is tilted until the line of action of the centre of gravity falls outside its base, the sum of the clockwise moments created by the tilt and the weight causes the object to topple over to the other side of the base area of support.",
+        "bbox": [
+            546,
+            293,
+            875,
+            427
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "d = the perpendicular distance from the pivot to the line of action of the weight.",
+        "bbox": [
+            300,
+            440,
+            870,
+            475
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Remark:",
+        "bbox": [
+            292,
+            491,
+            360,
+            507
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Depending on how the diagram is presented, recognise the correct direction of moments of force that allow the object to return to its original position or topple over.",
+        "bbox": [
+            290,
+            508,
+            864,
+            555
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Question 7",
+        "text_level": 2,
+        "bbox": [
+            56,
+            577,
+            207,
+            598
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Díagram 1 shows an object of mass 4 kg being balanced by a horizontal force, F. G is the centre of gravity of the object",
+        "bbox": [
+            50,
+            606,
+            831,
+            639
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "image",
+        "img_path": "images/f1f2bb291508d549f462943a5d4ba56c012a8ddfdc90076cd55592b1a81c5a68.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            298,
+            643,
+            639,
+            829
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Take the gravitational field strength as 10 N/kg.",
+        "bbox": [
+            50,
+            834,
+            426,
+            851
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "(a) Find the weight of the object.",
+        "bbox": [
+            50,
+            854,
+            321,
+            871
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "(b) On the same diagram, draw an arrow to show the vertical force that acts upwards on the object.",
+        "bbox": [
+            50,
+            909,
+            839,
+            927
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "header",
+        "text": "Situation",
+        "bbox": [
+            377,
+            56,
+            457,
+            75
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "header",
+        "text": "Why it is so",
+        "bbox": [
+            664,
+            57,
+            765,
+            75
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            955,
+            438,
+            980,
+            635
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            62,
+            950,
+            226,
+            964
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "page_number",
+        "text": "101",
+        "bbox": [
+            912,
+            951,
+            945,
+            967
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "(c) State the principle of moments for the object to remain in equilibrium.",
+        "bbox": [
+            104,
+            48,
+            930,
+            117
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(d) Calculate",
+        "bbox": [
+            104,
+            124,
+            222,
+            141
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(i) the moment of the weight about point P,",
+        "bbox": [
+            141,
+            145,
+            494,
+            163
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(ii) the value of the force, F.",
+        "bbox": [
+            141,
+            200,
+            375,
+            216
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(e) The object is placed in the upright position, as shown in Diagram 2.",
+        "bbox": [
+            104,
+            255,
+            668,
+            271
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "image",
+        "img_path": "images/871ab7a7c1ba7adc8a95e4cd7ede3d63b2e4b42703e45464f2c1932f5a3a95ed.jpg",
+        "image_caption": [
+            "Diagram 2"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            424,
+            277,
+            649,
+            390
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Explain why the object will be more stable with the centre of gravity at H than at G.",
+        "bbox": [
+            141,
+            412,
+            786,
+            430
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Question 8",
+        "text_level": 2,
+        "bbox": [
+            108,
+            488,
+            255,
+            507
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "The stability of a car is tested, as shown in the diagram.",
+        "bbox": [
+            104,
+            517,
+            542,
+            533
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "image",
+        "img_path": "images/7fa9b1fc4fdbb0741f87ae83e27b9e948d3b1721380e8d1e0cd04f43de33c0e6.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            339,
+            539,
+            697,
+            689
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "The ramp is tilted as much as possible without the car toppling over. The ramp is then fixed and the car remains at rest in the position shown.",
+        "bbox": [
+            102,
+            696,
+            910,
+            729
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(a) On the same diagram, draw arrows to represent the forces acting on the car. Label your arrows with the names of the forces.",
+        "bbox": [
+            104,
+            732,
+            922,
+            764
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(b) Explain why the car topples over if the ramp is tilted to a certain angle.",
+        "bbox": [
+            104,
+            766,
+            930,
+            835
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "(c) State how the position of the centre of gravity affects the stability of the car.",
+        "bbox": [
+            104,
+            843,
+            928,
+            883
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "page_number",
+        "text": "102",
+        "bbox": [
+            56,
+            947,
+            91,
+            964
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            769,
+            945,
+            928,
+            958
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Section A: Multiple-choice Questions",
+        "text_level": 2,
+        "bbox": [
+            56,
+            82,
+            375,
+            98
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "1The diagram shows a load used to balance the toy.",
+        "bbox": [
+            56,
+            116,
+            507,
+            133
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "image",
+        "img_path": "images/51d51cef13854f0bf421fd1408c94c78132f8f6721a3dcdf942f137900129ef5.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            418,
+            138,
+            581,
+            279
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "What is the effect of the load?",
+        "bbox": [
+            100,
+            286,
+            343,
+            303
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "A To raise the centre of gravity above the rod",
+        "bbox": [
+            98,
+            312,
+            480,
+            330
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "B To raise the centre of gravity to the rod",
+        "bbox": [
+            100,
+            333,
+            449,
+            349
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "C To lower the centre of gravity below the rod",
+        "bbox": [
+            98,
+            353,
+            482,
+            370
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "D To increase the weight by not affecting its centre of gravity",
+        "bbox": [
+            98,
+            373,
+            596,
+            390
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "2 The diagram shows a truck going down a rough slope. What is the safest position for its centre of gravity?",
+        "bbox": [
+            54,
+            423,
+            866,
+            455
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "image",
+        "img_path": "images/fa8a01531f9f97d9870ef91eb912a8c52ab0dee883506f8db5492150373516f3.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            282,
+            460,
+            713,
+            611
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "A plane lamina is freely suspended from point X. The weight of the lamina is 5.0 N and the centre of gravity is at Z.",
+        "bbox": [
+            98,
+            648,
+            885,
+            681
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "image",
+        "img_path": "images/63a876749daaeb71f056ff0a7d2c6eb4621f219b3a614e5a8a0be5a185f424d8.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            395,
+            685,
+            598,
+            823
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "The lamina is displaced into the position shown. What is the moment that will cause the lamina to swing?",
+        "bbox": [
+            98,
+            831,
+            864,
+            862
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "A 3.5 Nm clockwise B 6 Nm anticlockwise",
+        "bbox": [
+            98,
+            871,
+            653,
+            888
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "C 6 Nm clockwise D 6.5 Nm anticlockwise",
+        "bbox": [
+            96,
+            891,
+            664,
+            908
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "header",
+        "text": "TOPICAL TEST 4",
+        "bbox": [
+            395,
+            50,
+            560,
+            67
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            959,
+            437,
+            984,
+            633
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "footer",
+        "text": "WiseMann Publishing",
+        "bbox": [
+            79,
+            950,
+            226,
+            962
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "page_number",
+        "text": "103",
+        "bbox": [
+            916,
+            950,
+            949,
+            965
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "text",
+        "text": "4 Why is it better to use a long spanner rather than a short one to loosen a nut on a bolt?",
+        "bbox": [
+            100,
+            48,
+            833,
+            64
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "A Less force needs to be exerted by the user.",
+        "bbox": [
+            143,
+            74,
+            529,
+            90
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "B Reduce the effect of friction.",
+        "bbox": [
+            145,
+            94,
+            408,
+            109
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "C Less turning is required on the spanner.",
+        "bbox": [
+            145,
+            115,
+            500,
+            130
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "D Less work is done by the user.",
+        "bbox": [
+            145,
+            135,
+            426,
+            150
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "5 A student balances a non-uniform object on a pivot by attaching a weight at one end, as shown. Where is the centre of gravity?",
+        "bbox": [
+            100,
+            185,
+            899,
+            216
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "image",
+        "img_path": "images/ccdeeb02b434a8382e4db5b534045969a352e9ee9e69a10e6f793046611b155e.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            343,
+            219,
+            746,
+            345
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows a wheelbarrow and its load, which have a total weight of W. This is supported by a vertical force of 400 N at the ends of the handles",
+        "bbox": [
+            143,
+            379,
+            939,
+            411
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "image",
+        "img_path": "images/0ed2d9e27caf157529f70cba73dd3810ee6ae22c51406511bbdea5840712793d.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            343,
+            418,
+            744,
+            533
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "What is the total weight of the load and the wheelbarrow?",
+        "bbox": [
+            147,
+            541,
+            604,
+            558
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "A 400 N B 550 N C 700 N D 850 N",
+        "bbox": [
+            145,
+            566,
+            831,
+            584
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "7 A uniform metre rule, which weighs 2.0 N, is pivoted horizontally at the 40 cm mark. A 4.0 N weight is hung from the 20 cm mark.",
+        "bbox": [
+            100,
+            617,
+            939,
+            648
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "image",
+        "img_path": "images/e586489f670330580a971b8c7c898b1d1ac9f04da4ebbb5543c05c4afa21675d.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            327,
+            652,
+            761,
+            724
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "What is the resultant moment about the pivot?",
+        "bbox": [
+            147,
+            732,
+            515,
+            747
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "table",
+        "img_path": "images/147b9efd79a06a9001ebed90542c655e2a5dd1435b7ef6f72081a673277028be.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>magnitude</td><td rowspan=1 colspan=1>direction</td></tr><tr><td rowspan=1 colspan=1>A</td><td rowspan=1 colspan=1>ON</td><td rowspan=1 colspan=1>no turning</td></tr><tr><td rowspan=1 colspan=1>B</td><td rowspan=1 colspan=1>0.6 Nm</td><td rowspan=1 colspan=1>clockwise</td></tr><tr><td rowspan=1 colspan=1>C</td><td rowspan=1 colspan=1>0.6 Nm</td><td rowspan=1 colspan=1>anticlockwise</td></tr><tr><td rowspan=1 colspan=1>D</td><td rowspan=1 colspan=1>1.0 Nm</td><td rowspan=1 colspan=1>anticlockwise</td></tr></table>",
+        "bbox": [
+            149,
+            753,
+            563,
+            855
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "aside_text",
+        "text": "6",
+        "bbox": [
+            102,
+            381,
+            116,
+            395
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "page_number",
+        "text": "104",
+        "bbox": [
+            54,
+            947,
+            89,
+            964
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            769,
+            945,
+            928,
+            958
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows a plank hinged at X and supported by a vertical rope at Y, 2 m from X. A load weighing 500 N is placed at the end of Z of the plank, which is 8 m from the hinge.",
+        "bbox": [
+            100,
+            52,
+            864,
+            85
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "image",
+        "img_path": "images/e50eb36c9887f0b2d42d999416941d58114a285422fbea4d6adefdb2f60b6466.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            310,
+            90,
+            686,
+            172
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "By neglecting the weight of the plank, what is the tension T in the rope? A 500 N B 1000 N C 1500 N D 2000 N",
+        "bbox": [
+            98,
+            179,
+            794,
+            222
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "A uniform bar of length 1.0 m is supported 20 cm from one end. In order to balance the bar, a weight of 6 N is attached to one end, as shown.",
+        "bbox": [
+            98,
+            255,
+            889,
+            286
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "image",
+        "img_path": "images/9a32076236074f4a9d0c950993f063186d2f7e36a487472a807a9538171b5497.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            315,
+            292,
+            684,
+            382
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "What is the weight of the bar? A 2N B 4N C 6N D 8N",
+        "bbox": [
+            98,
+            388,
+            763,
+            432
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "10Two loads are placed on a uniform metre rule and weight 4 N as shown.",
+        "bbox": [
+            54,
+            463,
+            666,
+            480
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "image",
+        "img_path": "images/f74abe29b6010000aa8847b6d9fe8176f5bc1a93339a7984857105fc7578ab8f.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            273,
+            485,
+            720,
+            565
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "The metre rule is balanced by these two loads. What is the value of force F? A 0.5 N B1N C 2N D 3N",
+        "bbox": [
+            98,
+            573,
+            763,
+            617
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "Section B: Structured Questions",
+        "text_level": 2,
+        "bbox": [
+            54,
+            661,
+            343,
+            679
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "1 The diagram shows a ladder AB. End A of the ladder rests against a vertical wall. End B rests on rough ground.",
+        "bbox": [
+            52,
+            698,
+            856,
+            728
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "image",
+        "img_path": "images/9dc13464ae35692f56c050415defa96f788ceab501872d349d1e9d2841e37cbf.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            354,
+            740,
+            639,
+            913
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            957,
+            440,
+            982,
+            636
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "footer",
+        "text": "WiseMann Publishing",
+        "bbox": [
+            75,
+            951,
+            226,
+            965
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "page_number",
+        "text": "105",
+        "bbox": [
+            912,
+            953,
+            947,
+            968
+        ],
+        "page_idx": 17
+    },
+    {
+        "type": "text",
+        "text": "The diagram shows two of the forces acting on the ladder. The only force on the ladder at A is F, which acts at a right angle to the wall. The weight of the ladder is 240 N acting at the centre of gravity of the ladder.",
+        "bbox": [
+            147,
+            46,
+            905,
+            96
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "(a) Calculate the moment of the weight of the ladder about point B.",
+        "bbox": [
+            149,
+            102,
+            697,
+            123
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "(b) Write an expression, in terms of F, for the moment of F about point B.",
+        "bbox": [
+            149,
+            181,
+            744,
+            200
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "(c) Use your answers from (a) and (b) to calculate F.",
+        "bbox": [
+            149,
+            259,
+            587,
+            279
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "(d) Explain why there must be an upwards force acting on the ladder at B.",
+        "bbox": [
+            149,
+            382,
+            751,
+            401
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "(a) Diagram 1 shows the same vertical force of 400 N exerted by a man on the hand pedal of a wheel in three different positions, X, Y and Z. P is the pivot of the pedal.",
+        "bbox": [
+            149,
+            489,
+            916,
+            525
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "image",
+        "img_path": "images/f84e62af6d16838389564e5a4c09c25a58ff02329d88ef846c21d62d926b77eb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            238,
+            585,
+            476,
+            668
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "image",
+        "img_path": "images/e5636f776a6314cf88cf2c5361e84e7a6c085fdb8bf97be1344fc4707957bfa0.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            498,
+            581,
+            707,
+            674
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "image",
+        "img_path": "images/e4275e3954872ab038d7bf43f9a8e19fabb421a48fd429e459025795c0c39af5.jpg",
+        "image_caption": [
+            "Z",
+            "Diagram 1"
+        ],
+        "image_footnote": [],
+        "bbox": [
+            792,
+            533,
+            899,
+            725
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "State the position, X, Y or Z, in which the force exerts the largest moment about the pivot. Give a reason for your answer.",
+        "bbox": [
+            195,
+            803,
+            939,
+            836
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "aside_text",
+        "text": "2",
+        "bbox": [
+            104,
+            491,
+            122,
+            508
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "page_number",
+        "text": "106",
+        "bbox": [
+            56,
+            947,
+            91,
+            964
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            769,
+            945,
+            930,
+            958
+        ],
+        "page_idx": 18
+    },
+    {
+        "type": "text",
+        "text": "(b) The diagram shows a uniform metre rule in equilibrium supported by a force 0.8 N.",
+        "bbox": [
+            102,
+            49,
+            798,
+            68
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "image",
+        "img_path": "images/5991b4a03bd055b6fc92da9f448588d3cd38c4fa1ecf074638159f6ee38b2ca5.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            339,
+            78,
+            705,
+            135
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "By taking the gravitational field strength as 10 N/kg, caiculate the mass of the metre rule.",
+        "bbox": [
+            149,
+            146,
+            846,
+            164
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "3 A uniform plank XY of length 6.0 m and weight 400 N is suspended by a vertical rope at each end. A load of weight 250 N is placed at 1.5 m from position X. The plank is in equilibrium.",
+        "bbox": [
+            54,
+            231,
+            889,
+            266
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "image",
+        "img_path": "images/08f5f8e23cf87aa9e06ab20dd2b9fefdf9039f8e6c67f3836db8873096abfbcb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            255,
+            274,
+            742,
+            367
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "Calculate the tension in the rope supporting the plank",
+        "bbox": [
+            100,
+            378,
+            527,
+            396
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "(a) at position X,",
+        "bbox": [
+            100,
+            404,
+            259,
+            423
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "(b) at position Y.",
+        "bbox": [
+            100,
+            456,
+            255,
+            475
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "Section C: Free-response Questions",
+        "text_level": 2,
+        "bbox": [
+            54,
+            525,
+            381,
+            544
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "1(a) State the two conditions necessary for a system of forces acting on a body to be in equilibrium.",
+        "bbox": [
+            52,
+            563,
+            891,
+            582
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "(b) Diagram 1 shows a loaded wheelbarrow held in equilibrium by a gardener. The wheel of the wheelbarrow is in contact with the ground at point C.",
+        "bbox": [
+            98,
+            643,
+            866,
+            674
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "image",
+        "img_path": "images/72cc067cc9f472333cae940d31183ca86eafe748c6e206b9f2f2389753fd7844.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            385,
+            685,
+            655,
+            923
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "aside_text",
+        "text": "Unit 4 Turning effects of forces",
+        "bbox": [
+            957,
+            437,
+            980,
+            633
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            63,
+            949,
+            226,
+            964
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "page_number",
+        "text": "107",
+        "bbox": [
+            912,
+            950,
+            947,
+            967
+        ],
+        "page_idx": 19
+    },
+    {
+        "type": "text",
+        "text": "There are three vertical forces acting on the wheelbarrow. P is the upward force applied by the gardener. Q is the upward force of the ground on the wheel at point C. W is the weight of the wheelbarrow and its contents.",
+        "bbox": [
+            195,
+            45,
+            767,
+            122
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "Explain why the force P is less than the force W",
+        "bbox": [
+            195,
+            126,
+            583,
+            148
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "(i) by considering the forces P, Q and W,",
+        "bbox": [
+            195,
+            152,
+            544,
+            174
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "(ii) by considering the moments of the forces P and W about point C.",
+        "bbox": [
+            195,
+            310,
+            753,
+            331
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "(c) Diagram 2 shows a kitchen cupboard resting on a support and attached to a wall by a screw.",
+        "bbox": [
+            149,
+            467,
+            924,
+            488
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "image",
+        "img_path": "images/1356cde6328b5d4f1ddebd84351230947b2242fd12f80e6248d9abe1d79ed67c.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            389,
+            493,
+            751,
+            716
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "text",
+        "text": "The weight of the cupboard and its contents is 75 N. G is the position of the centre of gravity of the cupboard. The clockwise and anticlockwise moments about point P are equal. Calculate force F exerted by the screw.",
+        "bbox": [
+            195,
+            727,
+            941,
+            775
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "page_number",
+        "text": "108",
+        "bbox": [
+            54,
+            946,
+            91,
+            962
+        ],
+        "page_idx": 20
+    },
+    {
+        "type": "footer",
+        "text": "© WiseMann Publishing",
+        "bbox": [
+            769,
+            943,
+            930,
+            958
+        ],
+        "page_idx": 20
+    }
+]

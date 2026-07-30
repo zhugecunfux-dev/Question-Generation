@@ -135,12 +135,35 @@ function normaliseAssets(
 
     const width = Number(pick(record, "width", "w"));
     const height = Number(pick(record, "height", "h"));
+    const generationMode = asString(pick(record, "generationMode", "generation_mode"));
+    const rawJob = asString(pick(record, "imageGenerationJob", "image_generation_job"));
+    const rawOverlay = asString(pick(record, "overlayPath", "overlay_path"));
+    const rawFallback = asString(pick(record, "fallbackPath", "fallback_path"));
+    const imageGenerationJob = rawJob ? normaliseAssetPath(rawJob) ?? undefined : undefined;
+    const overlayPath = rawOverlay ? normaliseAssetPath(rawOverlay) ?? undefined : undefined;
+    const fallbackPath = rawFallback ? normaliseAssetPath(rawFallback) ?? undefined : undefined;
     out.push({
       path: safe,
       caption: asString(pick(record, "caption", "label", "title")),
       alt: asString(pick(record, "alt", "description", "altText", "alt_text")),
       width: Number.isFinite(width) && width > 0 ? Math.round(width) : undefined,
       height: Number.isFinite(height) && height > 0 ? Math.round(height) : undefined,
+      generationPrompt: asString(
+        pick(record, "generationPrompt", "generation_prompt"),
+      ),
+      generationMode:
+        generationMode === "svg" || generationMode === "imagegen_overlay"
+          ? generationMode
+          : undefined,
+      imageGenerationJob:
+        imageGenerationJob?.endsWith(".imagegen.json")
+          ? imageGenerationJob
+          : undefined,
+      imageGenerationThreadId: asString(
+        pick(record, "imageGenerationThreadId", "image_generation_thread_id"),
+      ),
+      overlayPath,
+      fallbackPath,
     });
   }
 

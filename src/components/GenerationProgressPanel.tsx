@@ -11,9 +11,14 @@ const PHASES: Array<{ id: GenerationPhase; title: string; subtitle: string }> = 
     subtitle: "Knowledge Base → bank examples → Codex draft → physics checks",
   },
   {
+    id: "illustration",
+    title: "Complex illustration",
+    subtitle: "ImageGen apparatus base → exact SVG data overlay",
+  },
+  {
     id: "layout",
     title: "Figures & layout",
-    subtitle: "SVG checks → asset storage → paper assembly",
+    subtitle: "Fallback checks → asset storage → paper assembly",
   },
 ];
 
@@ -82,7 +87,7 @@ export function GenerationProgressPanel({
         </div>
       </div>
 
-      <div className={`grid gap-3 p-4 ${compact ? "md:grid-cols-2" : "lg:grid-cols-2"}`}>
+      <div className={`grid gap-3 p-4 ${compact ? "md:grid-cols-3" : "lg:grid-cols-3"}`}>
         {PHASES.map((phase) => {
           const events = progress.events.filter((event) => event.phase === phase.id);
           return (
@@ -135,6 +140,22 @@ export function GenerationProgressPanel({
             : ""}
           {progress.questionCount !== undefined ? ` · ${progress.questionCount} validated` : ""}
           {progress.figureCount !== undefined ? ` · ${progress.figureCount} SVG figure(s)` : ""}
+          {progress.imagegenFigureCount !== undefined
+            ? ` · ${progress.imagegenFigureCount} ImageGen overlay job(s)`
+            : ""}
+          {progress.illustrationThreadId ? (
+            <>
+              {" · "}
+              <a
+                href={`/agent?threadId=${encodeURIComponent(progress.illustrationThreadId)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[var(--color-accent)] underline"
+              >
+                open illustration task
+              </a>
+            </>
+          ) : null}
         </div>
       )}
     </section>

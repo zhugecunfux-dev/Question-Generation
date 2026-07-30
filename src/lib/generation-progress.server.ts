@@ -83,6 +83,8 @@ export function reportGenerationProgress(
       | "exemplarCount"
       | "questionCount"
       | "figureCount"
+      | "imagegenFigureCount"
+      | "illustrationThreadId"
     >
   > & {
     event?: {

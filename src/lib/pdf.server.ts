@@ -87,6 +87,10 @@ export function parsePdfExportRequest(value: unknown): {
       seed: typeof candidate.seed === "number" ? candidate.seed : undefined,
       codexThreadId:
         typeof candidate.codexThreadId === "string" ? candidate.codexThreadId : undefined,
+      illustrationThreadId:
+        typeof candidate.illustrationThreadId === "string"
+          ? candidate.illustrationThreadId
+          : undefined,
       totalMarks: questions.reduce((sum, question) => sum + Math.round(question.marks), 0),
       questions,
       warnings: [],

@@ -101,7 +101,12 @@ function fromTemplates(
 export async function generatePaper(req: GenerateRequest): Promise<GeneratedPaper> {
   const seed = req.seed ?? Math.floor(Math.random() * 2 ** 31);
 
-  let result: { questions: Question[]; warnings: string[]; codexThreadId?: string };
+  let result: {
+    questions: Question[];
+    warnings: string[];
+    codexThreadId?: string;
+    illustrationThreadId?: string;
+  };
   switch (req.mode) {
     case "retrieve":
       result = retrieve(req, seed);
@@ -126,6 +131,7 @@ export async function generatePaper(req: GenerateRequest): Promise<GeneratedPape
     generatedAt: new Date().toISOString(),
     seed: req.mode === "llm" ? undefined : seed,
     codexThreadId: result.codexThreadId,
+    illustrationThreadId: result.illustrationThreadId,
     totalMarks: result.questions.reduce((sum, q) => sum + q.marks, 0),
     questions: result.questions,
     warnings: result.warnings,

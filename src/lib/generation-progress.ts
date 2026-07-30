@@ -1,4 +1,4 @@
-export type GenerationPhase = "questions" | "layout" | "system";
+export type GenerationPhase = "questions" | "illustration" | "layout" | "system";
 export type GenerationStatus = "queued" | "running" | "completed" | "failed";
 
 export interface GenerationProgressEvent {
@@ -26,6 +26,8 @@ export interface GenerationProgress {
   exemplarCount?: number;
   questionCount?: number;
   figureCount?: number;
+  imagegenFigureCount?: number;
+  illustrationThreadId?: string;
   startedAt: string;
   updatedAt: string;
   completedAt?: string;

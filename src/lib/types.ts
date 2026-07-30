@@ -95,8 +95,21 @@ export interface QuestionAsset {
   alt?: string;
   width?: number;
   height?: number;
-  /** Detailed production brief retained for generated SVG review/regeneration. */
+  /** Detailed production brief retained for generated figure review/regeneration. */
   generationPrompt?: string;
+  /**
+   * `imagegen_overlay` keeps a complete deterministic fallback while a
+   * separate Codex/ImageGen task paints the complex, unlabelled apparatus.
+   */
+  generationMode?: "svg" | "imagegen_overlay";
+  /** Safe path, relative to `data/assets`, of the local ImageGen job manifest. */
+  imageGenerationJob?: string;
+  /** Codex thread handling the optional ImageGen enhancement. */
+  imageGenerationThreadId?: string;
+  /** Exact-label SVG composited over the generated base illustration. */
+  overlayPath?: string;
+  /** Complete deterministic SVG used until the ImageGen enhancement is ready. */
+  fallbackPath?: string;
 }
 
 /**
@@ -276,6 +289,8 @@ export interface GeneratedPaper {
   seed?: number;
   /** Codex thread that produced this paper, for opening it in the local agent UI. */
   codexThreadId?: string;
+  /** Separate visible Codex thread producing complex ImageGen base illustrations. */
+  illustrationThreadId?: string;
   totalMarks: number;
   questions: Question[];
   /** Warnings, e.g. "asked for 12 MCQ on T3, bank only had 5". */

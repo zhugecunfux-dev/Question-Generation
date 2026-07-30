@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
+import sharp from "sharp";
 import type { AO, Difficulty, Question, QuestionFormat } from "@/lib/types";
 import { findTopic, getSyllabus } from "@/lib/syllabus";
 import { getStaticQuestions } from "@/lib/db";
@@ -21,6 +22,11 @@ import {
   formatKnowledgeContext,
   retrieveKnowledgeExcerpts,
 } from "@/lib/knowledge-retrieval.server";
+import {
+  createImagegenJob,
+  dispatchImagegenJobs,
+  validateBaseImagePrompt,
+} from "@/lib/imagegen-jobs.server";
 
 const CODEX_TIMEOUT_MS = 300_000;
 const MAX_SVG_CHARS = 200_000;
@@ -29,12 +35,15 @@ export class LlmUnavailableError extends Error {}
 export class LlmRefusalError extends Error {}
 
 interface ModelFigure {
+  mode?: "svg" | "imagegen_overlay";
   caption: string;
   alt: string;
   svgPrompt: string;
   width: number;
   height: number;
   svg: string;
+  baseImagePrompt?: string;
+  overlaySvg?: string;
 }
 
 export interface ModelQuestion {
@@ -158,7 +167,7 @@ export function buildSystemPrompt(): string {
     "",
     "Exam rules:",
     `- Paper 1 uses ${paper1?.structure[0].questionCount ?? 40} four-option MCQs worth 1 mark each.`,
-    "- Use SI units and syllabus notation. Take g = 9.81 N/kg unless stated otherwise.",
+    "- Use SI units and syllabus notation. Take g = 10 N/kg (equivalently 10 m/s² for gravitational acceleration) unless the question explicitly states another value.",
     "- Numerical answers need units and 2 or 3 significant figures.",
     "- AO1 tests recall/understanding; AO2 applies physics in a context. Do not write AO3 practical questions.",
     "- Stay inside the supplied topic and sub-topic list.",
@@ -169,7 +178,11 @@ export function buildSystemPrompt(): string {
     "- Follow the figure policy stated for the current question. When a figure is required, include `figure`; when figures are forbidden, omit it.",
     "- A figure question must explicitly refer to its figure in the stem.",
     "- `svgPrompt` is a detailed production brief for the SVG. Describe canvas size, layout, every object and line, coordinates or relative positions, labels and values, arrow directions, axes/scales, colours, stroke widths, font treatment, and which details must remain visually unambiguous. It must be detailed enough for another illustrator to reproduce the diagram without reading the question.",
-    "- `svg` is the finished self-contained SVG matching `svgPrompt`. Use a white background, black/dark strokes, legible text, and a viewBox. Do not use scripts, event handlers, style elements, foreignObject, embedded images, external references, data URLs, CSS url(), or animation.",
+    "- `svg` is the finished self-contained SVG matching `svgPrompt`. Use a white background, black/dark strokes, legible text, and a viewBox. Do not use scripts, event handlers, style elements, foreignObject, embedded images, external references, data URLs, or animation. Arrow markers may use safe same-document fragment references such as `marker-end=\"url(#arrow)\"`; every other `url(...)`, `href`, or `src` target is forbidden.",
+    "- For a required T4 Turning Effect figure, use `mode: \"imagegen_overlay\"`. The `svg` remains a complete, accurate fallback containing the whole diagram. Also provide `baseImagePrompt` for a separate built-in ImageGen pass and `overlaySvg` containing only the exact force arrows, pivot marker, perpendicular distances, angle arcs, labels, numbers, and units on a transparent canvas.",
+    "- A T4 `baseImagePrompt` must be a detailed scientific-educational illustration brief for the unlabelled apparatus/background. It must explicitly say: no text, no labels, no numbers, no arrows, no dimensions, no watermark. Specify the same aspect ratio, viewpoint, numeric pixel/percentage landmarks, object placement, and clear empty zones needed by the overlay. Never ask ImageGen to decide or render assessable data.",
+    "- `overlaySvg` must use the same viewBox and dimensions as `svg`, have no opaque background, and contain all assessable labels/data plus every scoring-critical geometry anchor: pivot, lever/contact points, lines of action, and perpendicular-distance guides. The ImageGen base is illustrative only. The separate illustration pass composites the exact overlay so generated pixels or text can never change the physics.",
+    "- For T4, use moment = force × perpendicular distance from the pivot, distinguish clockwise and anticlockwise moments, and make every line of action and perpendicular distance visually unambiguous.",
     "- Put all information needed to solve the question either in the stem or visibly in the SVG. The `alt` text must precisely describe the drawn information for accessibility, without revealing the answer.",
     "",
     "Output rules:",
@@ -202,13 +215,23 @@ function responseExample(slot?: GenerationSlot): { questions: Array<Record<strin
     ];
   }
   if (!slot || slot.figureRequired) {
+    const turningEffectHybrid = slot?.topicId === "T4";
     question.figure = {
+      mode: turningEffectHybrid ? "imagegen_overlay" : "svg",
       caption: "Fig. 1",
       alt: "Precise accessible description without the answer",
       svgPrompt: "Detailed SVG production brief as required above",
       width: 640,
       height: 420,
       svg: "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 640 420\" width=\"640\" height=\"420\">...</svg>",
+      ...(turningEffectHybrid
+        ? {
+            baseImagePrompt:
+              "Use case: scientific-educational. On a 640 by 420 landscape canvas, draw only the unlabelled apparatus on a clean white background, place the pivot landmark at (300, 280), keep the lever inside the central 80% of the width, and reserve the exact clear zones described for the later data overlay. No text, no labels, no numbers, no arrows, no dimensions, no watermark.",
+            overlaySvg:
+              "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 640 420\" width=\"640\" height=\"420\">...exact transparent labels and arrows only...</svg>",
+          }
+        : {}),
     };
   }
   return { questions: [question] };
@@ -265,7 +288,9 @@ export function buildUserPrompt(opts: {
         `Required format: ${opts.slot.format}`,
         `Required difficulty: ${opts.slot.difficulty}`,
         opts.slot.figureRequired
-          ? "Figure policy: REQUIRED. This question must contain one complete `figure`."
+          ? opts.slot.topicId === "T4"
+            ? "Figure policy: REQUIRED T4 HYBRID. This question must contain one complete `figure` with `mode: \"imagegen_overlay\"`, a full fallback `svg`, a detailed unlabelled `baseImagePrompt`, and an exact transparent `overlaySvg`."
+            : "Figure policy: REQUIRED. This question must contain one complete `figure`."
           : "Figure policy: FORBIDDEN. This question must be text-only and must omit `figure`.",
         "Do not repeat or lightly reword any earlier question in this thread.",
       ]
@@ -317,7 +342,9 @@ function buildContinuationPrompt(opts: {
     `Required format: ${opts.slot.format}`,
     `Required difficulty: ${opts.slot.difficulty}`,
     opts.slot.figureRequired
-      ? "Figure policy: REQUIRED. This question must contain one complete `figure`."
+      ? opts.slot.topicId === "T4"
+        ? "Figure policy: REQUIRED T4 HYBRID. Include `mode: \"imagegen_overlay\"`, a complete fallback `svg`, a detailed unlabelled `baseImagePrompt`, and an exact transparent `overlaySvg`."
+        : "Figure policy: REQUIRED. This question must contain one complete `figure`."
       : "Figure policy: FORBIDDEN. This question must be text-only and must omit `figure`.",
     opts.notes ? `Teacher instruction: ${opts.notes}` : "",
     "Do not repeat or lightly reword any earlier question in this thread.",
@@ -331,6 +358,33 @@ function buildContinuationPrompt(opts: {
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+function buildRepairPrompt(opts: {
+  slot: GenerationSlot;
+  totalCount: number;
+  problem: string;
+}): string {
+  return [
+    `Your previous response for question ${opts.slot.number} of ${opts.totalCount} failed local validation: ${opts.problem}`,
+    "Return one corrected replacement for that same question. Do not add an extra question and do not change its assigned requirements.",
+    `Required topic: ${opts.slot.topicId}`,
+    `Required format: ${opts.slot.format}`,
+    `Required difficulty: ${opts.slot.difficulty}`,
+    opts.slot.figureRequired
+      ? opts.slot.topicId === "T4"
+        ? "Figure policy: REQUIRED T4 HYBRID. Include `mode: \"imagegen_overlay\"`, a complete fallback `svg`, a detailed unlabelled `baseImagePrompt`, and an exact transparent `overlaySvg`."
+        : "Figure policy: REQUIRED. Include one complete, self-contained SVG figure."
+      : "Figure policy: FORBIDDEN. Omit `figure` completely.",
+    "For every SVG, use only safe self-contained SVG elements. Do not use script, style, foreignObject, image, animation, event attributes, data URLs, src, or external href targets.",
+    "Safe same-document SVG references such as `marker-end=\"url(#arrow)\"` are allowed when the referenced id is defined inside that SVG. Every other `url(...)` or href target is forbidden.",
+    "Do not use tools, run commands, inspect files, browse, or edit anything.",
+    "",
+    "Return exactly one corrected question in this JSON shape:",
+    JSON.stringify(responseExample(opts.slot), null, 2),
+    "",
+    "Return one JSON object only, with no Markdown fences or commentary.",
+  ].join("\n");
 }
 
 export function parseCodexJson(text: string): { questions: ModelQuestion[] } {
@@ -363,10 +417,31 @@ function validateSvg(svg: string): string | undefined {
   }
   if (svg.length > MAX_SVG_CHARS) return "figure SVG is too large";
   const unsafe =
-    /<!doctype|<!entity|<script|<style|<foreignObject|<image|<animate|<set\b|\son[a-z]+\s*=|(?:href|src)\s*=\s*["']\s*(?:https?:|\/\/|data:|javascript:)|url\s*\(/i;
+    /<!doctype|<!entity|<script|<style|<foreignObject|<image|<animate|<set\b|\son[a-z]+\s*=|\bsrc\s*=/i;
   if (unsafe.test(svg)) return "figure SVG contains unsafe or external content";
+  for (const match of svg.matchAll(/\burl\s*\(\s*([^)]*?)\s*\)/gi)) {
+    const target = match[1].trim().replace(/^(["'])(.*)\1$/, "$2").trim();
+    if (!/^#[A-Za-z_][A-Za-z0-9_.:-]*$/.test(target)) {
+      return "figure SVG contains unsafe or external content";
+    }
+  }
+  for (const match of svg.matchAll(
+    /\b(?:href|xlink:href)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi,
+  )) {
+    const target = (match[1] ?? match[2] ?? match[3] ?? "").trim();
+    if (!/^#[A-Za-z_][A-Za-z0-9_.:-]*$/.test(target)) {
+      return "figure SVG contains unsafe or external content";
+    }
+  }
   if (!/\bviewBox\s*=/i.test(svg)) return "figure SVG must include a viewBox";
   return undefined;
+}
+
+function svgViewBox(svg: string): string | undefined {
+  return svg
+    .match(/\bviewBox\s*=\s*["']([^"']+)["']/i)?.[1]
+    ?.trim()
+    .replace(/\s+/g, " ");
 }
 
 /** Reject output that would not survive the bank/import path. */
@@ -405,6 +480,10 @@ export function validateModelQuestion(q: ModelQuestion, allowedTopics: string[])
     return "non-mcq question must not carry options";
   }
   if (q.figure) {
+    const mode = q.figure.mode ?? "svg";
+    if (mode !== "svg" && mode !== "imagegen_overlay") {
+      return `unsupported figure mode (${String(q.figure.mode)})`;
+    }
     if (typeof q.figure.caption !== "string" || !q.figure.caption.trim()) {
       return "figure caption is required";
     }
@@ -426,11 +505,94 @@ export function validateModelQuestion(q: ModelQuestion, allowedTopics: string[])
     }
     const svgProblem = validateSvg(q.figure.svg);
     if (svgProblem) return svgProblem;
+    if (mode === "imagegen_overlay") {
+      if (q.topicId !== "T4") {
+        return "ImageGen overlay mode is reserved for T4 Turning Effect figures";
+      }
+      const promptProblem = validateBaseImagePrompt(q.figure.baseImagePrompt ?? "");
+      if (promptProblem) return promptProblem;
+      const overlayProblem = validateSvg(q.figure.overlaySvg ?? "");
+      if (overlayProblem) return `figure overlay ${overlayProblem}`;
+      if (svgViewBox(q.figure.svg) !== svgViewBox(q.figure.overlaySvg ?? "")) {
+        return "figure overlay must use the same viewBox as the fallback SVG";
+      }
+      if (!/<text\b/i.test(q.figure.overlaySvg ?? "")) {
+        return "figure overlay must contain the exact labels and values";
+      }
+      if (!/<(?:path|line|polyline|polygon|circle)\b/i.test(q.figure.overlaySvg ?? "")) {
+        return "figure overlay must contain exact physics geometry anchors";
+      }
+      if (
+        /<rect\b[^>]*\bfill\s*=\s*["'](?:white|#fff(?:fff)?|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\))["']/i.test(
+          q.figure.overlaySvg ?? "",
+        )
+      ) {
+        return "figure overlay must keep its background transparent";
+      }
+    } else if (q.figure.baseImagePrompt || q.figure.overlaySvg) {
+      return "plain SVG figure must not include ImageGen overlay fields";
+    }
     if (!/\b(fig\.?|figure|diagram|graph|circuit|apparatus)\b/i.test(q.stem)) {
       return "figure question stem does not refer to its figure";
     }
   }
   return undefined;
+}
+
+function validateSlotResponse(
+  parsed: { questions: ModelQuestion[] },
+  slot: GenerationSlot,
+): { question?: ModelQuestion; problem?: string } {
+  if (parsed.questions.length !== 1) {
+    return {
+      problem: `Codex returned ${parsed.questions.length} questions; exactly 1 was requested.`,
+    };
+  }
+  const question = parsed.questions[0];
+  const modelProblem = validateModelQuestion(question, [slot.topicId]);
+  if (modelProblem) {
+    return { problem: `Codex output failed validation: ${modelProblem}` };
+  }
+  if (question.format !== slot.format) {
+    return {
+      problem: `Codex returned format ${question.format}; ${slot.format} was required.`,
+    };
+  }
+  if (question.difficulty !== slot.difficulty) {
+    return {
+      problem: `Codex returned difficulty ${question.difficulty}; ${slot.difficulty} was required.`,
+    };
+  }
+  if (Boolean(question.figure) !== slot.figureRequired) {
+    return {
+      problem: `Codex ${
+        question.figure ? "included a figure" : "omitted the required figure"
+      } contrary to the slot figure policy.`,
+    };
+  }
+  if (
+    slot.topicId === "T4" &&
+    slot.figureRequired &&
+    question.figure?.mode !== "imagegen_overlay"
+  ) {
+    return {
+      problem: "T4 figure did not use the required ImageGen + exact SVG overlay mode.",
+    };
+  }
+  return { question };
+}
+
+function parseAndValidateSlotResponse(
+  text: string,
+  slot: GenerationSlot,
+): { question?: ModelQuestion; problem?: string } {
+  try {
+    return validateSlotResponse(parseCodexJson(text), slot);
+  } catch (cause) {
+    return {
+      problem: cause instanceof Error ? cause.message : String(cause),
+    };
+  }
 }
 
 function buildKnowledgeQuery(opts: {
@@ -735,7 +897,12 @@ export interface LlmGenerateOptions {
 
 export async function generateWithLlm(
   opts: LlmGenerateOptions,
-): Promise<{ questions: Question[]; warnings: string[]; codexThreadId: string }> {
+): Promise<{
+  questions: Question[];
+  warnings: string[];
+  codexThreadId: string;
+  illustrationThreadId?: string;
+}> {
   const knowledge = retrieveKnowledgeExcerpts({
     topicIds: opts.topicIds,
     query: buildKnowledgeQuery(opts),
@@ -800,6 +967,7 @@ export async function generateWithLlm(
   const prepared = await prepareCodexThread(opts.codexThreadId);
   const modelQuestions: ModelQuestion[] = [];
   let figureCount = 0;
+  let imagegenFigureCount = 0;
 
   for (const slot of slots) {
     const userPrompt =
@@ -819,16 +987,15 @@ export async function generateWithLlm(
           });
     const prompt = buildSystemPrompt() + "\n\n" + userPrompt;
 
-    let parsed: { questions: ModelQuestion[] };
+    let text: string;
     try {
-      const text = await runCodexTurn(
+      text = await runCodexTurn(
         prepared.client,
         prepared.threadId,
         prompt,
         slot.number,
         opts.count,
       );
-      parsed = parseCodexJson(text);
     } catch (cause) {
       throw new Error(
         `Question ${slot.number}/${opts.count}: ${
@@ -854,38 +1021,78 @@ export async function generateWithLlm(
       },
     });
 
-    if (parsed.questions.length !== 1) {
-      throw new Error(
-        `Question ${slot.number}/${opts.count}: Codex returned ${parsed.questions.length} questions; exactly 1 was requested.`,
-      );
-    }
-    const question = parsed.questions[0];
-    const problem = validateModelQuestion(question, [slot.topicId]);
-    if (problem) {
-      throw new Error(
-        `Question ${slot.number}/${opts.count}: Codex output failed validation: ${problem}`,
-      );
-    }
-    if (question.format !== slot.format) {
-      throw new Error(
-        `Question ${slot.number}/${opts.count}: Codex returned format ${question.format}; ${slot.format} was required.`,
-      );
-    }
-    if (question.difficulty !== slot.difficulty) {
-      throw new Error(
-        `Question ${slot.number}/${opts.count}: Codex returned difficulty ${question.difficulty}; ${slot.difficulty} was required.`,
-      );
-    }
-    if (Boolean(question.figure) !== slot.figureRequired) {
-      throw new Error(
-        `Question ${slot.number}/${opts.count}: Codex ${
-          question.figure ? "included a figure" : "omitted the required figure"
-        } contrary to the slot figure policy.`,
-      );
+    let checked = parseAndValidateSlotResponse(text, slot);
+    if (checked.problem) {
+      reportGenerationProgress(prepared.threadId, {
+        status: "running",
+        stage: "repairing_question",
+        headline: `Correcting question ${slot.number} of ${opts.count}`,
+        detail: checked.problem,
+        percent: generationPercent(slot.number, opts.count, 0.92),
+        questionCount: modelQuestions.length,
+        figureCount,
+        imagegenFigureCount,
+        event: {
+          id: `repair_question_${slot.number}`,
+          phase: "questions",
+          title: `Correct question ${slot.number}`,
+          detail: "Codex is replacing an answer that did not pass local validation.",
+          status: "active",
+        },
+      });
+
+      let repairedText: string;
+      try {
+        repairedText = await runCodexTurn(
+          prepared.client,
+          prepared.threadId,
+          buildSystemPrompt() +
+            "\n\n" +
+            buildRepairPrompt({
+              slot,
+              totalCount: opts.count,
+              problem: checked.problem,
+            }),
+          slot.number,
+          opts.count,
+        );
+      } catch (cause) {
+        throw new Error(
+          `Question ${slot.number}/${opts.count}: ${
+            cause instanceof Error ? cause.message : String(cause)
+          }`,
+        );
+      }
+
+      checked = parseAndValidateSlotResponse(repairedText, slot);
+      if (checked.problem) {
+        throw new Error(
+          `Question ${slot.number}/${opts.count}: after one automatic correction, ${checked.problem}`,
+        );
+      }
+      reportGenerationProgress(prepared.threadId, {
+        status: "running",
+        stage: "question_repaired",
+        headline: `Question ${slot.number} corrected`,
+        detail: "The replacement passed local validation.",
+        percent: generationPercent(slot.number, opts.count, 0.96),
+        questionCount: modelQuestions.length,
+        figureCount,
+        imagegenFigureCount,
+        event: {
+          id: `repair_question_${slot.number}`,
+          phase: "questions",
+          title: `Correct question ${slot.number}`,
+          detail: "Replacement passed local validation.",
+          status: "done",
+        },
+      });
     }
 
+    const question = checked.question!;
     modelQuestions.push(question);
     if (question.figure) figureCount += 1;
+    if (question.figure?.mode === "imagegen_overlay") imagegenFigureCount += 1;
     reportGenerationProgress(prepared.threadId, {
       status: "running",
       stage: "question_validated",
@@ -894,6 +1101,7 @@ export async function generateWithLlm(
       percent: generationPercent(slot.number, opts.count, 1),
       questionCount: modelQuestions.length,
       figureCount,
+      imagegenFigureCount,
       event: {
         id: "validate_questions",
         phase: "questions",
@@ -918,6 +1126,7 @@ export async function generateWithLlm(
     percent: 82,
     questionCount: modelQuestions.length,
     figureCount,
+    imagegenFigureCount,
     event: {
       id: "validate_questions",
       phase: "questions",
@@ -930,40 +1139,101 @@ export async function generateWithLlm(
   const stamp = `${Date.now().toString(36)}-${randomUUID().slice(0, 8)}`;
   const generatedDir = path.join(assetsRoot(), "generated", stamp);
   const createdAt = new Date().toISOString();
+  fs.mkdirSync(generatedDir, { recursive: true });
   reportGenerationProgress(prepared.threadId, {
     status: "running",
     stage: "layout",
     headline: "Building figures and paper layout",
-    detail: "Saving safe SVG assets and assembling the final question order.",
+    detail:
+      imagegenFigureCount > 0
+        ? "Saving complete SVG fallbacks, exact overlay layers, and preview PNGs."
+        : "Saving safe SVG assets and assembling the final question order.",
     percent: 86,
     event: {
       id: "layout",
       phase: "layout",
-      title: "Save SVGs and assemble paper",
-      detail: `${figureCount} SVG figure(s) to place`,
+      title: "Save figure layers and assemble paper",
+      detail: `${figureCount} figure(s), including ${imagegenFigureCount} ImageGen overlay job(s)`,
       status: "active",
     },
   });
-  const questions = modelQuestions.map((q, index): Question => {
+
+  const questions: Question[] = [];
+  const imagegenJobPaths: string[] = [];
+  for (let index = 0; index < modelQuestions.length; index += 1) {
+    const q = modelQuestions[index];
+    const questionId = `codex-${stamp}-${index + 1}`;
     let assets: Question["assets"];
     if (q.figure) {
-      fs.mkdirSync(generatedDir, { recursive: true });
-      const filename = `q${index + 1}.svg`;
-      fs.writeFileSync(path.join(generatedDir, filename), q.figure.svg, "utf8");
-      assets = [
-        {
-          path: `generated/${stamp}/${filename}`,
-          caption: q.figure.caption,
-          alt: q.figure.alt,
+      const prefix = `q${index + 1}`;
+      if (q.figure.mode === "imagegen_overlay") {
+        const fallbackPath = `generated/${stamp}/${prefix}-fallback.svg`;
+        const overlayPath = `generated/${stamp}/${prefix}-overlay.svg`;
+        const outputPath = `generated/${stamp}/${prefix}.png`;
+        const basePath = `generated/${stamp}/${prefix}-base.png`;
+        const jobPath = `generated/${stamp}/${prefix}.imagegen.json`;
+        fs.writeFileSync(
+          path.join(generatedDir, `${prefix}-fallback.svg`),
+          q.figure.svg,
+          "utf8",
+        );
+        fs.writeFileSync(
+          path.join(generatedDir, `${prefix}-overlay.svg`),
+          q.figure.overlaySvg!,
+          "utf8",
+        );
+        // The paper is immediately usable: the complete deterministic SVG is
+        // rasterised to the stable final path until ImageGen replaces it.
+        await sharp(Buffer.from(q.figure.svg))
+          .resize(q.figure.width, q.figure.height, { fit: "fill" })
+          .png()
+          .toFile(path.join(generatedDir, `${prefix}.png`));
+        createImagegenJob(jobPath, {
+          id: `${stamp}-${prefix}`,
+          questionId,
+          topicId: "T4",
           width: q.figure.width,
           height: q.figure.height,
-          generationPrompt: q.figure.svgPrompt,
-        },
-      ];
+          prompt: q.figure.baseImagePrompt!,
+          overlayPath,
+          fallbackPath,
+          outputPath,
+          basePath,
+        });
+        imagegenJobPaths.push(jobPath);
+        assets = [
+          {
+            path: outputPath,
+            caption: q.figure.caption,
+            alt: q.figure.alt,
+            width: q.figure.width,
+            height: q.figure.height,
+            generationPrompt: q.figure.svgPrompt,
+            generationMode: "imagegen_overlay",
+            imageGenerationJob: jobPath,
+            overlayPath,
+            fallbackPath,
+          },
+        ];
+      } else {
+        const filename = `${prefix}.svg`;
+        fs.writeFileSync(path.join(generatedDir, filename), q.figure.svg, "utf8");
+        assets = [
+          {
+            path: `generated/${stamp}/${filename}`,
+            caption: q.figure.caption,
+            alt: q.figure.alt,
+            width: q.figure.width,
+            height: q.figure.height,
+            generationPrompt: q.figure.svgPrompt,
+            generationMode: "svg",
+          },
+        ];
+      }
     }
-    return {
+    questions.push({
       kind: "static",
-      id: `codex-${stamp}-${index + 1}`,
+      id: questionId,
       source: `codex:${prepared.threadId}`,
       topicId: q.topicId,
       subtopicId: q.subtopicId,
@@ -976,10 +1246,84 @@ export async function generateWithLlm(
       assets,
       answer: q.answer,
       solution: q.solution,
-      tags: ["generated:codex", "needs-review", ...(q.figure ? ["figure:svg"] : [])],
+      tags: [
+        "generated:codex",
+        "needs-review",
+        ...(q.figure ? ["figure:svg"] : []),
+        ...(q.figure?.mode === "imagegen_overlay"
+          ? ["figure:imagegen-overlay", "figure:imagegen-pending"]
+          : []),
+      ],
       createdAt,
-    };
-  });
+    });
+  }
+
+  let illustrationThreadId: string | undefined;
+  let illustrationWarning: string | undefined;
+  if (imagegenJobPaths.length) {
+    reportGenerationProgress(prepared.threadId, {
+      status: "running",
+      stage: "imagegen_handoff",
+      headline: "Sending complex figures to ImageGen",
+      detail:
+        "Opening a separate visible Codex task for unlabelled apparatus art; exact data stays in SVG overlays.",
+      percent: 92,
+      imagegenFigureCount,
+      event: {
+        id: "imagegen_handoff",
+        phase: "illustration",
+        title: "Generate apparatus bases with ImageGen",
+        detail: `${imagegenJobPaths.length} Turning Effect illustration job(s) prepared`,
+        status: "active",
+      },
+    });
+    try {
+      const handoff = await dispatchImagegenJobs(imagegenJobPaths);
+      illustrationThreadId = handoff.threadId;
+      for (const question of questions) {
+        for (const asset of question.assets ?? []) {
+          if (asset.imageGenerationJob) {
+            asset.imageGenerationThreadId = illustrationThreadId;
+          }
+        }
+      }
+      reportGenerationProgress(prepared.threadId, {
+        stage: "imagegen_dispatched",
+        headline: "ImageGen illustration task started",
+        detail:
+          "The paper already uses accurate fallback diagrams. The separate Codex task will enhance the apparatus and then apply exact SVG labels.",
+        percent: 94,
+        imagegenFigureCount,
+        illustrationThreadId,
+        event: {
+          id: "imagegen_handoff",
+          phase: "illustration",
+          title: "Generate apparatus bases with ImageGen",
+          detail: `${imagegenJobPaths.length} job(s) sent to Codex task ${illustrationThreadId}`,
+          status: "done",
+        },
+      });
+    } catch (cause) {
+      illustrationWarning =
+        "Could not automatically start the optional ImageGen task; accurate fallback diagrams remain available. " +
+        (cause instanceof Error ? cause.message : String(cause));
+      reportGenerationProgress(prepared.threadId, {
+        stage: "imagegen_fallback",
+        headline: "Using exact fallback diagrams",
+        detail: illustrationWarning,
+        percent: 94,
+        imagegenFigureCount,
+        event: {
+          id: "imagegen_handoff",
+          phase: "illustration",
+          title: "Generate apparatus bases with ImageGen",
+          detail: "Automatic handoff unavailable; use the per-figure retry control.",
+          status: "error",
+        },
+      });
+    }
+  }
+
   reportGenerationProgress(prepared.threadId, {
     status: "running",
     stage: "paper_assembled",
@@ -988,10 +1332,12 @@ export async function generateWithLlm(
     percent: 95,
     questionCount: questions.length,
     figureCount,
+    imagegenFigureCount,
+    illustrationThreadId,
     event: {
       id: "layout",
       phase: "layout",
-      title: "Save SVGs and assemble paper",
+      title: "Save figure layers and assemble paper",
       detail: `${questions.length} question(s) placed in the generated paper`,
       status: "done",
     },
@@ -1013,6 +1359,12 @@ export async function generateWithLlm(
             "Knowledge Base retrieval used verified Markdown/OCR text only; source image bytes were not sent to Codex.",
           ]
         : []),
+      ...(illustrationWarning ? [illustrationWarning] : []),
+      ...(illustrationThreadId
+        ? [
+            `${imagegenFigureCount} complex Turning Effect figure(s) were handed to local Codex/ImageGen task ${illustrationThreadId}; exact labels remain deterministic SVG overlays.`,
+          ]
+        : []),
       "Generated in local Codex thread " +
         prepared.threadId +
         "; " +
@@ -1023,5 +1375,6 @@ export async function generateWithLlm(
       "Codex-authored questions and diagrams are drafts; review physics, wording, answers, and visual accuracy before use.",
     ],
     codexThreadId: prepared.threadId,
+    illustrationThreadId,
   };
 }

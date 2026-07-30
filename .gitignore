@@ -6,12 +6,9 @@ out/
 .env.local
 *.tsbuildinfo
 next-env.d.ts
-data/bank.sqlite
 data/bank.sqlite-journal
 data/bank.sqlite-wal
 data/bank.sqlite-shm
-data/knowledge/
-data/assets/generated/
 output/pdf/*.pdf
 !output/pdf/.gitkeep
 .codex/
