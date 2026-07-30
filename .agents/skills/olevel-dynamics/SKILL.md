@@ -1,6 +1,6 @@
 ---
 name: olevel-dynamics
-description: Solve, explain, mark, or generate Singapore O Level Physics Dynamics questions using syllabus-appropriate force analysis. Use for mass and weight, gravitational field strength, balanced and unbalanced forces, Newton's first and second laws, free-body diagrams, resultant force, F = ma, connected-body tension or contact-force problems, friction and drag, terminal velocity, and Newton's third-law interaction pairs. Apply the chapter convention g = 10 N/kg or 10 m/s² unless the question explicitly gives another value.
+description: Solve, explain, mark, or generate Singapore O Level Physics Dynamics questions using syllabus-appropriate force analysis. Use for mass and weight, gravitational field strength, balanced and unbalanced forces, Newton's first and second laws, free-body diagrams, resultant force, F = ma, connected-body tension or contact-force problems, friction and drag, terminal velocity, and Newton's third-law interaction pairs. Calibrate MCQ format to uploaded Section A exercises, easy questions to foundation-level physics, medium questions to Section B, and hard questions to Section C; make every hard non-MCQ a linked calculation-and-explanation problem. Apply the chapter convention g = 10 N/kg or 10 m/s² unless the question explicitly gives another value.
 ---
 
 # O Level Dynamics
@@ -123,6 +123,59 @@ on different objects.
      are zero, and downward velocity is constant;
   4. after a parachute opens, drag may exceed weight, so the object accelerates
      upward while still moving downward and therefore slows down.
+
+## Calibrate generated question format and difficulty
+
+- Treat **Section A as the multiple-choice section**. Use it to calibrate MCQ
+  stem length, four-option structure, and misconception-based distractors. Do
+  not use "Section A" as a synonym for easy; Section A can contain MCQs at
+  different cognitive difficulties.
+- Treat **easy** as foundation level: use one object, one state, and one concept
+  or calculation such as \(W=mg\), \(F=ma\), identifying one force, or
+  recognising that a constant velocity means zero resultant force. Keep a
+  written question to one main step and normally 1–3 marks.
+- Treat **medium** as Section B structured level: use one stable context with
+  scaffolded subparts and a one- or two-stage calculation, for example graph
+  gradient \(\rightarrow a \rightarrow F\), system acceleration
+  \(\rightarrow\) tension, or acceleration \(\rightarrow\) scale reading.
+  A short explanation may follow. Normally allocate 3–6 marks.
+- Treat **hard** as Section C free-response level: use a data-rich context,
+  reduced scaffolding, at least three dependent physics steps, and normally
+  7–12 marks.
+- Require every hard non-MCQ question to contain:
+  1. at least one explicit **calculate**, **determine**, or **show that** part;
+  2. at least one explicit **explain**, **justify**, or **evaluate** part;
+  3. a later part that uses, checks, compares, or interprets an earlier result.
+- Increase hard difficulty through system choice, state changes, model limits,
+  and representation changes. Do not use larger numbers or obscure algebra as
+  a substitute for deeper physics.
+
+## Use Section C hard-question patterns
+
+Choose and rotate among these patterns:
+
+1. **Multiple bodies and a state change:** draw free-body diagrams, treat the
+   bodies as one system to calculate common acceleration, isolate one body to
+   calculate tension or contact force, then explain the motion after a string
+   is cut, a hanging mass lands, or contact is lost.
+2. **Graph or table to forces:** calculate acceleration or distance from motion
+   data, use \(F_{\text{resultant}}=ma\), account for a stated resistance to find
+   a driving force, then explain steady speed or why an actual value differs
+   from an ideal calculation.
+3. **Parameter change:** calculate the initial force and acceleration, update
+   the mass, load, thrust, or resistance, recalculate, then explain the trend
+   using Newton's laws.
+4. **Limiting internal force:** calculate tension or contact force, compare it
+   with a safe or maximum value, determine a limiting acceleration, then explain
+   what happens when the limit is exceeded.
+5. **Model evaluation:** complete an idealised calculation, decide whether a
+   claim about mass, force, or acceleration is correct, and explain which total
+   mass, external force, or resistance the claim overlooks.
+
+For hard questions, make switching the system boundary or rebuilding the
+free-body diagram after a condition change an intended part of the reasoning.
+Do not let the explanation be a generic statement of Newton's law; require it
+to connect the named forces to resultant force, acceleration, and motion.
 
 ## Generate and mark questions
 

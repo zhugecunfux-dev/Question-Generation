@@ -1,0 +1,17 @@
+{
+  "id": "ms6y9oyu-0e5a4b14-q2",
+  "questionId": "codex-ms6y9oyu-0e5a4b14-2",
+  "topicId": "T4",
+  "width": 640,
+  "height": 420,
+  "prompt": "Use case: scientific-educational illustration. Create a clean 640 by 420 pixel landscape image with a 32:21 aspect ratio and a white background. Draw two unlabelled side views of the same compact battery-powered lifting trolley, stacked vertically. Use restrained pale-grey metal surfaces, dark rubber wheels and crisp textbook-style outlines. In the upper view, place the level ground line at 43% of the canvas height. Place the rear and front wheel contact landmarks at approximately (120,180) and (500,180), with wheel centres at y=168. Keep the main chassis between x=105 and x=515 and between y=108 and y=155. Place a vertical lifting mast near x=415 and an unmarked rectangular crate between x=430 and x=494, centred on x=462. Leave clear white space above the trolley for later force overlays and below the ground from y=185 to y=245 for later dimensions. In the lower view, place the ground line at y=362, rear and front wheel contacts at (120,362) and (500,362), and wheel centres at y=350. Place the chassis between y=294 and y=337, with the same mast near x=415. Extend plain horizontal forks past the front wheel to x=610 and place an unmarked crate between x=545 and x=607, centred on x=576. Leave clear zones above x=280 to x=320 and x=555 to x=600 for later force overlays, and below the ground from y=365 to y=415 for later dimension overlays. Maintain an exact side-on orthographic viewpoint with both ground lines horizontal and the vehicle upright. Do not include any assessable geometry or data in the generated pixels. No text, no labels, no numbers, no arrows, no dimensions, no watermark.",
+  "overlayPath": "generated/ms6y9oyu-0e5a4b14/q2-overlay.svg",
+  "fallbackPath": "generated/ms6y9oyu-0e5a4b14/q2-fallback.svg",
+  "outputPath": "generated/ms6y9oyu-0e5a4b14/q2.png",
+  "basePath": "generated/ms6y9oyu-0e5a4b14/q2-base.png",
+  "version": 1,
+  "status": "dispatched",
+  "createdAt": "2026-07-30T03:24:31.854Z",
+  "updatedAt": "2026-07-30T03:24:32.590Z",
+  "illustrationThreadId": "019fb10d-62b4-7f90-946f-782994c6d580"
+}

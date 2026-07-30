@@ -31,6 +31,48 @@ import {
 const CODEX_TIMEOUT_MS = 300_000;
 const MAX_SVG_CHARS = 200_000;
 
+const TURNING_EFFECT_TEXT_QUESTION_TYPES = [
+  "moment concept, unit, direction, or one direct M = F d_perpendicular calculation",
+  "centre of gravity definition, location, or plumb-line method",
+  "find an unknown force or directly given perpendicular distance using M = F d_perpendicular",
+  "principle of moments or resultant moment using directly supplied distances",
+  "stability or toppling explanation using the vertical weight line and base",
+  "practical turning-effect comparison such as a door handle or spanner",
+] as const;
+
+const TURNING_EFFECT_FIGURE_QUESTION_TYPES = [
+  "identify which labelled length is the perpendicular distance from the pivot to the force's line of action",
+  "principle of moments with all perpendicular distances labelled directly",
+  "centre of gravity location or plumb-line construction",
+  "stability or toppling from the vertical line of action of weight and the base",
+  "practical turning-effect application with a directly labelled perpendicular distance",
+] as const;
+
+const SECTION_C_KINEMATICS_PATTERNS = [
+  "two-object velocity-time graph: calculate each displacement and their separation, then explain how the separation changes using relative velocity",
+  "multi-stage velocity-time graph: calculate acceleration, distance, and an average quantity, then explain the physical meaning of a graph feature",
+  "rebound or direction-change context: calculate a signed change in velocity or compare distances, then explain the role of direction",
+  "reverse graph problem: determine an unknown time, speed, or distance from area and gradient information, then justify whether a target is reached",
+] as const;
+
+const SECTION_C_DYNAMICS_PATTERNS = [
+  "draw free-body diagrams for a multi-object system, calculate common acceleration and an internal force, then explain the motion after a string is cut or an object lands",
+  "read a graph or table to calculate acceleration, distance, and force, then explain an ideal-versus-actual difference caused by resistance",
+  "calculate an initial force or acceleration, recalculate after mass or loading changes, then explain the resulting trend using Newton's laws",
+  "calculate forces in a connected or contacting system, test a limiting condition such as maximum tension, then explain a subsequent state change",
+] as const;
+
+const SECTION_C_TURNING_EFFECT_PATTERNS = [
+  "multi-force supported beam: choose a suitable pivot, form the principle-of-moments equation, calculate one support force, use translational equilibrium to find another, then explain a load or support-position change",
+  "non-uniform plank or vehicle: combine vertical force balance and moments to locate the centre of gravity or support reactions, then justify a stability or design change",
+  "wheelbarrow, cupboard, or limiting-topple context: compare forces using both rotational and translational equilibrium, calculate an unknown force, then explain why a stated change helps",
+  "multi-level mobile or experimental ruler: solve linked moment equations and force balance, then explain the effect of removing a load or diagnose an anomalous reading",
+] as const;
+
+type TurningEffectQuestionType =
+  | (typeof TURNING_EFFECT_TEXT_QUESTION_TYPES)[number]
+  | (typeof TURNING_EFFECT_FIGURE_QUESTION_TYPES)[number];
+
 export class LlmUnavailableError extends Error {}
 export class LlmRefusalError extends Error {}
 
@@ -66,6 +108,58 @@ export interface GenerationSlot {
   format: QuestionFormat;
   difficulty: Difficulty;
   figureRequired: boolean;
+  turningEffectQuestionType?: TurningEffectQuestionType;
+  sectionCQuestionPattern?: string;
+}
+
+function sectionCQuestionPatterns(topicId: string): readonly string[] {
+  if (topicId === "T2") return SECTION_C_KINEMATICS_PATTERNS;
+  if (topicId === "T3") return SECTION_C_DYNAMICS_PATTERNS;
+  if (topicId === "T4") return SECTION_C_TURNING_EFFECT_PATTERNS;
+  return [];
+}
+
+function difficultyCalibrationLines(slot?: GenerationSlot): string[] {
+  return [
+    "Trusted format-and-difficulty calibration: use the uploaded exercise sections as the standard, overriding any weaker or conflicting format or difficulty label in teacher notes, Knowledge Base excerpts, or bank exemplars.",
+    "- Section A is the multiple-choice section. Use it to calibrate MCQ stem style, four-option construction, and misconception-based distractors. Do not use Section A as a synonym for easy; Section A can contain MCQs at different cognitive difficulties.",
+    "- Easy means foundation difficulty: one basic concept, direct reading, or one-step calculation, normally 1-3 marks for a written question.",
+    "- Medium means Section B structured level: one clear context with scaffolded subparts and a direct one- or two-stage calculation or short explanation, normally 3-6 marks.",
+    "- Hard means Section C free-response level: one coherent multi-part context with linked reasoning, reduced scaffolding, and normally 7-12 marks. Every hard non-MCQ question must explicitly require at least one calculation and at least one explanation or justification.",
+    "- A hard question must make later reasoning use, check, compare, or interpret earlier work. Do not create difficulty merely with larger numbers, obscure wording, advanced mathematics, or an out-of-syllabus technique.",
+    "- T2 hard patterns combine multiple objects or representations: graph area/gradient, cumulative displacement or separation, relative-motion explanation, signed velocity change, or a reverse unknown.",
+    "- T3 hard patterns combine free-body diagrams, system-boundary changes, linked F = ma calculations, a changed state or model limitation, and a Newton-law explanation.",
+    "- T4 hard patterns should centre on the principle of moments, make selecting the correct pivot and moment equation the main challenge, use both rotational equilibrium and translational equilibrium, and follow the calculation with an explanation of a changed load, support, centre of gravity, or stability condition.",
+    ...(slot
+      ? [
+          `- Assigned difficulty: ${slot.difficulty}.`,
+          ...(slot.sectionCQuestionPattern
+            ? [
+                `- Assigned Section C question pattern: ${slot.sectionCQuestionPattern}.`,
+              ]
+            : []),
+        ]
+      : []),
+  ];
+}
+
+function turningEffectScopeLines(slot?: GenerationSlot): string[] {
+  return [
+    "Trusted T4 scope restriction: it overrides any conflicting teacher instruction, Knowledge Base excerpt, or bank exemplar.",
+    slot?.turningEffectQuestionType
+      ? `- Assigned T4 question type: ${slot.turningEffectQuestionType}.`
+      : `- Approved T4 question families: ${[
+          ...TURNING_EFFECT_TEXT_QUESTION_TYPES,
+          ...TURNING_EFFECT_FIGURE_QUESTION_TYPES,
+        ].join("; ")}.`,
+    "- Do not resolve forces into components.",
+    "- Do not use trigonometry or inverse trigonometry, including sin, cos, tan, or expressions such as r sin(theta).",
+    "- Every perpendicular distance used in a calculation must be given or shown directly; never derive it from an angle, a sloping length, or a force component.",
+    "- An oblique force or sloping lever may be used only to ask which already-labelled length is the perpendicular distance from the pivot to the force's line of action.",
+    "- For that identification type, show multiple labelled candidate lengths and the force's full line of action. Ask the learner to identify the perpendicular segment; do not ask for a projection calculation.",
+    "- Do not include angle arcs or numerical non-right angles as assessable data. A right-angle marker is allowed.",
+    "- Make harder T4 questions harder through additional directly specified moments, equilibrium steps, centre-of-gravity reasoning, or stability reasoning, never through angled-force mathematics.",
+  ];
 }
 
 const FORMAT_COUNT_PATTERNS: Partial<Record<QuestionFormat, RegExp>> = {
@@ -144,15 +238,86 @@ export function planGenerationSlots(opts: {
       ),
     );
   }
+  const turningEffectIndices = Array.from(
+    { length: opts.count },
+    (_, index) => index,
+  ).filter(
+    (index) => opts.topicIds[index % opts.topicIds.length] === "T4",
+  );
+  if (
+    turningEffectIndices.length &&
+    !turningEffectIndices.some((index) => figureSlots.has(index))
+  ) {
+    const targetIndex =
+      turningEffectIndices[Math.floor(turningEffectIndices.length / 2)];
+    const replacementIndex = [...figureSlots].find(
+      (index) => opts.topicIds[index % opts.topicIds.length] !== "T4",
+    );
+    if (replacementIndex !== undefined) {
+      figureSlots.delete(replacementIndex);
+      figureSlots.add(targetIndex);
+    }
+  }
 
   const plannedFormats = planFormats(opts.formats, opts.count, opts.notes);
-  return Array.from({ length: opts.count }, (_, index) => ({
-    number: index + 1,
-    topicId: opts.topicIds[index % opts.topicIds.length],
-    format: plannedFormats[index],
-    difficulty: opts.difficulties[index % opts.difficulties.length],
-    figureRequired: figureSlots.has(index),
-  }));
+  const plannedDifficulties = Array.from(
+    { length: opts.count },
+    (_, index) => opts.difficulties[index % opts.difficulties.length],
+  );
+  for (let index = 0; index < opts.count; index += 1) {
+    if (
+      plannedDifficulties[index] !== "hard" ||
+      plannedFormats[index] !== "mcq"
+    ) {
+      continue;
+    }
+    const swapIndex = plannedFormats.findIndex(
+      (format, candidateIndex) =>
+        plannedDifficulties[candidateIndex] !== "hard" && format !== "mcq",
+    );
+    if (swapIndex >= 0) {
+      [plannedFormats[index], plannedFormats[swapIndex]] = [
+        plannedFormats[swapIndex],
+        plannedFormats[index],
+      ];
+    }
+  }
+  let turningEffectTextIndex = 0;
+  let turningEffectFigureIndex = 0;
+  const sectionCPatternIndexes = new Map<string, number>();
+  return Array.from({ length: opts.count }, (_, index) => {
+    const topicId = opts.topicIds[index % opts.topicIds.length];
+    const difficulty = plannedDifficulties[index];
+    const figureRequired = figureSlots.has(index);
+    let sectionCQuestionPattern: string | undefined;
+    if (difficulty === "hard" && plannedFormats[index] !== "mcq") {
+      const patterns = sectionCQuestionPatterns(topicId);
+      if (patterns.length) {
+        const patternIndex = sectionCPatternIndexes.get(topicId) ?? 0;
+        sectionCQuestionPattern = patterns[patternIndex % patterns.length];
+        sectionCPatternIndexes.set(topicId, patternIndex + 1);
+      }
+    }
+    let turningEffectQuestionType: TurningEffectQuestionType | undefined;
+    if (topicId === "T4" && difficulty !== "hard") {
+      const types = figureRequired
+        ? TURNING_EFFECT_FIGURE_QUESTION_TYPES
+        : TURNING_EFFECT_TEXT_QUESTION_TYPES;
+      const typeIndex = figureRequired
+        ? turningEffectFigureIndex++
+        : turningEffectTextIndex++;
+      turningEffectQuestionType = types[typeIndex % types.length];
+    }
+    return {
+      number: index + 1,
+      topicId,
+      format: plannedFormats[index],
+      difficulty,
+      figureRequired,
+      ...(turningEffectQuestionType ? { turningEffectQuestionType } : {}),
+      ...(sectionCQuestionPattern ? { sectionCQuestionPattern } : {}),
+    };
+  });
 }
 
 export function buildSystemPrompt(): string {
@@ -173,16 +338,18 @@ export function buildSystemPrompt(): string {
     "- Stay inside the supplied topic and sub-topic list.",
     "- MCQs must have exactly four options A-D and one key. Distractors should reflect plausible student errors.",
     "- `solution` is a complete mark scheme with the principle, working, and final answer.",
+    ...difficultyCalibrationLines(),
     "",
     "Figure rules:",
     "- Follow the figure policy stated for the current question. When a figure is required, include `figure`; when figures are forbidden, omit it.",
     "- A figure question must explicitly refer to its figure in the stem.",
     "- `svgPrompt` is a detailed production brief for the SVG. Describe canvas size, layout, every object and line, coordinates or relative positions, labels and values, arrow directions, axes/scales, colours, stroke widths, font treatment, and which details must remain visually unambiguous. It must be detailed enough for another illustrator to reproduce the diagram without reading the question.",
     "- `svg` is the finished self-contained SVG matching `svgPrompt`. Use a white background, black/dark strokes, legible text, and a viewBox. Do not use scripts, event handlers, style elements, foreignObject, embedded images, external references, data URLs, or animation. Arrow markers may use safe same-document fragment references such as `marker-end=\"url(#arrow)\"`; every other `url(...)`, `href`, or `src` target is forbidden.",
-    "- For a required T4 Turning Effect figure, use `mode: \"imagegen_overlay\"`. The `svg` remains a complete, accurate fallback containing the whole diagram. Also provide `baseImagePrompt` for a separate built-in ImageGen pass and `overlaySvg` containing only the exact force arrows, pivot marker, perpendicular distances, angle arcs, labels, numbers, and units on a transparent canvas.",
+    "- For a required T4 Turning Effect figure, use `mode: \"imagegen_overlay\"`. The `svg` remains a complete, accurate fallback containing the whole diagram. Also provide `baseImagePrompt` for a separate built-in ImageGen pass and `overlaySvg` containing only the exact force arrows, pivot marker, lines of action, perpendicular distances, right-angle markers, labels, numbers, and units on a transparent canvas.",
     "- A T4 `baseImagePrompt` must be a detailed scientific-educational illustration brief for the unlabelled apparatus/background. It must explicitly say: no text, no labels, no numbers, no arrows, no dimensions, no watermark. Specify the same aspect ratio, viewpoint, numeric pixel/percentage landmarks, object placement, and clear empty zones needed by the overlay. Never ask ImageGen to decide or render assessable data.",
     "- `overlaySvg` must use the same viewBox and dimensions as `svg`, have no opaque background, and contain all assessable labels/data plus every scoring-critical geometry anchor: pivot, lever/contact points, lines of action, and perpendicular-distance guides. The ImageGen base is illustrative only. The separate illustration pass composites the exact overlay so generated pixels or text can never change the physics.",
     "- For T4, use moment = force × perpendicular distance from the pivot, distinguish clockwise and anticlockwise moments, and make every line of action and perpendicular distance visually unambiguous.",
+    ...turningEffectScopeLines(),
     "- Put all information needed to solve the question either in the stem or visibly in the SVG. The `alt` text must precisely describe the drawn information for accessibility, without revealing the answer.",
     "",
     "Output rules:",
@@ -193,18 +360,25 @@ export function buildSystemPrompt(): string {
 
 function responseExample(slot?: GenerationSlot): { questions: Array<Record<string, unknown>> } {
   const format = slot?.format ?? "structured";
+  const hardComposite = slot?.difficulty === "hard" && format !== "mcq";
   const question: Record<string, unknown> = {
     topicId: slot?.topicId ?? "T2",
     subtopicId: slot?.topicId === "T2" || !slot ? "T2.1" : undefined,
     format,
     difficulty: slot?.difficulty ?? "medium",
     ao: "AO2",
-    marks: format === "mcq" ? 1 : 3,
-    stem: slot?.figureRequired
-      ? "Question text referring to Fig. 1."
-      : "Original question text.",
+    marks: format === "mcq" ? 1 : hardComposite ? 8 : 3,
+    stem: hardComposite
+      ? slot?.figureRequired
+        ? "Section C-style multi-part question referring to Fig. 1: (a) Calculate or determine a required quantity. (b) Explain or justify a linked physical result."
+        : "Section C-style multi-part question: (a) Calculate or determine a required quantity. (b) Explain or justify a linked physical result."
+      : slot?.figureRequired
+        ? "Question text referring to Fig. 1."
+        : "Original question text.",
     answer: "Final answer",
-    solution: "Worked mark scheme",
+    solution: hardComposite
+      ? "Linked Section C mark scheme with complete calculation and explanation"
+      : "Worked mark scheme",
   };
   if (!slot || format === "mcq") {
     question.options = [
@@ -313,6 +487,11 @@ export function buildUserPrompt(opts: {
     "",
     "Local question-bank exemplars:",
     exemplarBlock,
+    ...(opts.topicIds.includes("T4")
+      ? ["", ...turningEffectScopeLines(opts.slot)]
+      : []),
+    "",
+    ...difficultyCalibrationLines(opts.slot),
     "",
     "Return exactly this JSON shape:",
     JSON.stringify(responseExample(opts.slot), null, 2),
@@ -347,6 +526,8 @@ function buildContinuationPrompt(opts: {
         : "Figure policy: REQUIRED. This question must contain one complete `figure`."
       : "Figure policy: FORBIDDEN. This question must be text-only and must omit `figure`.",
     opts.notes ? `Teacher instruction: ${opts.notes}` : "",
+    ...difficultyCalibrationLines(opts.slot),
+    ...(opts.slot.topicId === "T4" ? turningEffectScopeLines(opts.slot) : []),
     "Do not repeat or lightly reword any earlier question in this thread.",
     "Do not use tools, run commands, inspect files, browse, or edit anything.",
     "",
@@ -376,6 +557,8 @@ function buildRepairPrompt(opts: {
         ? "Figure policy: REQUIRED T4 HYBRID. Include `mode: \"imagegen_overlay\"`, a complete fallback `svg`, a detailed unlabelled `baseImagePrompt`, and an exact transparent `overlaySvg`."
         : "Figure policy: REQUIRED. Include one complete, self-contained SVG figure."
       : "Figure policy: FORBIDDEN. Omit `figure` completely.",
+    ...difficultyCalibrationLines(opts.slot),
+    ...(opts.slot.topicId === "T4" ? turningEffectScopeLines(opts.slot) : []),
     "For every SVG, use only safe self-contained SVG elements. Do not use script, style, foreignObject, image, animation, event attributes, data URLs, src, or external href targets.",
     "Safe same-document SVG references such as `marker-end=\"url(#arrow)\"` are allowed when the referenced id is defined inside that SVG. Every other `url(...)` or href target is forbidden.",
     "Do not use tools, run commands, inspect files, browse, or edit anything.",
@@ -444,6 +627,128 @@ function svgViewBox(svg: string): string | undefined {
     .replace(/\s+/g, " ");
 }
 
+interface TurningEffectScopeCandidate {
+  topicId: string;
+  stem: string;
+  answer: string;
+  solution?: string;
+  options?: Array<{ text: string }>;
+  figure?: Partial<ModelFigure>;
+  assets?: Array<{ alt?: string; generationPrompt?: string }>;
+}
+
+function validateTurningEffectScope(
+  question: TurningEffectScopeCandidate,
+): string | undefined {
+  if (question.topicId !== "T4") return undefined;
+
+  const figure = question.figure;
+  const text = [
+    question.stem,
+    question.answer,
+    question.solution,
+    ...((question.options ?? []).map((option) => option.text)),
+    figure?.alt,
+    figure?.svgPrompt,
+    figure?.baseImagePrompt,
+    figure?.svg,
+    figure?.overlaySvg,
+    ...((question.assets ?? []).flatMap((asset) => [
+      asset.alt,
+      asset.generationPrompt,
+    ])),
+  ]
+    .filter((value): value is string => typeof value === "string")
+    .join("\n");
+
+  if (
+    /\b(?:sin|cos|tan|sine|cosine|tangent|trigonometry|trigonometric)\b/i.test(
+      text,
+    )
+  ) {
+    return "T4 scope forbids trigonometry and inverse trigonometry";
+  }
+  if (
+    /(?:\b(?:resolve|resolves|resolved|resolving|resolution)\b[^.\n]{0,60}\bforces?\b|\bforces?\b[^.\n]{0,60}\bcomponents?\b|\b(?:horizontal|vertical|parallel|perpendicular)\s+components?\b)/i.test(
+      text,
+    )
+  ) {
+    return "T4 scope forbids resolving forces into components";
+  }
+  if (/[θϑ]|\btheta\b|\bangle\s+arcs?\b/i.test(text)) {
+    return "T4 scope forbids angle-based perpendicular-distance geometry";
+  }
+  for (const match of text.matchAll(/(\d+(?:\.\d+)?)\s*(?:°|degrees?)/gi)) {
+    if (Math.abs(Number(match[1]) - 90) > 1e-9) {
+      return "T4 scope forbids numerical non-right angles";
+    }
+  }
+  return undefined;
+}
+
+interface DifficultyCalibrationCandidate {
+  topicId: string;
+  format: QuestionFormat;
+  difficulty: Difficulty;
+  marks: number;
+  stem: string;
+  solution?: string;
+}
+
+function validateDifficultyCalibration(
+  question: DifficultyCalibrationCandidate,
+): string | undefined {
+  if (question.format === "mcq") return undefined;
+  if (
+    question.difficulty === "easy" &&
+    (question.marks < 1 || question.marks > 3)
+  ) {
+    return "easy written question must be worth 1-3 marks";
+  }
+  if (
+    question.difficulty === "medium" &&
+    (question.marks < 3 || question.marks > 6)
+  ) {
+    return "medium Section B-style question must be worth 3-6 marks";
+  }
+  if (question.difficulty !== "hard") return undefined;
+  if (question.marks < 7) {
+    return "hard Section C-style question must be worth at least 7 marks";
+  }
+  if (
+    !/\b(?:calculate|determine|find|show that|work out|deduce)\b/i.test(
+      question.stem,
+    )
+  ) {
+    return "hard Section C-style question must include an explicit calculation task";
+  }
+  if (
+    !/\b(?:explain|justify|give\s+(?:a|one|two)\s+reasons?|describe\s+(?:how|why)|account for|evaluate|comment on|suggest\s+(?:why|how))\b/i.test(
+      question.stem,
+    )
+  ) {
+    return "hard Section C-style question must include an explicit explanation or justification task";
+  }
+  if (question.topicId !== "T4") return undefined;
+
+  const text = `${question.stem}\n${question.solution ?? ""}`;
+  if (
+    !/\b(?:principle of moments|moments? about|clockwise moments?|anticlockwise moments?|rotational equilibrium)\b|(?:Σ|sum)\s*M\b/i.test(
+      text,
+    )
+  ) {
+    return "T4 hard Section C-style question must use rotational equilibrium and the principle of moments";
+  }
+  if (
+    !/\b(?:resultant force|force balance|translational equilibrium|vertical equilibrium|total upward force|total downward force|sum of (?:the )?(?:vertical )?forces)\b|(?:Σ|sum)\s*F\b/i.test(
+      text,
+    )
+  ) {
+    return "T4 hard Section C-style question must also use translational equilibrium";
+  }
+  return undefined;
+}
+
 /** Reject output that would not survive the bank/import path. */
 export function validateModelQuestion(q: ModelQuestion, allowedTopics: string[]): string | undefined {
   if (!q || typeof q !== "object") return "question is not an object";
@@ -458,9 +763,13 @@ export function validateModelQuestion(q: ModelQuestion, allowedTopics: string[])
   if (typeof q.stem !== "string" || !q.stem.trim()) return "empty stem";
   if (typeof q.answer !== "string" || !q.answer.trim()) return "empty answer";
   if (typeof q.solution !== "string" || !q.solution.trim()) return "empty solution";
+  const turningEffectProblem = validateTurningEffectScope(q);
+  if (turningEffectProblem) return turningEffectProblem;
   if (!Number.isInteger(q.marks) || q.marks < 1 || q.marks > 12) {
     return `implausible mark allocation (${q.marks})`;
   }
+  const difficultyProblem = validateDifficultyCalibration(q);
+  if (difficultyProblem) return difficultyProblem;
   if (q.format === "mcq") {
     if (!q.options || q.options.length !== 4) return "mcq must have exactly 4 options";
     if (
@@ -595,7 +904,7 @@ function parseAndValidateSlotResponse(
   }
 }
 
-function buildKnowledgeQuery(opts: {
+export function buildKnowledgeQuery(opts: {
   topicIds: string[];
   formats: QuestionFormat[];
   difficulties: Difficulty[];
@@ -611,10 +920,30 @@ function buildKnowledgeQuery(opts: {
         ]
       : [topicId];
   });
+  const difficultyTerms = opts.difficulties.flatMap((difficulty) => {
+    if (difficulty === "easy") {
+      return ["foundation", "basic concept", "one-step"];
+    }
+    if (difficulty === "medium") {
+      return ["Section B", "Structured Questions", "scaffolded"];
+    }
+    return [
+      "Section C",
+      "Free-response Questions",
+      "calculate",
+      "explain",
+      "justify",
+      "linked parts",
+    ];
+  });
   return [
     ...syllabusTerms,
     ...opts.formats,
     ...opts.difficulties,
+    ...(opts.formats.includes("mcq")
+      ? ["Section A", "Multiple Choice Questions", "four options"]
+      : []),
+    ...difficultyTerms,
     opts.notes ?? "",
   ].join(" ");
 }
@@ -939,18 +1268,27 @@ export async function generateWithLlm(
 
   // The bank remains a second, structured exemplar source. Its fixed limit and
   // the Knowledge Base budget prevent unbounded prompt growth.
-  const exemplars = getStaticQuestions({
+  const exemplarCandidates = getStaticQuestions({
     topicIds: opts.topicIds,
     formats: opts.formats,
-    limit: 30,
+    difficulties: opts.difficulties,
+    limit: 60,
   });
+  const scopeAlignedExemplars = exemplarCandidates.filter(
+    (question) =>
+      !validateTurningEffectScope(question) &&
+      !validateDifficultyCalibration(question),
+  );
+  const exemplars = scopeAlignedExemplars.slice(0, 30);
+  const excludedExemplars =
+    exemplarCandidates.length - scopeAlignedExemplars.length;
   if (opts.codexThreadId) {
     reportGenerationProgress(opts.codexThreadId, {
       status: "running",
       stage: "bank_context",
       headline: "Reading the question bank",
       detail: exemplars.length
-        ? `Selected ${exemplars.length} matching bank question(s) as style and difficulty references.`
+        ? `Selected ${exemplars.length} matching bank question(s) as style and difficulty references.${excludedExemplars ? ` Excluded ${excludedExemplars} exemplar(s) outside the configured scope or Section-based difficulty standard.` : ""}`
         : "No exact topic-and-format match was found; Codex will follow the syllabus rules.",
       percent: 18,
       exemplarCount: exemplars.length,

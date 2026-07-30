@@ -68,6 +68,95 @@ test("sequential generation slots balance filters and reserve only the aggregate
   assert.equal(teacherDirected.filter((slot) => slot.format === "mcq").length, 5);
 });
 
+test("Turning Effect slots rotate through figure-compatible and text-compatible question types", () => {
+  const slots = planGenerationSlots({
+    topicIds: ["T4"],
+    formats: ["structured"],
+    difficulties: ["easy", "medium", "hard"],
+    count: 6,
+  });
+
+  assert.ok(
+    slots.every(
+      (slot) =>
+        slot.turningEffectQuestionType || slot.sectionCQuestionPattern,
+    ),
+  );
+  assert.equal(
+    new Set(
+      slots.map(
+        (slot) =>
+          slot.turningEffectQuestionType ?? slot.sectionCQuestionPattern,
+      ),
+    ).size,
+    slots.length,
+  );
+  assert.match(
+    slots.find((slot) => slot.figureRequired)?.turningEffectQuestionType ?? "",
+    /identify which labelled length is the perpendicular distance/i,
+  );
+  assert.ok(
+    slots
+      .filter((slot) => !slot.figureRequired)
+      .some((slot) => /centre of gravity/i.test(slot.turningEffectQuestionType ?? "")),
+  );
+
+  const mixedTopicSlots = planGenerationSlots({
+    topicIds: ["T4", "T2", "T3"],
+    formats: ["structured"],
+    difficulties: ["medium"],
+    count: 9,
+  });
+  assert.equal(
+    mixedTopicSlots.filter((slot) => slot.figureRequired).length,
+    3,
+  );
+  assert.ok(
+    mixedTopicSlots.some(
+      (slot) =>
+        slot.topicId === "T4" &&
+        slot.figureRequired &&
+        /identify which labelled length/i.test(
+          slot.turningEffectQuestionType ?? "",
+      ),
+    ),
+  );
+
+  const threeQuestionSet = planGenerationSlots({
+    topicIds: ["T4"],
+    formats: ["structured"],
+    difficulties: ["medium"],
+    count: 3,
+  }).map((slot) => slot.turningEffectQuestionType ?? "");
+  assert.ok(threeQuestionSet.some((type) => /moment concept/i.test(type)));
+  assert.ok(threeQuestionSet.some((type) => /identify which labelled length/i.test(type)));
+  assert.ok(threeQuestionSet.some((type) => /centre of gravity/i.test(type)));
+});
+
+test("hard written slots use Section C patterns and avoid MCQ when the requested mix permits it", () => {
+  const slots = planGenerationSlots({
+    topicIds: ["T2", "T3", "T4"],
+    formats: ["mcq", "structured", "free_response"],
+    difficulties: ["hard", "easy"],
+    count: 6,
+  });
+
+  const hardSlots = slots.filter((slot) => slot.difficulty === "hard");
+  assert.equal(hardSlots.length, 3);
+  assert.ok(hardSlots.every((slot) => slot.format !== "mcq"));
+  assert.ok(hardSlots.every((slot) => slot.sectionCQuestionPattern));
+  assert.ok(
+    slots
+      .filter((slot) => slot.difficulty === "easy")
+      .every((slot) => !slot.sectionCQuestionPattern),
+  );
+  assert.match(
+    hardSlots.find((slot) => slot.topicId === "T4")
+      ?.sectionCQuestionPattern ?? "",
+    /principle-of-moments|vertical force balance|rotational and translational equilibrium/i,
+  );
+});
+
 test("Codex JSON parser accepts a fenced object but requires a questions array", () => {
   const parsed = parseCodexJson('```json\n{"questions":[]}\n```');
   assert.deepEqual(parsed, { questions: [] });
@@ -153,6 +242,160 @@ test("Turning Effect hybrid figures separate ImageGen pixels from exact SVG labe
   assert.match(
     validateModelQuestion({ ...hybrid, topicId: "T3" }, ["T3"]) ?? "",
     /reserved for T4/i,
+  );
+});
+
+test("Turning Effect scope accepts direct lever arms and rejects trigonometry or force resolution", () => {
+  const directMoment = question({
+    topicId: "T4",
+    subtopicId: "T4.1",
+    stem:
+      "A vertical force of 40 N acts with a labelled perpendicular distance of 0.30 m from a pivot. Calculate its moment.",
+    answer: "12 N m",
+    solution:
+      "The perpendicular distance is given directly. M = Fd = 40 × 0.30 = 12 N m, clockwise.",
+    figure: undefined,
+  });
+  assert.equal(validateModelQuestion(directMoment, ["T4"]), undefined);
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...directMoment,
+        solution:
+          "Resolve the force into T cos 25° and T sin 25° before calculating the moment.",
+      },
+      ["T4"],
+    ),
+    "T4 scope forbids trigonometry and inverse trigonometry",
+  );
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...directMoment,
+        solution:
+          "First calculate the perpendicular distance using d = 0.80 sin 50°, then use M = Fd.",
+      },
+      ["T4"],
+    ),
+    "T4 scope forbids trigonometry and inverse trigonometry",
+  );
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...directMoment,
+        solution:
+          "Use tan θ = 0.60 / 0.90 and θ = tan⁻¹(0.60 / 0.90) to find the angle.",
+      },
+      ["T4"],
+    ),
+    "T4 scope forbids trigonometry and inverse trigonometry",
+  );
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...directMoment,
+        solution:
+          "Resolve the force into horizontal and vertical components before taking moments.",
+      },
+      ["T4"],
+    ),
+    "T4 scope forbids resolving forces into components",
+  );
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...directMoment,
+        stem:
+          "A 40 N force acts at 35 degrees to a lever. Calculate the turning effect.",
+      },
+      ["T4"],
+    ),
+    "T4 scope forbids numerical non-right angles",
+  );
+});
+
+test("Section-based difficulty validation requires a linked calculation and explanation for hard questions", () => {
+  const hardKinematics = question({
+    difficulty: "hard",
+    marks: 8,
+    stem:
+      "(a) Calculate the displacement of each cyclist at 20 s and hence determine their separation. (b) Explain how their separation changes after 20 s using their relative velocities.",
+    answer: "Their separation is 40 m and then decreases.",
+    solution:
+      "Calculate both signed graph areas and subtract them. After 20 s the cyclist behind has the greater velocity, so the separation decreases.",
+    figure: undefined,
+  });
+  assert.equal(validateModelQuestion(hardKinematics, ["T2"]), undefined);
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...hardKinematics,
+        stem:
+          "(a) Calculate the displacement of each cyclist at 20 s and hence determine their separation.",
+      },
+      ["T2"],
+    ),
+    "hard Section C-style question must include an explicit explanation or justification task",
+  );
+  assert.equal(
+    validateModelQuestion({ ...hardKinematics, marks: 6 }, ["T2"]),
+    "hard Section C-style question must be worth at least 7 marks",
+  );
+
+  const hardTurningEffects = question({
+    topicId: "T4",
+    subtopicId: "T4.1",
+    difficulty: "hard",
+    marks: 9,
+    stem:
+      "(a) Taking moments about a suitable support, calculate the reaction at the other support. (b) Use vertical force balance to determine the first reaction. (c) Explain how moving the load changes the two reactions.",
+    answer: "The reactions are 420 N and 280 N.",
+    solution:
+      "Apply the principle of moments for rotational equilibrium. Then use translational equilibrium: total upward force equals total downward force. Moving the load changes its moment and transfers load between the supports.",
+    figure: undefined,
+  });
+  assert.equal(validateModelQuestion(hardTurningEffects, ["T4"]), undefined);
+  assert.equal(
+    validateModelQuestion(
+      {
+        ...hardTurningEffects,
+        stem:
+          "(a) Taking moments about a suitable support, calculate the reaction at the other support. (b) Explain how moving the load changes that reaction.",
+        solution:
+          "Apply the principle of moments for rotational equilibrium, then explain how the load moment changes.",
+      },
+      ["T4"],
+    ),
+    "T4 hard Section C-style question must also use translational equilibrium",
+  );
+
+  assert.equal(
+    validateModelQuestion(
+      question({ difficulty: "easy", marks: 4, figure: undefined }),
+      ["T2"],
+    ),
+    "easy written question must be worth 1-3 marks",
+  );
+  assert.equal(
+    validateModelQuestion(
+      question({
+        difficulty: "easy",
+        marks: 2,
+        stem: "State what is meant by acceleration.",
+        answer: "The rate of change of velocity.",
+        solution: "Change of velocity per unit time.",
+        figure: undefined,
+      }),
+      ["T2"],
+    ),
+    undefined,
+  );
+  assert.equal(
+    validateModelQuestion(
+      question({ difficulty: "medium", marks: 2, figure: undefined }),
+      ["T2"],
+    ),
+    "medium Section B-style question must be worth 3-6 marks",
   );
 });
 

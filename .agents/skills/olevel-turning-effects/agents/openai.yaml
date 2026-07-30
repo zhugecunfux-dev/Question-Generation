@@ -1,0 +1,4 @@
+interface:
+  display_name: "O Level Turning Effects"
+  short_description: "O Level moments, centre of gravity, and stability"
+  default_prompt: "Use $olevel-turning-effects to solve, explain, mark, or generate an O Level Turning Effects question without force resolution or trigonometry."

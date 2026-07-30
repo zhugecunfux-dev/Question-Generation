@@ -1,0 +1,17 @@
+{
+  "id": "ms6xcyr8-75667ed8-q2",
+  "questionId": "codex-ms6xcyr8-75667ed8-2",
+  "topicId": "T4",
+  "width": 640,
+  "height": 420,
+  "prompt": "Use case: scientific-educational illustration. On a 640 by 420 landscape canvas with aspect ratio 32:21, draw only an unlabelled mechanical lever and its support on a clean white background. Place the circular pivot landmark at pixel (180,300), about 28% from the left and 71% from the top. Draw a rigid grey-blue metal lever rising to the right from the pivot to an unmarked rounded force-application end at pixel (470,150), about 73% from the left and 36% from the top. The lever should remain within the central 80% of the canvas width. Add a compact triangular metal support below the pivot, spanning approximately x=145 to x=215 and ending near y=350. Use a simple side-on orthographic viewpoint with no perspective distortion. Keep the vertical zone x=440 to x=520 from y=35 to y=370 visually clear except for the lever end, so a later overlay can add a force line and arrow. Keep the region between the pivot and that vertical zone uncluttered so candidate-distance guides can be added. Use restrained grey-blue apparatus colours, dark outlines, and a plain white background. No text, no labels, no numbers, no arrows, no dimensions, no watermark.",
+  "overlayPath": "generated/ms6xcyr8-75667ed8/q2-overlay.svg",
+  "fallbackPath": "generated/ms6xcyr8-75667ed8/q2-fallback.svg",
+  "outputPath": "generated/ms6xcyr8-75667ed8/q2.png",
+  "basePath": "generated/ms6xcyr8-75667ed8/q2-base.png",
+  "version": 1,
+  "status": "dispatched",
+  "createdAt": "2026-07-30T02:59:04.872Z",
+  "updatedAt": "2026-07-30T02:59:05.211Z",
+  "illustrationThreadId": "019fb0f6-143c-7112-a4dd-964d9ebaa200"
+}
