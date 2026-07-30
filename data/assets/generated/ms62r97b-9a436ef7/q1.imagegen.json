@@ -1,0 +1,17 @@
+{
+  "id": "ms62r97b-9a436ef7-q1",
+  "questionId": "codex-ms62r97b-9a436ef7-1",
+  "topicId": "T4",
+  "width": 640,
+  "height": 420,
+  "prompt": "Use case: scientific-educational illustration. Create an unlabelled side view on a 640 by 420 landscape canvas with a clean white background and a 640:420 aspect ratio. Draw a pale-grey vertical wall occupying x=55 to x=90 from about y=45 to y=315. Draw a straight, uniform horizontal shelf from the landmark (90,280) to the attachment landmark (520,280), about 18 pixels thick, with a dark outline. Include a small mechanical hinge at the pivot landmark (120,280). Attach a taut narrow cable at (520,280), running upwards-left to the wall landmark near (350,77), corresponding exactly to a 50-degree inclination to the horizontal shelf. Hang a simple lamp below the shelf centred at x=445, with its top connected directly beneath the shelf. Use restrained grey tones, crisp edges and a flat orthographic textbook-diagram viewpoint. Keep the region above the shelf from x=220 to x=520 and the region below the shelf from y=310 to y=395 clear for the later exact data overlay. Preserve all stated pixel landmarks; do not shift the hinge, cable attachment, cable line or lamp. No text, no labels, no numbers, no arrows, no dimensions, no watermark.",
+  "overlayPath": "generated/ms62r97b-9a436ef7/q1-overlay.svg",
+  "fallbackPath": "generated/ms62r97b-9a436ef7/q1-fallback.svg",
+  "outputPath": "generated/ms62r97b-9a436ef7/q1.png",
+  "basePath": "generated/ms62r97b-9a436ef7/q1-base.png",
+  "version": 1,
+  "status": "dispatched",
+  "createdAt": "2026-07-29T12:42:23.628Z",
+  "updatedAt": "2026-07-29T12:42:23.697Z",
+  "illustrationThreadId": "019fade5-c210-7180-b028-222ef72eeead"
+}

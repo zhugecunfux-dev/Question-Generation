@@ -1,0 +1,3677 @@
+[
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9689,
+                "bbox": [
+                    147,
+                    161,
+                    1355,
+                    229
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9635,
+                "bbox": [
+                    525,
+                    246,
+                    985,
+                    565
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.5986,
+                "bbox": [
+                    149,
+                    591,
+                    969,
+                    629
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9105,
+                "bbox": [
+                    149,
+                    811,
+                    817,
+                    850
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9069,
+                "bbox": [
+                    149,
+                    1032,
+                    776,
+                    1070
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9497,
+                "bbox": [
+                    148,
+                    1451,
+                    1265,
+                    1570
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8381,
+                "bbox": [
+                    149,
+                    1573,
+                    1178,
+                    1610
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8768,
+                "bbox": [
+                    149,
+                    1733,
+                    933,
+                    1770
+                ],
+                "index": 9
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    163,
+                    1348,
+                    190
+                ],
+                "score": 0.989,
+                "text": "A cyclist rides in a straight line for 20 minutes. He waits for half an hour, then returns in a straight line to his"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    153,
+                    194,
+                    1090,
+                    223
+                ],
+                "score": 0.991,
+                "text": "starting point in 15 minutes. This is a displacement (d)-time (t) graph for his journey."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    155,
+                    596,
+                    962,
+                    622
+                ],
+                "score": 0.988,
+                "text": "(a)Work out the average velocity for each stage of the journey in km/h."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    814,
+                    813,
+                    845
+                ],
+                "score": 0.993,
+                "text": "(b) Write down the average velocity for the whole journey."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    153,
+                    1035,
+                    773,
+                    1066
+                ],
+                "score": 0.98,
+                "text": "(c) Work out the average speed for the whole journey."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    1454,
+                    1188,
+                    1482
+                ],
+                "score": 0.987,
+                "text": "A woman travels at a speed of 20 m/s for half an hour before she stops for grocery shopping. After"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    155,
+                    1484,
+                    1259,
+                    1508
+                ],
+                "score": 0.986,
+                "text": "spending 45 minutes in the shop, she continues her journey for another 25 km in 20 minutes. The woman"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    1511,
+                    1210,
+                    1538
+                ],
+                "score": 0.985,
+                "text": "is then caught in a traffic jam for 10 minutes before making the last part of the journey of 15 km in 10"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    1541,
+                    246,
+                    1564
+                ],
+                "score": 1.0,
+                "text": "minutes."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    155,
+                    1579,
+                    1173,
+                    1603
+                ],
+                "score": 0.988,
+                "text": "(a) Calculate the speed of the driver for the last part of the journey. Express your answer in m/s."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    1739,
+                    928,
+                    1765
+                ],
+                "score": 0.988,
+                "text": "(b)Calculate the average speed of the car, in m/s, for the whole journey."
+            }
+        ],
+        "page_info": {
+            "page_no": 0,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9839,
+                "bbox": [
+                    152,
+                    180,
+                    862,
+                    275
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9589,
+                "bbox": [
+                    154,
+                    281,
+                    713,
+                    315
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9574,
+                "bbox": [
+                    153,
+                    362,
+                    830,
+                    396
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9767,
+                "bbox": [
+                    153,
+                    442,
+                    816,
+                    506
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9698,
+                "bbox": [
+                    947,
+                    180,
+                    1359,
+                    514
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9776,
+                "bbox": [
+                    153,
+                    652,
+                    1251,
+                    716
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9709,
+                "bbox": [
+                    479,
+                    727,
+                    1023,
+                    938
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9579,
+                "bbox": [
+                    154,
+                    951,
+                    866,
+                    984
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9756,
+                "bbox": [
+                    154,
+                    991,
+                    1334,
+                    1055
+                ],
+                "index": 9
+            },
+            {
+                "cls_id": 21,
+                "label": "table",
+                "score": 0.9876,
+                "bbox": [
+                    364,
+                    1066,
+                    1191,
+                    1274
+                ],
+                "index": 10,
+                "html": "<table><tr><td rowspan=2 colspan=1>Type of motion</td><td rowspan=1 colspan=5>Region</td></tr><tr><td rowspan=1 colspan=1>A</td><td rowspan=1 colspan=1>B</td><td rowspan=1 colspan=1>C</td><td rowspan=1 colspan=1>D</td><td rowspan=1 colspan=1>E</td></tr><tr><td rowspan=1 colspan=1>Stationary</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Moving with constant speed</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Accelerating</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9555,
+                "bbox": [
+                    155,
+                    1288,
+                    1307,
+                    1323
+                ],
+                "index": 11
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9637,
+                "bbox": [
+                    221,
+                    1343,
+                    482,
+                    1550
+                ],
+                "index": 12
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8199,
+                "bbox": [
+                    337,
+                    1562,
+                    357,
+                    1589
+                ],
+                "index": 13
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9371,
+                "bbox": [
+                    502,
+                    1343,
+                    765,
+                    1551
+                ],
+                "index": 14
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8323,
+                "bbox": [
+                    617,
+                    1562,
+                    638,
+                    1589
+                ],
+                "index": 15
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9525,
+                "bbox": [
+                    784,
+                    1344,
+                    1044,
+                    1551
+                ],
+                "index": 16
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8172,
+                "bbox": [
+                    898,
+                    1561,
+                    919,
+                    1589
+                ],
+                "index": 17
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9527,
+                "bbox": [
+                    1064,
+                    1344,
+                    1322,
+                    1551
+                ],
+                "index": 18
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7572,
+                "bbox": [
+                    1178,
+                    1561,
+                    1199,
+                    1587
+                ],
+                "index": 19
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.965,
+                "bbox": [
+                    155,
+                    1612,
+                    1182,
+                    1646
+                ],
+                "index": 20
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9561,
+                "bbox": [
+                    643,
+                    1656,
+                    955,
+                    1850
+                ],
+                "index": 21
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    157,
+                    182,
+                    858,
+                    210
+                ],
+                "score": 0.994,
+                "text": "The motion of a car travelling in a straight line is tracked for 60"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    159,
+                    215,
+                    855,
+                    240
+                ],
+                "score": 0.999,
+                "text": "seconds. The information is then displayed in the velocity-time"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    156,
+                    243,
+                    235,
+                    275
+                ],
+                "score": 1.0,
+                "text": "graph."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    159,
+                    284,
+                    707,
+                    312
+                ],
+                "score": 0.978,
+                "text": "(a) Calculate the acceleration of the car at 20 s."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    159,
+                    365,
+                    825,
+                    394
+                ],
+                "score": 0.992,
+                "text": "(b) Calculate the distance travelled in the first 28 seconds."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    159,
+                    446,
+                    808,
+                    474
+                ],
+                "score": 0.992,
+                "text": "(c) Calculate the displacement of the car from its starting"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    211,
+                    477,
+                    469,
+                    502
+                ],
+                "score": 1.0,
+                "text": "point after 60 seconds."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    158,
+                    655,
+                    1247,
+                    684
+                ],
+                "score": 0.995,
+                "text": "A boy goes for a ride on his bike. The graph shows how his displacement from the start of his ride"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    160,
+                    689,
+                    369,
+                    711
+                ],
+                "score": 1.0,
+                "text": "changes with time."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    162,
+                    955,
+                    861,
+                    980
+                ],
+                "score": 0.994,
+                "text": "The graph has been divided into five regions, A, B, C, D and E."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    159,
+                    996,
+                    1331,
+                    1022
+                ],
+                "score": 0.992,
+                "text": "(a)Which region or regions show each type of motion? Put ticks (√) in the correct box or boxes for each"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    213,
+                    1028,
+                    727,
+                    1050
+                ],
+                "score": 0.988,
+                "text": "row. You may tick more than one box in a row."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    160,
+                    1290,
+                    1301,
+                    1318
+                ],
+                "score": 0.987,
+                "text": "(b) Which of the following sketch graphs, 1, 2, 3 or 4, shows the boy's velocity in regions C, D and E?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    339,
+                    1566,
+                    355,
+                    1590
+                ],
+                "score": 1.0,
+                "text": "1"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    619,
+                    1566,
+                    635,
+                    1589
+                ],
+                "score": 1.0,
+                "text": "2"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    900,
+                    1565,
+                    916,
+                    1588
+                ],
+                "score": 1.0,
+                "text": "3"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    1180,
+                    1566,
+                    1196,
+                    1588
+                ],
+                "score": 1.0,
+                "text": "4"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    161,
+                    1617,
+                    1177,
+                    1643
+                ],
+                "score": 0.994,
+                "text": "(c) On the sketch graph below, show how the boy's velocity changes with time in region A."
+            }
+        ],
+        "page_info": {
+            "page_no": 1,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9563,
+                "bbox": [
+                    75,
+                    160,
+                    972,
+                    195
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.7094,
+                "bbox": [
+                    353,
+                    204,
+                    990,
+                    493
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8289,
+                "bbox": [
+                    74,
+                    508,
+                    195,
+                    539
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9204,
+                "bbox": [
+                    72,
+                    548,
+                    961,
+                    583
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9463,
+                "bbox": [
+                    73,
+                    628,
+                    470,
+                    664
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9482,
+                "bbox": [
+                    73,
+                    710,
+                    514,
+                    746
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.956,
+                "bbox": [
+                    71,
+                    906,
+                    1073,
+                    942
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.6644,
+                "bbox": [
+                    386,
+                    948,
+                    951,
+                    1249
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8973,
+                "bbox": [
+                    70,
+                    1267,
+                    931,
+                    1302
+                ],
+                "index": 9
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8749,
+                "bbox": [
+                    71,
+                    1349,
+                    245,
+                    1381
+                ],
+                "index": 10
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9388,
+                "bbox": [
+                    124,
+                    1390,
+                    565,
+                    1424
+                ],
+                "index": 11
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9502,
+                "bbox": [
+                    124,
+                    1511,
+                    579,
+                    1545
+                ],
+                "index": 12
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9601,
+                "bbox": [
+                    68,
+                    1717,
+                    1183,
+                    1778
+                ],
+                "index": 13
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    83,
+                    165,
+                    966,
+                    190
+                ],
+                "score": 0.996,
+                "text": "The diagram show the velocity-time graph of an object moving in a straight line."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    79,
+                    511,
+                    189,
+                    540
+                ],
+                "score": 1.0,
+                "text": "Calculate"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    80,
+                    553,
+                    956,
+                    578
+                ],
+                "score": 0.996,
+                "text": "(a) the distance travelled by the object when it is moving at a constant speed,"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    78,
+                    632,
+                    466,
+                    661
+                ],
+                "score": 0.996,
+                "text": "(b) the deceleration of the object,"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    78,
+                    714,
+                    509,
+                    743
+                ],
+                "score": 0.997,
+                "text": "(c) the average velocity of the object."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    80,
+                    911,
+                    1068,
+                    937
+                ],
+                "score": 0.996,
+                "text": "The velocity-time graph shows the motion of a particle starting from rest in a straight line."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    74,
+                    1271,
+                    925,
+                    1298
+                ],
+                "score": 0.992,
+                "text": "(a) How long is the particle at rest before moving in the opposite direction?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    73,
+                    1351,
+                    239,
+                    1381
+                ],
+                "score": 0.997,
+                "text": "(b) Calculate"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    131,
+                    1394,
+                    558,
+                    1420
+                ],
+                "score": 0.989,
+                "text": "(i) the average speed of the particle,"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    129,
+                    1514,
+                    575,
+                    1542
+                ],
+                "score": 0.984,
+                "text": "(ii) the average velocity of the particle."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    74,
+                    1720,
+                    1179,
+                    1745
+                ],
+                "score": 0.985,
+                "text": "A car travelling at a velocity of 5 m/s accelerates at 0.5 m/s². In a time of 6.0 s, what is the distance"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    74,
+                    1750,
+                    307,
+                    1776
+                ],
+                "score": 0.999,
+                "text": "travelled by the car?"
+            }
+        ],
+        "page_info": {
+            "page_no": 2,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9455,
+                "bbox": [
+                    113,
+                    83,
+                    825,
+                    115
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.9707,
+                "bbox": [
+                    514,
+                    125,
+                    932,
+                    310
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.787,
+                "bbox": [
+                    111,
+                    323,
+                    742,
+                    355
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8078,
+                "bbox": [
+                    111,
+                    362,
+                    1326,
+                    440
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9439,
+                "bbox": [
+                    112,
+                    456,
+                    1326,
+                    536
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.4924,
+                "bbox": [
+                    108,
+                    625,
+                    887,
+                    816
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9504,
+                "bbox": [
+                    108,
+                    915,
+                    1111,
+                    1023
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9637,
+                "bbox": [
+                    108,
+                    1112,
+                    1179,
+                    1171
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.9337,
+                "bbox": [
+                    155,
+                    1294,
+                    609,
+                    1327
+                ],
+                "index": 9
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9724,
+                "bbox": [
+                    153,
+                    1363,
+                    1036,
+                    1492
+                ],
+                "index": 10
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9426,
+                "bbox": [
+                    153,
+                    1527,
+                    1157,
+                    1561
+                ],
+                "index": 11
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.7807,
+                "bbox": [
+                    242,
+                    1613,
+                    477,
+                    1835
+                ],
+                "index": 12
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.5213,
+                "bbox": [
+                    628,
+                    1581,
+                    654,
+                    1610
+                ],
+                "index": 13
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8488,
+                "bbox": [
+                    521,
+                    1611,
+                    759,
+                    1834
+                ],
+                "index": 14
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.5073,
+                "bbox": [
+                    909,
+                    1581,
+                    935,
+                    1610
+                ],
+                "index": 15
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8063,
+                "bbox": [
+                    802,
+                    1614,
+                    1040,
+                    1835
+                ],
+                "index": 16
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.5661,
+                "bbox": [
+                    1191,
+                    1581,
+                    1217,
+                    1609
+                ],
+                "index": 17
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8156,
+                "bbox": [
+                    1085,
+                    1613,
+                    1319,
+                    1835
+                ],
+                "index": 18
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    119,
+                    88,
+                    819,
+                    112
+                ],
+                "score": 0.99,
+                "text": "The diagram shows the distances between towns A, B and C."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    115,
+                    326,
+                    735,
+                    354
+                ],
+                "score": 0.979,
+                "text": "A man travels from A to B and then to C in his journey."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    113,
+                    363,
+                    796,
+                    393
+                ],
+                "score": 0.992,
+                "text": "(a) What is the distance travelled by the man from A to C?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    113,
+                    459,
+                    930,
+                    489
+                ],
+                "score": 0.992,
+                "text": "(b) What is the displacement of the man when he travels from A to C?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    115,
+                    629,
+                    565,
+                    653
+                ],
+                "score": 0.991,
+                "text": "Which of the following defines acceleration?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    168,
+                    672,
+                    361,
+                    699
+                ],
+                "score": 0.98,
+                "text": "change in distance"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    699,
+                    673,
+                    884,
+                    700
+                ],
+                "score": 0.998,
+                "text": "change in velocity"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    111,
+                    686,
+                    137,
+                    715
+                ],
+                "score": 1.0,
+                "text": "A"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    634,
+                    688,
+                    656,
+                    713
+                ],
+                "score": 1.0,
+                "text": "B"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    210,
+                    705,
+                    319,
+                    730
+                ],
+                "score": 1.0,
+                "text": "time taken"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    737,
+                    705,
+                    846,
+                    730
+                ],
+                "score": 1.0,
+                "text": "time taken"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    167,
+                    755,
+                    412,
+                    784
+                ],
+                "score": 0.999,
+                "text": "change in displacement"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    698,
+                    756,
+                    869,
+                    783
+                ],
+                "score": 0.99,
+                "text": "change in speed"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    113,
+                    771,
+                    136,
+                    797
+                ],
+                "score": 0.97,
+                "text": "C"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    633,
+                    772,
+                    656,
+                    797
+                ],
+                "score": 1.0,
+                "text": "D"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    235,
+                    789,
+                    346,
+                    813
+                ],
+                "score": 1.0,
+                "text": "time taken"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    727,
+                    789,
+                    837,
+                    813
+                ],
+                "score": 1.0,
+                "text": "time taken"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    114,
+                    918,
+                    832,
+                    943
+                ],
+                "score": 0.993,
+                "text": "Which car, moving from rest, has an average acceleration of 4.0 m/s²?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    113,
+                    956,
+                    566,
+                    982
+                ],
+                "score": 0.995,
+                "text": "A a car reaching a speed of 20 m/s in 4 s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    628,
+                    952,
+                    1108,
+                    984
+                ],
+                "score": 0.989,
+                "text": "B a car reaching a speed of 60 m/s in 20 s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    112,
+                    993,
+                    567,
+                    1019
+                ],
+                "score": 0.988,
+                "text": "C a car reaching a speed of 40 m/s in 5 s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    624,
+                    991,
+                    1107,
+                    1020
+                ],
+                "score": 0.979,
+                "text": "D a car reaching a speed of 40 m/s in 10 s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    114,
+                    1115,
+                    1177,
+                    1140
+                ],
+                "score": 0.992,
+                "text": "When a car driver applies the brake, the speed of car changes from 90 km/h to 50 km/h in 5 s. Calculate"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    114,
+                    1143,
+                    473,
+                    1168
+                ],
+                "score": 0.978,
+                "text": "the acceleration, in m/s², of the car."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    160,
+                    1298,
+                    604,
+                    1323
+                ],
+                "score": 0.999,
+                "text": "Section A: Multiple-choice Questions"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    154,
+                    1367,
+                    1032,
+                    1395
+                ],
+                "score": 0.989,
+                "text": "1 Which of the following must change if a body experiences acceleration?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    218,
+                    1419,
+                    545,
+                    1448
+                ],
+                "score": 0.992,
+                "text": "A force acting on the body"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    716,
+                    1418,
+                    999,
+                    1449
+                ],
+                "score": 0.962,
+                "text": "B density of the body"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    217,
+                    1456,
+                    471,
+                    1490
+                ],
+                "score": 0.995,
+                "text": "C mass of the body"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    716,
+                    1456,
+                    873,
+                    1490
+                ],
+                "score": 0.99,
+                "text": "D velocity"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    152,
+                    1530,
+                    1154,
+                    1559
+                ],
+                "score": 0.99,
+                "text": "2Which graph best represents the motion of a car travelling with a constant velocity?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    629,
+                    1584,
+                    652,
+                    1611
+                ],
+                "score": 1.0,
+                "text": "B"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    910,
+                    1583,
+                    932,
+                    1612
+                ],
+                "score": 0.984,
+                "text": "C"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    1190,
+                    1583,
+                    1215,
+                    1613
+                ],
+                "score": 1.0,
+                "text": "D"
+            }
+        ],
+        "page_info": {
+            "page_no": 3,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9606,
+                "bbox": [
+                    142,
+                    102,
+                    1220,
+                    164
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.455,
+                "bbox": [
+                    897,
+                    104,
+                    923,
+                    134
+                ],
+                "index": 2,
+                "latex": "{ \\mathsf { Y } } ,"
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.7356,
+                "bbox": [
+                    484,
+                    176,
+                    943,
+                    594
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8543,
+                "bbox": [
+                    142,
+                    605,
+                    877,
+                    638
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.918,
+                "bbox": [
+                    139,
+                    658,
+                    770,
+                    690
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9246,
+                "bbox": [
+                    140,
+                    698,
+                    834,
+                    731
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9225,
+                "bbox": [
+                    140,
+                    739,
+                    725,
+                    771
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9308,
+                "bbox": [
+                    139,
+                    780,
+                    770,
+                    814
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9273,
+                "bbox": [
+                    75,
+                    881,
+                    1205,
+                    916
+                ],
+                "index": 9
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.7427,
+                "bbox": [
+                    142,
+                    1033,
+                    166,
+                    1062
+                ],
+                "index": 10
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9206,
+                "bbox": [
+                    190,
+                    937,
+                    430,
+                    1162
+                ],
+                "index": 11
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9087,
+                "bbox": [
+                    455,
+                    937,
+                    691,
+                    1163
+                ],
+                "index": 12
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.7949,
+                "bbox": [
+                    140,
+                    1270,
+                    165,
+                    1299
+                ],
+                "index": 13
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9111,
+                "bbox": [
+                    190,
+                    1173,
+                    429,
+                    1398
+                ],
+                "index": 14
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9209,
+                "bbox": [
+                    454,
+                    1173,
+                    692,
+                    1398
+                ],
+                "index": 15
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8243,
+                "bbox": [
+                    140,
+                    1506,
+                    165,
+                    1535
+                ],
+                "index": 16
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9149,
+                "bbox": [
+                    190,
+                    1410,
+                    428,
+                    1635
+                ],
+                "index": 17
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8882,
+                "bbox": [
+                    455,
+                    1409,
+                    691,
+                    1636
+                ],
+                "index": 18
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.8281,
+                "bbox": [
+                    139,
+                    1743,
+                    163,
+                    1772
+                ],
+                "index": 19
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8925,
+                "bbox": [
+                    189,
+                    1646,
+                    429,
+                    1872
+                ],
+                "index": 20
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9162,
+                "bbox": [
+                    453,
+                    1645,
+                    691,
+                    1871
+                ],
+                "index": 21
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    148,
+                    104,
+                    896,
+                    134
+                ],
+                "score": 0.999,
+                "text": "The velocity (v)-time (t) graph shows the motion of two cars, X and"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    924,
+                    104,
+                    1216,
+                    134
+                ],
+                "score": 1.0,
+                "text": "travelling in a straight line"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    151,
+                    138,
+                    459,
+                    160
+                ],
+                "score": 1.0,
+                "text": "towards the same direction."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    149,
+                    610,
+                    871,
+                    634
+                ],
+                "score": 0.992,
+                "text": "Which of the following statements about cars X and Y is correct?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    145,
+                    662,
+                    763,
+                    686
+                ],
+                "score": 0.988,
+                "text": "AThe acceleration of both cars X and Y is the same."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    143,
+                    701,
+                    829,
+                    728
+                ],
+                "score": 0.982,
+                "text": "B The distance travelled by both cars X and Y is the same."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    141,
+                    739,
+                    720,
+                    771
+                ],
+                "score": 0.992,
+                "text": "C The acceleration of car Y is greater than car X."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    142,
+                    781,
+                    766,
+                    812
+                ],
+                "score": 0.992,
+                "text": "D The average velocity of car Y is greater than car X."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    79,
+                    887,
+                    98,
+                    908
+                ],
+                "score": 1.0,
+                "text": "4"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    147,
+                    884,
+                    1201,
+                    913
+                ],
+                "score": 0.986,
+                "text": "Which of the following pairs of graphs can be used to represent the same motion of an object?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    141,
+                    1035,
+                    166,
+                    1067
+                ],
+                "score": 1.0,
+                "text": "A"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    142,
+                    1272,
+                    163,
+                    1299
+                ],
+                "score": 1.0,
+                "text": "B"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    141,
+                    1508,
+                    164,
+                    1541
+                ],
+                "score": 0.963,
+                "text": "C"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    139,
+                    1744,
+                    164,
+                    1776
+                ],
+                "score": 1.0,
+                "text": "D"
+            }
+        ],
+        "page_info": {
+            "page_no": 4,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.965,
+                "bbox": [
+                    211,
+                    102,
+                    1330,
+                    167
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9298,
+                "bbox": [
+                    231,
+                    183,
+                    471,
+                    442
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9247,
+                "bbox": [
+                    517,
+                    186,
+                    757,
+                    441
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9167,
+                "bbox": [
+                    800,
+                    190,
+                    1040,
+                    441
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 7,
+                "label": "figure_title",
+                "score": 0.6372,
+                "bbox": [
+                    1187,
+                    185,
+                    1215,
+                    215
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9342,
+                "bbox": [
+                    1083,
+                    212,
+                    1317,
+                    441
+                ],
+                "index": 9
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8597,
+                "bbox": [
+                    147,
+                    480,
+                    1118,
+                    516
+                ],
+                "index": 10
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9058,
+                "bbox": [
+                    481,
+                    524,
+                    1100,
+                    837
+                ],
+                "index": 11
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9683,
+                "bbox": [
+                    209,
+                    846,
+                    1261,
+                    965
+                ],
+                "index": 12
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9162,
+                "bbox": [
+                    147,
+                    998,
+                    642,
+                    1034
+                ],
+                "index": 13
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9203,
+                "bbox": [
+                    488,
+                    1035,
+                    1082,
+                    1349
+                ],
+                "index": 14
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9598,
+                "bbox": [
+                    210,
+                    1360,
+                    1205,
+                    1449
+                ],
+                "index": 15
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.4771,
+                "bbox": [
+                    149,
+                    1483,
+                    805,
+                    1556
+                ],
+                "index": 16
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.8237,
+                "bbox": [
+                    540,
+                    1528,
+                    1085,
+                    1755
+                ],
+                "index": 17
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9617,
+                "bbox": [
+                    212,
+                    1772,
+                    1304,
+                    1889
+                ],
+                "index": 18
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    217,
+                    106,
+                    1328,
+                    136
+                ],
+                "score": 0.986,
+                "text": "Which graph best represents the motion of an object, initially at rest, that accelerates uniformly in a"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    219,
+                    138,
+                    365,
+                    164
+                ],
+                "score": 1.0,
+                "text": "straight line?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    1190,
+                    189,
+                    1212,
+                    216
+                ],
+                "score": 1.0,
+                "text": "D"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    146,
+                    482,
+                    1116,
+                    514
+                ],
+                "score": 0.984,
+                "text": "6 The graph shows the motion of a car along a straight road over a period of 25 s."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    218,
+                    848,
+                    1258,
+                    877
+                ],
+                "score": 0.992,
+                "text": "What was the distance travelled by the car during the time when it was travelling at a uniform"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    218,
+                    880,
+                    323,
+                    909
+                ],
+                "score": 1.0,
+                "text": "velocity?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    212,
+                    931,
+                    329,
+                    959
+                ],
+                "score": 0.982,
+                "text": "A 40 m"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    483,
+                    929,
+                    628,
+                    961
+                ],
+                "score": 0.963,
+                "text": "B 120 m"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    770,
+                    932,
+                    799,
+                    958
+                ],
+                "score": 0.983,
+                "text": "C"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    829,
+                    931,
+                    910,
+                    959
+                ],
+                "score": 0.999,
+                "text": "185 m"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    1052,
+                    928,
+                    1196,
+                    960
+                ],
+                "score": 0.936,
+                "text": "D 200 m"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    149,
+                    1001,
+                    637,
+                    1031
+                ],
+                "score": 0.99,
+                "text": "7The graph shows the motion of a car."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    218,
+                    1363,
+                    1036,
+                    1390
+                ],
+                "score": 0.993,
+                "text": "If the total displacement of the car is 35 m in 10 s, what is the value of v?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    214,
+                    1415,
+                    336,
+                    1445
+                ],
+                "score": 0.939,
+                "text": "A 1 m/s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    486,
+                    1415,
+                    619,
+                    1445
+                ],
+                "score": 0.866,
+                "text": "B 5 m/s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    767,
+                    1415,
+                    915,
+                    1443
+                ],
+                "score": 0.97,
+                "text": "C 15 m/s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    1052,
+                    1413,
+                    1200,
+                    1445
+                ],
+                "score": 0.965,
+                "text": "D 20 m/s"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    152,
+                    1490,
+                    171,
+                    1511
+                ],
+                "score": 1.0,
+                "text": "8"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    219,
+                    1488,
+                    800,
+                    1514
+                ],
+                "score": 0.999,
+                "text": "The graph shows a straight-line motion of an object."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    487,
+                    1529,
+                    615,
+                    1558
+                ],
+                "score": 0.999,
+                "text": "velocity (m/s)"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    217,
+                    1772,
+                    1272,
+                    1805
+                ],
+                "score": 0.998,
+                "text": "Which feature of the graph represents the distance travelled by the object whilst travelling at a"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    219,
+                    1806,
+                    455,
+                    1833
+                ],
+                "score": 1.0,
+                "text": "steady acceleration?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    213,
+                    1854,
+                    349,
+                    1886
+                ],
+                "score": 0.975,
+                "text": "A area Y"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    486,
+                    1855,
+                    515,
+                    1885
+                ],
+                "score": 0.999,
+                "text": "B"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    548,
+                    1856,
+                    630,
+                    1885
+                ],
+                "score": 0.997,
+                "text": "area Z"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    769,
+                    1855,
+                    799,
+                    1883
+                ],
+                "score": 0.971,
+                "text": "C"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    831,
+                    1855,
+                    1301,
+                    1883
+                ],
+                "score": 0.955,
+                "text": "area X + area Y D area Y + area Z"
+            }
+        ],
+        "page_info": {
+            "page_no": 5,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8056,
+                "bbox": [
+                    145,
+                    100,
+                    622,
+                    134
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 14,
+                "label": "image",
+                "score": 0.8287,
+                "bbox": [
+                    426,
+                    156,
+                    1043,
+                    448
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9617,
+                "bbox": [
+                    140,
+                    462,
+                    1131,
+                    550
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.5964,
+                "bbox": [
+                    216,
+                    697,
+                    275,
+                    727
+                ],
+                "index": 4,
+                "latex": "\\mathsf { m } / \\mathsf { s } ^ { 2 }"
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9731,
+                "bbox": [
+                    76,
+                    614,
+                    1264,
+                    732
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6504,
+                "bbox": [
+                    500,
+                    697,
+                    556,
+                    727
+                ],
+                "index": 6,
+                "latex": "\\mathsf { m } / \\mathsf { s } ^ { 2 }"
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6505,
+                "bbox": [
+                    795,
+                    696,
+                    851,
+                    727
+                ],
+                "index": 7,
+                "latex": "\\mathsf { m } / \\mathsf { s } ^ { 2 }"
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.6965,
+                "bbox": [
+                    1082,
+                    697,
+                    1137,
+                    726
+                ],
+                "index": 8,
+                "latex": "\\mathsf { m } / \\mathsf { s } ^ { 2 }"
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.9309,
+                "bbox": [
+                    75,
+                    791,
+                    493,
+                    827
+                ],
+                "index": 9
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9424,
+                "bbox": [
+                    74,
+                    871,
+                    783,
+                    905
+                ],
+                "index": 10
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.852,
+                "bbox": [
+                    413,
+                    926,
+                    1009,
+                    1248
+                ],
+                "index": 11
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7743,
+                "bbox": [
+                    141,
+                    1271,
+                    783,
+                    1306
+                ],
+                "index": 12
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.5669,
+                "bbox": [
+                    142,
+                    1377,
+                    328,
+                    1411
+                ],
+                "index": 13
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.6289,
+                "bbox": [
+                    207,
+                    1430,
+                    841,
+                    1465
+                ],
+                "index": 14
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7114,
+                "bbox": [
+                    207,
+                    1566,
+                    852,
+                    1601
+                ],
+                "index": 15
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    151,
+                    102,
+                    619,
+                    132
+                ],
+                "score": 0.999,
+                "text": "The diagram shows a velocity-time graph."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    149,
+                    466,
+                    875,
+                    493
+                ],
+                "score": 0.995,
+                "text": "In which region does the car experience increasing acceleration?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    143,
+                    518,
+                    275,
+                    547
+                ],
+                "score": 0.916,
+                "text": "A P to Q"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    414,
+                    515,
+                    558,
+                    547
+                ],
+                "score": 0.964,
+                "text": "B Q to R"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    696,
+                    517,
+                    837,
+                    545
+                ],
+                "score": 0.883,
+                "text": "C R to S"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    980,
+                    517,
+                    1126,
+                    545
+                ],
+                "score": 0.927,
+                "text": "D T to W"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    77,
+                    616,
+                    1262,
+                    647
+                ],
+                "score": 0.984,
+                "text": "10 A motorcyclist rides at an initial velocity of 10 m/s. He then accelerates to a velocity of 25 m/s in 5 s."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    145,
+                    648,
+                    645,
+                    676
+                ],
+                "score": 0.98,
+                "text": "What is the acceleration of the motorcyclist?"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    139,
+                    696,
+                    215,
+                    730
+                ],
+                "score": 0.984,
+                "text": "A 3"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    415,
+                    699,
+                    441,
+                    726
+                ],
+                "score": 1.0,
+                "text": "B"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    477,
+                    699,
+                    499,
+                    726
+                ],
+                "score": 1.0,
+                "text": "5"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    697,
+                    699,
+                    722,
+                    726
+                ],
+                "score": 0.992,
+                "text": "C"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    757,
+                    699,
+                    794,
+                    728
+                ],
+                "score": 1.0,
+                "text": "10"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    981,
+                    699,
+                    1009,
+                    728
+                ],
+                "score": 1.0,
+                "text": "D"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    1042,
+                    699,
+                    1081,
+                    728
+                ],
+                "score": 1.0,
+                "text": "25"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    82,
+                    795,
+                    488,
+                    824
+                ],
+                "score": 0.998,
+                "text": "Section B: Structured Questions"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    74,
+                    871,
+                    779,
+                    905
+                ],
+                "score": 0.992,
+                "text": "1 The velocity (v)-time (t) graph shows the motion of a car."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    143,
+                    1273,
+                    779,
+                    1303
+                ],
+                "score": 0.991,
+                "text": "(a) Describe the motion of the car shown in the graph."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    143,
+                    1378,
+                    324,
+                    1414
+                ],
+                "score": 0.978,
+                "text": "(b) Calculate"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    210,
+                    1432,
+                    838,
+                    1463
+                ],
+                "score": 0.985,
+                "text": "(i) the acceleration in the first 10 s of the car journey."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    213,
+                    1570,
+                    848,
+                    1598
+                ],
+                "score": 0.996,
+                "text": "(ii) the average speed of the car for the whole journey."
+            }
+        ],
+        "page_info": {
+            "page_no": 6,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8898,
+                "bbox": [
+                    153,
+                    96,
+                    1339,
+                    164
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9401,
+                "bbox": [
+                    440,
+                    178,
+                    1139,
+                    603
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.8252,
+                "bbox": [
+                    217,
+                    619,
+                    1335,
+                    688
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7406,
+                "bbox": [
+                    219,
+                    701,
+                    1033,
+                    743
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7624,
+                "bbox": [
+                    218,
+                    859,
+                    1296,
+                    929
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.6206,
+                "bbox": [
+                    219,
+                    1048,
+                    921,
+                    1093
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.637,
+                "bbox": [
+                    283,
+                    1153,
+                    922,
+                    1305
+                ],
+                "index": 7
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9065,
+                "bbox": [
+                    151,
+                    1373,
+                    1351,
+                    1476
+                ],
+                "index": 8
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9122,
+                "bbox": [
+                    382,
+                    1489,
+                    1193,
+                    1893
+                ],
+                "index": 9
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    157,
+                    102,
+                    179,
+                    129
+                ],
+                "score": 1.0,
+                "text": "2"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    222,
+                    101,
+                    1334,
+                    133
+                ],
+                "score": 0.994,
+                "text": "The speed (v)-time (t) graph shows the motion of a bal. It falls vertically and hits the ground. It then"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    225,
+                    134,
+                    545,
+                    160
+                ],
+                "score": 0.997,
+                "text": "rebounds vertically upwards."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    224,
+                    623,
+                    1329,
+                    652
+                ],
+                "score": 0.997,
+                "text": "The ball is released at P, hits the ground at Q and is in contact with the floor between Q and R. S is"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    224,
+                    655,
+                    699,
+                    681
+                ],
+                "score": 1.0,
+                "text": "the highest point reached as the ball rises."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    225,
+                    708,
+                    1024,
+                    736
+                ],
+                "score": 0.983,
+                "text": "(a) From the graph, describe the motion of the ball between P and Q."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    224,
+                    866,
+                    1290,
+                    895
+                ],
+                "score": 0.986,
+                "text": "(b) State how the graph shows that the distance travelled between P and Q is larger than the"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    292,
+                    897,
+                    697,
+                    923
+                ],
+                "score": 0.99,
+                "text": "distance travelled between R and S."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    224,
+                    1054,
+                    914,
+                    1084
+                ],
+                "score": 0.992,
+                "text": "(c) (i) Explain the difference between speed and velocity."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    292,
+                    1163,
+                    464,
+                    1191
+                ],
+                "score": 0.995,
+                "text": "(ii) Determine"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    347,
+                    1216,
+                    902,
+                    1243
+                ],
+                "score": 0.999,
+                "text": "the change in speed of the ball between Q and R,"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    346,
+                    1268,
+                    917,
+                    1296
+                ],
+                "score": 0.999,
+                "text": "the change in velocity of the ball between Q and R."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    155,
+                    1380,
+                    177,
+                    1405
+                ],
+                "score": 1.0,
+                "text": "3"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    222,
+                    1378,
+                    1279,
+                    1411
+                ],
+                "score": 0.998,
+                "text": "The velocity (v)-time (t) graph shows the motion of a cyclist travelling along a straight road. Upon"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    226,
+                    1412,
+                    1345,
+                    1437
+                ],
+                "score": 0.993,
+                "text": "approaching a bridge, the cyclist slows down. The cyclist rides at a constant speed from the start of the"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    222,
+                    1438,
+                    1285,
+                    1470
+                ],
+                "score": 0.993,
+                "text": "bridge, at X, to the end of the bridge, at Y. The cyclist speeds up after passing through the bridge."
+            }
+        ],
+        "page_info": {
+            "page_no": 7,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.906,
+                "bbox": [
+                    145,
+                    98,
+                    897,
+                    139
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9298,
+                "bbox": [
+                    144,
+                    295,
+                    1152,
+                    334
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9722,
+                "bbox": [
+                    144,
+                    492,
+                    1256,
+                    590
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.9281,
+                "bbox": [
+                    74,
+                    840,
+                    545,
+                    879
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9582,
+                "bbox": [
+                    72,
+                    919,
+                    1267,
+                    988
+                ],
+                "index": 5
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.9703,
+                "bbox": [
+                    140,
+                    1205,
+                    1275,
+                    1303
+                ],
+                "index": 6
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    152,
+                    105,
+                    889,
+                    132
+                ],
+                "score": 0.988,
+                "text": "(a) Calculate the distance travelled by the bicycle on the bridge."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    151,
+                    301,
+                    1145,
+                    328
+                ],
+                "score": 0.991,
+                "text": "(b)The cyclist accelerates after passing through the bridge. Calculate the acceleration."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    146,
+                    495,
+                    1254,
+                    529
+                ],
+                "score": 0.993,
+                "text": "(c) A second cyclist is stationary on the road at the point where the bridge starts. He accelerates"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    218,
+                    529,
+                    1185,
+                    553
+                ],
+                "score": 0.994,
+                "text": "uniformly for 50 s and reaches a speed of 2 m/s. Determine whether the second cyclist"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    216,
+                    558,
+                    634,
+                    583
+                ],
+                "score": 0.996,
+                "text": "reaches the end of the bridge in 50 s."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    81,
+                    845,
+                    539,
+                    875
+                ],
+                "score": 0.999,
+                "text": "Section C: Free-response Questions"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    77,
+                    926,
+                    104,
+                    950
+                ],
+                "score": 1.0,
+                "text": "1"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    139,
+                    924,
+                    1263,
+                    952
+                ],
+                "score": 0.988,
+                "text": "(a) A car travelling with a velocity of 5 m/s accelerates uniformly at a constant acceleration of 2 m/s²"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    214,
+                    955,
+                    1039,
+                    981
+                ],
+                "score": 0.994,
+                "text": "for 30 s. Calculate the distance travelled by the car while it is accelerating"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    143,
+                    1209,
+                    1209,
+                    1243
+                ],
+                "score": 0.992,
+                "text": "(b) A cyclist is travelling due east with a velocity of 16 m/s. The cyclist changes velocity to be"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    211,
+                    1239,
+                    1270,
+                    1269
+                ],
+                "score": 0.992,
+                "text": "travelling due south with a velocity of 12 m/s. Draw a vector diagram to calculate the change in"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    215,
+                    1273,
+                    494,
+                    1297
+                ],
+                "score": 0.994,
+                "text": "the velocity of the cyclist."
+            }
+        ],
+        "page_info": {
+            "page_no": 8,
+            "width": 1434,
+            "height": 2027
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "cls_id": 17,
+                "label": "paragraph_title",
+                "score": 0.5855,
+                "bbox": [
+                    151,
+                    101,
+                    994,
+                    136
+                ],
+                "index": 1
+            },
+            {
+                "cls_id": 3,
+                "label": "chart",
+                "score": 0.9738,
+                "bbox": [
+                    406,
+                    157,
+                    1167,
+                    560
+                ],
+                "index": 2
+            },
+            {
+                "cls_id": 24,
+                "label": "vision_footnote",
+                "score": 0.6063,
+                "bbox": [
+                    219,
+                    583,
+                    890,
+                    618
+                ],
+                "index": 3
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.6744,
+                "bbox": [
+                    217,
+                    634,
+                    1352,
+                    972
+                ],
+                "index": 4
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.4645,
+                "bbox": [
+                    1207,
+                    934,
+                    1297,
+                    963
+                ],
+                "index": 5,
+                "latex": "t = 3 8 s ."
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.891,
+                "bbox": [
+                    218,
+                    1186,
+                    1292,
+                    1330
+                ],
+                "index": 6
+            },
+            {
+                "cls_id": 15,
+                "label": "inline_formula",
+                "score": 0.4633,
+                "bbox": [
+                    1147,
+                    1189,
+                    1239,
+                    1219
+                ],
+                "index": 7,
+                "latex": "t = 3 8 s ."
+            },
+            {
+                "cls_id": 22,
+                "label": "text",
+                "score": 0.7611,
+                "bbox": [
+                    219,
+                    1345,
+                    1340,
+                    1413
+                ],
+                "index": 8
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    157,
+                    107,
+                    176,
+                    129
+                ],
+                "score": 1.0,
+                "text": "2"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    193,
+                    104,
+                    989,
+                    133
+                ],
+                "score": 0.977,
+                "text": "The velocity (v)-time (t) graph shows the motion of two cars X and Y."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    225,
+                    589,
+                    885,
+                    614
+                ],
+                "score": 0.997,
+                "text": "Both cars travel along a straight road in the same direction."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    224,
+                    640,
+                    260,
+                    667
+                ],
+                "score": 1.0,
+                "text": "(a)"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    284,
+                    637,
+                    1351,
+                    667
+                ],
+                "score": 0.991,
+                "text": "Car X travels at a uniform velocity. Car Y is at rest until t = 20 s, when it then starts moving with"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    291,
+                    669,
+                    547,
+                    696
+                ],
+                "score": 0.995,
+                "text": "a uniform acceleration."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    292,
+                    723,
+                    323,
+                    749
+                ],
+                "score": 0.877,
+                "text": "(i)"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    342,
+                    722,
+                    791,
+                    751
+                ],
+                "score": 1.0,
+                "text": "State what is meant by uniform velocity."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    293,
+                    830,
+                    330,
+                    857
+                ],
+                "score": 0.997,
+                "text": "(ii)"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    346,
+                    830,
+                    844,
+                    855
+                ],
+                "score": 0.998,
+                "text": "State what is meant by uniform acceleration."
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    222,
+                    934,
+                    1205,
+                    964
+                ],
+                "score": 0.975,
+                "text": "(b) At t = 0, car X passes car Y. Determine the distance between cars X and Y at time"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    224,
+                    1191,
+                    1145,
+                    1220
+                ],
+                "score": 0.995,
+                "text": "(c) Describe how the distance between the two cars changes between t = 0 and"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    221,
+                    1349,
+                    1338,
+                    1379
+                ],
+                "score": 0.994,
+                "text": "(d) Calculate the average velocity of cars X and Y respectively for the whole journey shown in the"
+            },
+            {
+                "label": "ocr_text",
+                "bbox": [
+                    289,
+                    1379,
+                    369,
+                    1412
+                ],
+                "score": 1.0,
+                "text": "graph."
+            }
+        ],
+        "page_info": {
+            "page_no": 9,
+            "width": 1434,
+            "height": 2027
+        }
+    }
+]

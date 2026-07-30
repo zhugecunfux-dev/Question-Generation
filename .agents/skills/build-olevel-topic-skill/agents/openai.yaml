@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build O Level Topic Skill"
+  short_description: "Turn uploaded notes and exercises into topic skills"
+  default_prompt: "Use $build-olevel-topic-skill to analyse the uploaded notes and exercises, then create or update the matching O Level topic skill and generation rules."

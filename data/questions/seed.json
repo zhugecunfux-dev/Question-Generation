@@ -1,0 +1,242 @@
+{
+  "_comment": "Small starter bank so the app is usable before real questions are imported. Static items are hand-checked; templates compute their own answers. Load with `npm run import -- data/questions/seed.json`.",
+  "questions": [
+    {
+      "id": "seed-T1-001",
+      "topicId": "T1",
+      "subtopicId": "T1.2",
+      "format": "mcq",
+      "difficulty": "easy",
+      "ao": "AO1",
+      "marks": 1,
+      "stem": "Which row lists only vector quantities?",
+      "options": [
+        { "label": "A", "text": "displacement, velocity, force", "correct": true },
+        { "label": "B", "text": "distance, speed, force", "correct": false },
+        { "label": "C", "text": "displacement, mass, acceleration", "correct": false },
+        { "label": "D", "text": "energy, momentum, weight", "correct": false }
+      ],
+      "answer": "A (displacement, velocity, force)",
+      "solution": "A vector has both magnitude and direction. Distance, speed, mass and energy are scalars; displacement, velocity, acceleration, force, weight and momentum are vectors. Only row A contains no scalar.",
+      "tags": "seed,definitions"
+    },
+    {
+      "id": "seed-T3-001",
+      "topicId": "T3",
+      "subtopicId": "T3.4",
+      "format": "structured",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 3,
+      "stem": "A book of weight 12 N rests on a horizontal table. State the two forces that form a Newton's third law pair with (a) the weight of the book, and (b) the normal contact force from the table on the book. In each case give the magnitude, direction and the body the force acts on.",
+      "answer": "(a) The gravitational pull of the book on the Earth: 12 N, directed upwards, acting on the Earth. (b) The contact force of the book on the table: 12 N, directed downwards, acting on the table.",
+      "solution": "Third-law pairs act on different bodies, are the same type of force, and are equal in magnitude and opposite in direction. The weight of the book is the Earth pulling the book down, so its pair is the book pulling the Earth up with 12 N. The table pushes the book up with 12 N, so the book pushes the table down with 12 N. Note the weight and the normal contact force are NOT a third-law pair — they act on the same body.",
+      "tags": "seed,common-misconception"
+    },
+    {
+      "id": "seed-T2-002",
+      "topicId": "T2",
+      "subtopicId": "T2.2",
+      "format": "data_based",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 4,
+      "stem": "The graph shows how the velocity of a trolley on a horizontal track varies with time.\n\n(a) Calculate the acceleration of the trolley during the first 5.0 s.\n(b) Calculate the total distance travelled by the trolley during the 10 s shown.",
+      "assets": [
+        {
+          "path": "seed/velocity-time-trolley.svg",
+          "caption": "Fig. 2.1",
+          "alt": "Velocity-time graph. Velocity rises linearly from 0 to 20 m/s over the first 5 s, then stays constant at 20 m/s until 10 s. Time axis 0 to 10 s, velocity axis 0 to 20 m/s.",
+          "width": 440,
+          "height": 300
+        }
+      ],
+      "answer": "(a) 4.0 m/s^2  (b) 150 m",
+      "solution": "(a) Acceleration is the gradient of the velocity-time graph: a = (20 - 0) / (5.0 - 0) = 4.0 m/s^2. (b) Distance is the area under the graph: triangle (1/2)(5.0)(20) = 50 m, plus rectangle (5.0)(20) = 100 m, giving 150 m in total.",
+      "tags": "seed,graph,figure"
+    },
+    {
+      "id": "seed-T6-001",
+      "topicId": "T6",
+      "subtopicId": "T6.1",
+      "format": "structured",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 4,
+      "stem": "A pendulum bob is pulled to one side and released. Describe the energy transfers that occur as the bob swings from its highest point, through the lowest point of the swing, and up to the highest point on the other side. Explain why the bob does not return to exactly the same height.",
+      "answer": "Gravitational potential store decreases and kinetic store increases as the bob falls to the lowest point; the transfer reverses as it rises on the far side. The bob does not reach the same height because some energy is transferred to the internal (thermal) store of the bob and surrounding air by air resistance, and to the internal store of the support by friction at the pivot.",
+      "solution": "1 mark: GPE store to KE store on the way down. 1 mark: KE store to GPE store on the way up. 1 mark: energy is dissipated to internal (thermal) stores by air resistance and friction at the pivot. 1 mark: total energy is conserved, so less energy remains in the GPE store at the top of each swing and the height falls.",
+      "tags": "seed,energy-stores"
+    },
+    {
+      "id": "seed-T10-001",
+      "topicId": "T10",
+      "subtopicId": "T10.3",
+      "format": "mcq",
+      "difficulty": "medium",
+      "ao": "AO1",
+      "marks": 1,
+      "stem": "Which statement about sound waves in air is correct?",
+      "options": [
+        { "label": "A", "text": "They are transverse waves and can travel through a vacuum.", "correct": false },
+        { "label": "B", "text": "They are longitudinal waves and cannot travel through a vacuum.", "correct": true },
+        { "label": "C", "text": "They are longitudinal waves and travel faster in air than in steel.", "correct": false },
+        { "label": "D", "text": "They are transverse waves whose speed increases as the frequency increases.", "correct": false }
+      ],
+      "answer": "B (longitudinal, cannot travel through a vacuum)",
+      "solution": "Sound is a longitudinal wave: the air particles oscillate parallel to the direction of energy transfer, producing compressions and rarefactions. It needs a medium, so it cannot travel through a vacuum. Sound travels faster in solids than in air, and its speed in a given medium does not depend on frequency.",
+      "tags": "seed,waves"
+    },
+    {
+      "id": "seed-T16-001",
+      "topicId": "T16",
+      "subtopicId": "T16.3",
+      "format": "structured",
+      "difficulty": "medium",
+      "ao": "AO1",
+      "marks": 3,
+      "stem": "Explain why the earth wire and the metal casing of an electric kettle together make the kettle safer to use, and state the role of the fuse in the same circuit.",
+      "answer": "If a live wire comes loose and touches the metal casing, the earth wire provides a low-resistance path to earth, so a very large current flows instead of the casing becoming live. That large current melts the fuse wire, breaking the live line and disconnecting the appliance, so a user touching the casing does not receive a shock.",
+      "solution": "1 mark: earth wire gives a low-resistance path from the casing to earth. 1 mark: a fault current is therefore large. 1 mark: the fuse melts and breaks the live conductor, isolating the appliance. Credit also: the fuse must be in the live wire, and its rating should be just above the normal operating current.",
+      "tags": "seed,practical-electricity"
+    }
+  ],
+  "templates": [
+    {
+      "kind": "template",
+      "id": "tpl-T2-accel",
+      "topicId": "T2",
+      "subtopicId": "T2.1",
+      "format": "mcq",
+      "difficulty": "easy",
+      "ao": "AO2",
+      "marks": 1,
+      "stem": "A car speeds up uniformly from {{u}} m/s to {{v}} m/s in {{t}} s. What is its acceleration?",
+      "variables": [
+        { "name": "u", "type": "int", "min": 2, "max": 14, "step": 2 },
+        { "name": "v", "type": "int", "min": 16, "max": 40, "step": 2 },
+        { "name": "t", "type": "int", "min": 2, "max": 10, "step": 1 }
+      ],
+      "constraints": ["v > u"],
+      "derived": [{ "name": "a", "expr": "(v - u) / t", "sigfig": 3 }],
+      "answer": { "value": "a", "unit": "m/s^2", "sigfig": 3 },
+      "options": [
+        { "expr": "(v - u) / t", "correct": true },
+        { "expr": "(v + u) / t", "comment": "adds instead of subtracting" },
+        { "expr": "v / t", "comment": "forgets the initial velocity" },
+        { "expr": "(v - u) * t", "comment": "multiplies by time instead of dividing" }
+      ],
+      "solution": "a = (v - u) / t = ({{v}} - {{u}}) / {{t}} = {{a}} m/s^2",
+      "tags": "seed,template,kinematics"
+    },
+    {
+      "kind": "template",
+      "id": "tpl-T3-newton2",
+      "topicId": "T3",
+      "subtopicId": "T3.1",
+      "format": "structured",
+      "difficulty": "easy",
+      "ao": "AO2",
+      "marks": 2,
+      "stem": "A resultant force of {{F}} N acts on a trolley of mass {{m}} kg on a frictionless horizontal track. Calculate the acceleration of the trolley.",
+      "variables": [
+        { "name": "F", "type": "int", "min": 4, "max": 60, "step": 2 },
+        { "name": "m", "type": "float", "min": 0.5, "max": 8, "decimals": 1 }
+      ],
+      "derived": [{ "name": "a", "expr": "F / m", "sigfig": 3 }],
+      "answer": { "value": "a", "unit": "m/s^2", "sigfig": 3 },
+      "solution": "Newton's second law: F = ma, so a = F / m = {{F}} / {{m}} = {{a}} m/s^2. 1 mark for the correct rearrangement, 1 mark for the value with unit.",
+      "tags": "seed,template,dynamics"
+    },
+    {
+      "kind": "template",
+      "id": "tpl-T5-hydrostatic",
+      "topicId": "T5",
+      "subtopicId": "T5.2",
+      "format": "structured",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 3,
+      "stem": "A diver is {{h}} m below the surface of a lake. The density of the water is {{rho}} kg/m^3 and the gravitational field strength is 9.81 N/kg. Calculate the pressure due to the water alone at that depth.",
+      "variables": [
+        { "name": "h", "type": "int", "min": 3, "max": 40, "step": 1 },
+        { "name": "rho", "type": "choice", "values": [1000, 1020, 1025] }
+      ],
+      "derived": [{ "name": "p", "expr": "rho * g * h", "sigfig": 3 }],
+      "answer": { "value": "p", "unit": "Pa", "sigfig": 3 },
+      "solution": "p = rho * g * h = {{rho}} * 9.81 * {{h}} = {{p}} Pa. Note this is the pressure due to the water only; the total pressure on the diver also includes atmospheric pressure.",
+      "tags": "seed,template,pressure"
+    },
+    {
+      "kind": "template",
+      "id": "tpl-T9-shc",
+      "topicId": "T9",
+      "subtopicId": "T9.2",
+      "format": "structured",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 3,
+      "stem": "A metal block of mass {{m}} kg is heated from {{t1}} degrees C to {{t2}} degrees C. The specific heat capacity of the metal is {{c}} J/(kg K). Calculate the thermal energy transferred to the block.",
+      "variables": [
+        { "name": "m", "type": "float", "min": 0.2, "max": 5, "decimals": 1 },
+        { "name": "t1", "type": "int", "min": 15, "max": 30, "step": 1 },
+        { "name": "t2", "type": "int", "min": 45, "max": 95, "step": 5 },
+        { "name": "c", "type": "choice", "values": [900, 385, 450, 130] }
+      ],
+      "constraints": ["t2 > t1"],
+      "derived": [{ "name": "Q", "expr": "m * c * (t2 - t1)", "sigfig": 3 }],
+      "answer": { "value": "Q", "unit": "J", "sigfig": 3 },
+      "solution": "Q = m * c * (theta2 - theta1) = {{m}} * {{c}} * ({{t2}} - {{t1}}) = {{Q}} J. A temperature *change* in degrees C equals the change in kelvin, so no conversion is needed.",
+      "tags": "seed,template,thermal"
+    },
+    {
+      "kind": "template",
+      "id": "tpl-T15-ohm",
+      "topicId": "T15",
+      "subtopicId": "T15.1",
+      "format": "mcq",
+      "difficulty": "easy",
+      "ao": "AO2",
+      "marks": 1,
+      "stem": "Two resistors of resistance {{R1}} ohm and {{R2}} ohm are connected in series across a {{V}} V supply of negligible internal resistance. What is the current in the circuit?",
+      "variables": [
+        { "name": "R1", "type": "int", "min": 2, "max": 20, "step": 2 },
+        { "name": "R2", "type": "int", "min": 2, "max": 20, "step": 2 },
+        { "name": "V", "type": "int", "min": 6, "max": 24, "step": 3 }
+      ],
+      "derived": [{ "name": "I", "expr": "V / (R1 + R2)", "sigfig": 3 }],
+      "answer": { "value": "I", "unit": "A", "sigfig": 3 },
+      "options": [
+        { "expr": "V / (R1 + R2)", "correct": true },
+        { "expr": "V / R1", "comment": "uses only the first resistor" },
+        { "expr": "V * (R1 + R2)", "comment": "multiplies instead of dividing" },
+        { "expr": "V / (R1 * R2 / (R1 + R2))", "comment": "treats the resistors as parallel" }
+      ],
+      "solution": "In series the resistances add: R = {{R1}} + {{R2}}. Then I = V / R = {{V}} / ({{R1}} + {{R2}}) = {{I}} A.",
+      "tags": "seed,template,dc-circuits"
+    },
+    {
+      "kind": "template",
+      "id": "tpl-T20-halflife",
+      "topicId": "T20",
+      "subtopicId": "T20.3",
+      "format": "structured",
+      "difficulty": "medium",
+      "ao": "AO2",
+      "marks": 3,
+      "stem": "A radioactive source has an initial count rate of {{R0}} counts per minute above background. Its half-life is {{T}} hours. Calculate the count rate above background after {{n}} half-lives, and state how long that takes.",
+      "variables": [
+        { "name": "R0", "type": "int", "min": 400, "max": 4000, "step": 200 },
+        { "name": "T", "type": "int", "min": 2, "max": 12, "step": 1 },
+        { "name": "n", "type": "int", "min": 2, "max": 5, "step": 1 }
+      ],
+      "derived": [
+        { "name": "R", "expr": "R0 / 2^n", "sigfig": 3 },
+        { "name": "hours", "expr": "T * n", "decimals": 0 }
+      ],
+      "answer": { "value": "R", "unit": "counts per minute", "sigfig": 3 },
+      "solution": "Each half-life halves the count rate, so after {{n}} half-lives R = {{R0}} / 2^{{n}} = {{R}} counts per minute. The elapsed time is {{n}} * {{T}} = {{hours}} hours. Remember the background count must be subtracted before the halving is applied.",
+      "tags": "seed,template,radioactivity"
+    }
+  ]
+}

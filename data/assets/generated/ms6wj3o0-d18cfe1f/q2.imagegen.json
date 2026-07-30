@@ -1,0 +1,17 @@
+{
+  "id": "ms6wj3o0-d18cfe1f-q2",
+  "questionId": "codex-ms6wj3o0-d18cfe1f-2",
+  "topicId": "T4",
+  "width": 640,
+  "height": 420,
+  "prompt": "Use case: scientific-educational illustration. Create an unlabelled end-on view of a compact battery-powered inspection trolley resting on a rigid test platform, on a 640 by 420 landscape canvas with a 32:21 aspect ratio and a clean white background. The platform must rise from left to right, with its upper surface running exactly from about (70,340), 11% across and 81% down, to (570,188), 89% across and 45% down. Make the platform a thin pale-grey slab. Place the downhill wheel so that it touches the upper surface at approximately (188,304), 29% across and 72% down, with its centre near (180,277). Place the uphill wheel so that it touches at approximately (428,231), 67% across and 55% down, with its centre near (420,204). Use two equal dark rubber wheels about 56 px in diameter. Align a compact blue-grey metal chassis and a simple battery or instrument enclosure with the slope. Keep the trolley mechanically plausible and uncluttered. Reserve a clear zone from x=255 to 330 and y=125 to 275 for the later centre-of-gravity, weight-arrow, and height overlay. Reserve the area below the platform from y=280 to 380 for the later distance dimension, and keep the lower-left area around x=65 to 155 and y=315 to 355 clear for the later angle overlay. The contact landmarks and apparatus geometry must align with these numeric positions, but all assessable geometry and data will be supplied separately by an exact overlay. Use restrained textbook colours, clean edges, and minimal shading. No text, no labels, no numbers, no arrows, no dimensions, no watermark. Do not draw a centre-of-gravity dot, force line, pivot symbol, angle arc, construction line, or measurement annotation.",
+  "overlayPath": "generated/ms6wj3o0-d18cfe1f/q2-overlay.svg",
+  "fallbackPath": "generated/ms6wj3o0-d18cfe1f/q2-fallback.svg",
+  "outputPath": "generated/ms6wj3o0-d18cfe1f/q2.png",
+  "basePath": "generated/ms6wj3o0-d18cfe1f/q2-base.png",
+  "version": 1,
+  "status": "dispatched",
+  "createdAt": "2026-07-30T02:35:51.595Z",
+  "updatedAt": "2026-07-30T02:35:52.730Z",
+  "illustrationThreadId": "019fb0e0-d3ee-79d2-a1fc-d81dcc95933f"
+}
